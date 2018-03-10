@@ -60,3 +60,4 @@ venv/
 .idea/
 *.iml
 *.xml
+*.sqlite3
