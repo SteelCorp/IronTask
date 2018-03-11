@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 
 # Create your models here.
@@ -30,16 +31,22 @@ class Triathlon(models.Model):
         return 'Triathlon du ' + self.date + ' à ' + self.ville
 
 
+
 class Sponsor(models.Model):
     """
     Class Réprensentant un sponsor
     """
+
+    #Regex permettant de valider le format du numéro de téléphone
+    phone_regex = RegexValidator(regex=r'''^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$''',
+                                 message="Le numéro de téléphone doit être sous le format suivant : +33XXXXXXXXX ou  XXXXXXXXXX")
+
     siret = models.CharField(max_length=14, primary_key=True, verbose_name='Siret', blank=False, null=False)
     raisonSocial = models.CharField(max_length=50, verbose_name='Raison Sociale', blank=False, null=False)
     adresse = models.CharField(max_length=50, blank=False, null=False)
     codePostal = models.CharField(max_length=5, blank=False, null=False)
     ville = models.CharField(max_length=50, blank=False, null=False)
-    telephone = models.CharField(max_length=10, blank=False, null=False)
+    telephone = models.CharField(validators=phone_regex, max_length=12, blank=False, null=False)
     email = models.EmailField
 
     def __str__(self):
