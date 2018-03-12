@@ -5,19 +5,19 @@ from irontask_app.models import Sponsor
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
-    listTriathlon = Sponsor.objets.all()
+    sponsor = Sponsor.objects.all().filter()
 
-    return render(request, 'Sponsor.html', {'Sponsor': Sponsor})
+    return render(request, 'listSponsor.html', {'Sponsor': sponsor})
 
 
 def getSponsor(request, siret):
     """
     Vue qui retourne le sponsor fournit en paramètre
-    ::param siret est le siret d'un triathlon
+    ::param siret est le siret d'un sponsor
     """
-    triathlon = Sponsor.objets.get(siret = siret)
+    sponsor = Sponsor.objets.get(siret = siret)
 
-    return render(request, "Sponsor.html", {'Sponsor': Sponsor})
+    return render(request, "Sponsor.html", locals())
 
 
 def deleteSponsor(request, siret):
