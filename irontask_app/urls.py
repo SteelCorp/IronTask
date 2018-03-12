@@ -6,6 +6,7 @@ from irontask_app.views import viewSponsor
 
 urlpatterns = [
     path('listSponsor/', viewSponsor.listSponsor),
-    path('getSponsor/<siret>/', viewSponsor.getSponsor, name='getSponsor')
+    path('getSponsor/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
+    path('editerSponsor/<siret>/', viewSponsor.editerSponsor, name='editerSponsor')
 
 ]

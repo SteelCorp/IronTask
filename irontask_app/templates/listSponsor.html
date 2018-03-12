@@ -59,6 +59,7 @@
                 <th scope="col">Email</th>
 
                 <th scope="col">Voir</th>
+                <th scope="col">Editer</th>
             </tr>
             </thead>
             <tbody>
@@ -68,8 +69,10 @@
                     <td>{{ sponsor.raisonSocial }}</td>
                     <td>{{ sponsor.telephone }}</td>
                     <td>{{ sponsor.email }}</td>
-
                     <td><a href="{% url 'getSponsor' sponsor.siret %}"><img
+                            src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
+
+                    <td><a href="{% url 'editerSponsor' sponsor.siret %}"><img
                             src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
                 </tr>
             {% endfor %}
@@ -138,5 +141,7 @@
         <!--fin bouton ajout-->
 
     </div>
+
+
 
 {% endblock %}

@@ -21,6 +21,25 @@ def listSponsor(request):
     return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'sponsorForm':sponsorForm})
 
 
+def editerSponsor(request, siret):
+
+    
+    s = Sponsor.objects.get(siret = siret)
+    sponsorForm = SponsorForm(instance=s)
+
+    if request.method == 'POST':
+        sponsorform = SponsorForm(request.POST, instance=s)
+
+        if sponsorform.is_valid():
+            sponsor = sponsorform.save(commit=True)
+            sponsor.save()
+        return render(request, 'editerSponsor.html', {'sponsorForm': sponsorForm})
+
+    return render(request, 'editerSponsor.html', {'sponsorForm': sponsorForm})
+
+
+
+
 def getSponsor(request, siret):
     """
     Vue qui retourne le sponsor fournit en paramètre
