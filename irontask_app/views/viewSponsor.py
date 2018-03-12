@@ -19,8 +19,7 @@ def listSponsor(request):
         if sponsorform.is_valid():
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
-        return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'sponsorForm':sponsorForm})
-
+        return redirect(listSponsor)
     return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'sponsorForm':sponsorForm})
 
 

@@ -13,7 +13,7 @@ router.register(r'sponsor', api.SponsorViewSet)"""
 
 
 urlpatterns = [
-    path('listSponsor/', viewSponsor.listSponsor),
+    path('listSponsor/', viewSponsor.listSponsor, name='listSponsor'),
     path('getSponsor/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
     path('editerSponsor/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
 
