@@ -124,4 +124,4 @@ STATIC_URL = '/irontask_app/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'irontask_app/static/'),
 )
-print(BASE_DIR)  # it means settings.py is in PROJECT_ROOT?
+
