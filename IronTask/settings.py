@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'irontask_app.apps.IrontaskAppConfig',
+    #'rest_framework',
 ]
 
 MIDDLEWARE = [
