@@ -11,9 +11,10 @@ from irontask_app import views
 
 
 urlpatterns = [
-    path('listSponsor/', viewSponsor.listSponsor, name='listSponsor'),
-    path('getSponsor/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
-    path('editerSponsor/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
+
+    path('sponsor/', viewSponsor.listSponsor, name='listSponsor'),
+    path('sponsor/get/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
+    path('sponsor/editer/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
 
     #url(r'api/', include(router.urls))
 ]
