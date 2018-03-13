@@ -4,9 +4,6 @@ from irontask_app.models import Sponsor
 from irontask_app.forms.SponsorForm import SponsorForm
 
 
-
-
-
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
@@ -38,8 +35,6 @@ def editerSponsor(request, siret):
         return render(request, 'editerSponsor.html', {'sponsorForm': sponsorForm})
 
     return render(request, 'editerSponsor.html', {'sponsorForm': sponsorForm})
-
-
 
 
 def getSponsor(request, siret):

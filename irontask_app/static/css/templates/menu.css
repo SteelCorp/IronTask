@@ -3,10 +3,16 @@
 	position:relative;
 	z-index:10;
 }
+
+.entête{
+	background: #F7F7F7;
+	padding-top: 54px;
+}
+
 .ligne_verticale
 {
-    width:1px;
-    border-left:1px solid white;
+	width:1px;
+	border-left:1px solid white;
 }
 .ajouter{
 	position: fixed;
@@ -30,7 +36,7 @@
 	height: 32px;
 }
 .espaceModale{
-	margin-bottom: 32px;
+	margin-bottom: 16px;
 }
 
 .logoit {
@@ -53,15 +59,15 @@
 
 }
 #noti_Counter {
-    position: relative;
-    background: #E1141E;
-    color: #FFF;
-	  font-size: 10px;
-    font-weight: 400;
-    padding: 2px;
-    margin: 0em -4em 0em 2em;
-		border:none;
-  	border-radius:8px;
-    z-index: 1;
-		top: 1em;
+	position: relative;
+	background: #E1141E;
+	color: #FFF;
+	font-size: 10px;
+	font-weight: 400;
+	padding: 2px;
+	margin: 0em -4em 0em 2em;
+	border:none;
+	border-radius:8px;
+	z-index: 1;
+	top: 1em;
 }
