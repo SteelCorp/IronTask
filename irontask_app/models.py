@@ -4,6 +4,25 @@ from django.core.validators import RegexValidator
 
 # Create your models here.
 
+class Benevole(models.Model):
+    """
+    Class représentant un bénévole (un responsable est nécessairement un bénévole)
+    """
+
+    SEX_CHOICES = (
+        ('F', 'Feminin',),
+        ('M', 'Masculin',),
+    )
+    nom = models.CharField(max_length=50, blank=True, null=False)
+    prenom = models.CharField(max_length=50, blank=True, null=False)
+    dateNaissance = models.DateField(verbose_name="Date de naissance")
+    sexe = models.CharField(max_length=1,choices=SEX_CHOICES, default='M')
+    adresse = models.CharField(max_length=200, blank=False, null=False)
+    codePostal = models.PositiveSmallIntegerField(max_length=5, blank=False, null=False)
+    ville = models.CharField(max_length=50, blank=False, null=False)
+    telephoneFixe = models.PositiveIntegerField(max_length=12, blank=False, null=False,verbose_name="Téléphone fixe")
+    telephonePort = models.PositiveIntegerField(max_length=12, blank=False, null=False,verbose_name="Téléphone portable")
+    email = models.EmailField(unique=True)
 
 class Intervenant(models.Model):
     """
@@ -50,7 +69,6 @@ class Categorie(models.Model):
     SEX_CHOICES = (
         ('F', 'Feminin',),
         ('M', 'Masculin',),
-
     )
 
     libelle = models.CharField(max_length=50, blank=False, null=False)
