@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 import datetime
 
 
-# Create your models here.
+
 
 class UserProfile(models.Model):
     """
     Class pour la gestion des utilateurs du logiciel (connexion etc...)
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    pagination_config = models.IntegerField(default=25)
 
 
 
@@ -96,7 +97,7 @@ class Materiel(models.Model):
 
 
 
-# Create your models here.
+
 
 class Triathlon(models.Model):
     """Class Répresentant un Triathlon"""
@@ -111,10 +112,10 @@ class Triathlon(models.Model):
 
     ville = models.CharField(max_length=50, null=False, blank=False, verbose_name='ville')
 
-    taches = models.ForeignKey(Tache, on_delete=models.CASCADE)
+   # taches = models.ForeignKey(Tache, on_delete=models.CASCADE)
     # à coder la class Tache pour referencer la clé étrangère
 
-    typeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT)
+    #typeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT)
 
     # à coder la class TypeTriathlon pour referencer la clé étrangère
 
