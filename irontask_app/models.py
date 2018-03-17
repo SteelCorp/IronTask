@@ -1,8 +1,16 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 
 # Create your models here.
+
+class UserProfile(models.Model):
+    """
+    Class pour la gestion des utilateurs du logiciel (connexion etc...)
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 
 
 class Intervenant(models.Model):
