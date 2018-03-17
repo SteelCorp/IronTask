@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
-    sponsor = Sponsor.objects.all().filter()
+    sponsor = Sponsor.objects.all()
     sponsorForm = SponsorForm()
 
     if request.method == 'POST':
