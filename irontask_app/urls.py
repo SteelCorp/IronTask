@@ -7,9 +7,12 @@ from irontask_app import api
 from irontask_app import views
 
 urlpatterns = [
+    # Gestion de la session
     url('login/', viewLogin.user_login),
-    url('logout/', viewLogin.logout_user,  name='logout_user'),
+    url('logout/', viewLogin.logout_user, name='logout_user'),
     path('', viewIndex.index, name='index'),
+
+    # Gestion des sponsors
     path('sponsor/', viewSponsor.listSponsor, name='listSponsor'),
     path('sponsor/get/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
     path('sponsor/editer/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
