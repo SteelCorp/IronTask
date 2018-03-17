@@ -18,11 +18,10 @@ class test_SponsorCase(TestCase):
                                telephone='0305060788',
                                email='leclerc@gmail.com'
                                )
-        self.user = User.objects.create_user(username='john', email='john@beatles.fr', password='johnpassword' )
+        self.user = User.objects.create_user(username='john', email='john@beatles.fr', password='johnpassword')
         self.c = Client()
         self.client.login(username='john', password='johnpassword')
         self.sponsor = Sponsor.objects.get(siret='12345678912345')
-
 
     def test__str__(self):
         b = Sponsor.objects.get(siret='12345678912345')
@@ -33,7 +32,6 @@ class test_SponsorCase(TestCase):
         self.client.login(username='john', password='johnpassword')
         reponse = self.c.get(reverse(viewname=listSponsor), follow=True)
         self.assertEqual(reponse.status_code, 200)
-
 
     def testEditerSponsorView(self):
         self.client.login(username='john', password='johnpassword')

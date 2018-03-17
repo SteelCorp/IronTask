@@ -6,6 +6,6 @@ class ConnexionForm(forms.Form):
     """
     Pour la page de login
     """
-    username = forms.CharField()
+    username = forms.CharField(label='Compte utilisateur')
 
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput, label='Mot de passe')
