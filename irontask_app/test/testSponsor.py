@@ -3,6 +3,8 @@ from irontask_app.models import Sponsor
 from django.test import Client
 
 
+
+
 class test_SponsorCase(TestCase):
 
 
