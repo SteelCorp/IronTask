@@ -14,7 +14,7 @@ install:
 branches:
   only:
     - master
-    - Dev
+    - dev
 
 script:
   - python manage.py test
