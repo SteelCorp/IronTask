@@ -124,3 +124,26 @@ class Triathlon(models.Model):
         (utile pour la partie admin) """
 
         return 'Triathlon du ' + self.date + ' à ' + self.ville
+
+
+
+class Tache(models.Model):
+    """Class Representant une Tache"""
+
+    NivPriorite = (
+        ('0', 'Aucune')
+        ('1', 'Faible')
+        ('2', 'Moyen')
+        ('3', 'Important')
+    )
+    DateFin = models.DateField(null=False, blank=False, verbose_name='DateFin')
+
+    NiveauAvancement = models.CharField(max_length=1, choices=NivPriorite)
+
+    Triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT)
+
+    #Benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT)
+
+    # TacheModel = models.ForeignKey(TacheModel, on_delete=models.PROTECT)
+
+    # Benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT)
