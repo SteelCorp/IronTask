@@ -26,12 +26,10 @@ class test_SponsorCase(TestCase):
         self.assertEqual(b.__str__(), 'Leclerc.E')
 
     def testListSponsorView(self):
-        self.client.login(username='john', password='johnpassword')
         reponse = self.c.get(reverse(viewname=listSponsor), follow=True)
         self.assertEqual(reponse.status_code, 200)
 
     def testEditerSponsorView(self):
-        self.client.login(username='john', password='johnpassword')
         reponse = self.c.get(reverse(viewname=editerSponsor, args=[self.sponsor.siret]), follow=True)
         self.assertEqual(reponse.status_code, 200)
 
@@ -46,10 +44,7 @@ class test_SponsorCase(TestCase):
         self.assertEqual(reponse.status_code, 302)
         self.assertTrue(Sponsor.objects.get(siret='12345678912342'))
 
-
     def testDeleteSponsorView(self):
-        self.client.login(username='john', password='johnpassword')
         reponse = self.client.get(reverse(viewname=deleteSponsor, args=[self.sponsor.siret]), follow=True)
         self.assertEqual(reponse.status_code, 200)
         self.assertFalse(Sponsor.objects.filter(siret=self.sponsor.siret).exists())
-
