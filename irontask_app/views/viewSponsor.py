@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor
+from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 
@@ -51,6 +52,8 @@ def getSponsor(request, siret):
 def deleteSponsor(request, siret):
     sponsor = Sponsor.objects.get(siret=siret)
     sponsor.delete()
+    sponsor.save()
+    return redirect(reverse(viewname=listSponsor))
 
 @login_required(login_url='login/')
 def createSponsor(request):

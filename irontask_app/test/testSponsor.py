@@ -45,3 +45,11 @@ class test_SponsorCase(TestCase):
                                                  'email': 'leclerc@gmail.com'})
         self.assertEqual(reponse.status_code, 302)
         self.assertTrue(Sponsor.objects.get(siret='12345678912342'))
+
+
+    def testDeleteSponsorView(self):
+        self.client.login(username='john', password='johnpassword')
+        reponse = self.client.get(reverse(viewname=deleteSponsor, args=[self.sponsor.siret]), follow=True)
+        self.assertEqual(reponse.status_code, 200)
+        self.assertFalse(Sponsor.objects.filter(siret=self.sponsor.siret).exists())
+
