@@ -131,9 +131,9 @@ class Tache(models.Model):
     """Class Representant une Tache"""
 
     NivPriorite = (
-        ('0', 'Aucune')
-        ('1', 'Faible')
-        ('2', 'Moyen')
+        ('0', 'Aucune'),
+        ('1', 'Faible'),
+        ('2', 'Moyen'),
         ('3', 'Important')
     )
     DateFin = models.DateField(null=False, blank=False, verbose_name='DateFin')
