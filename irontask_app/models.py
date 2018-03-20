@@ -123,6 +123,26 @@ class Tache(models.Model):
         return 'Tache date de fin :' + self.DateFin + ' avec niveau d\'avancement :' + self.NiveauAvancement
 
 
+class TypeTriathlon(models.Model):
+    """Class representant un type de triathlon"""
+
+    # id???
+
+    libelle = models.CharField(max_length=50, blank=False, null=False)
+
+    distanceNatation = models.PositiveIntegerField(blank=False, null=False)
+
+    distanceCyclisme = models.PositiveIntegerField(blank=False, null=False)
+
+    distanceCourseAPied = models.PositiveIntegerField(blank=False, null=False)
+
+    # triathlon = models.ForeignKey(Triathlon, on_delete=) ???
+
+    def __str__(self):
+        """Retourne un string des parametre du type de triathlon"""
+        return 'Type triathlon de libelle ' + self.libelle + ' Natation' + self.distanceNatation + ' Cyclisme ' + self.distanceCyclisme + ' Course ' + self.distanceCourseAPied
+
+
 class Triathlon(models.Model):
     """Class Répresentant un Triathlon"""
 
@@ -139,8 +159,7 @@ class Triathlon(models.Model):
     taches = models.ForeignKey(Tache, on_delete=models.CASCADE)
     # à coder la class Tache pour referencer la clé étrangère
 
-    #typeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT)
-
+    typeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT)
     # à coder la class TypeTriathlon pour referencer la clé étrangère
 
     def __str__(self):
