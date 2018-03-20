@@ -146,4 +146,9 @@ class Tache(models.Model):
 
     # TacheModel = models.ForeignKey(TacheModel, on_delete=models.PROTECT)
 
-    # Benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT)
+    def __str__(self):
+        """Retrourne une representation string de l'objet Tache"""
+
+        return 'Tache date de fin :' + self.DateFin + ' avec niveau d\'avancement :' + self.NiveauAvancement
+
+
