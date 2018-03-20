@@ -169,4 +169,44 @@ class Triathlon(models.Model):
         return 'Triathlon du ' + self.date + ' à ' + self.ville
 
 
+class Benevole(models.Model):
+    """Representation d'un benevole"""
 
+    SEX_CHOICES = (
+        ('F', 'Feminin',),
+        ('M', 'Masculin',),
+    )
+
+    STATUS_CHOICES =(
+        ('A', 'Administrateur'),
+        ('O', 'Organisateur'),
+        ('B', 'Benevole'),
+    )
+
+    Nom = models.CharField(max_length=50, blank=False, null=False, verbose_name='Nom')
+
+    Prenom = models.CharField(max_length=50, blank=False, null=False,verbose_name='Prenom')
+
+    DateNaissance = models.DateField(blank=False, null=False, verbose_name='Date de naissance')
+
+    Sexe = models.BooleanField(choices=SEX_CHOICES,verbose_name='Sexe')
+
+    Adresse = models.CharField(max_length=50, blank=False, null=False,verbose_name='Adresse')
+
+    CodePostal = models.CharField(max_length=5, blank=False, null=False, verbose_name='Code Postal')
+
+    Ville = models.CharField(max_length=50, blank=False, null=False,verbose_name='Ville')
+
+    TelephoneFixe = models.CharField(max_length=10, blank=False, null=False, verbose_name='Telephone Fixe')
+
+    TelephonePortable = models.CharField(max_length=10, blank=False, null=False, verbose_name='Telephone Portable')
+
+    Email = models.EmailField(verbose_name='Email')
+
+    Status = models.CharField(max_length=1, choices=STATUS_CHOICES,verbose_name='Status')
+
+    def __str__(self):
+        """String du benevole (lol)"""
+        return 'Benevole :' +self.Nom+" "+self.Prenom+' Status'+ self.STATUS_CHOICES
+
+    
