@@ -61,3 +61,6 @@ venv/
 *.iml
 *.xml
 *.sqlite3
+
+#Mac
+.DS_Store
