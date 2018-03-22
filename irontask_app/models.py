@@ -168,11 +168,6 @@ class Triathlon(models.Model):
 
         return 'Triathlon du ' + self.date + ' à ' + self.ville
 
-class TypeTriathlon(models.Model):
-    Libelle = models.CharField(max_length=50)
-    DistanceNatation = models.IntegerField
-    DistanceCyclisme = models.IntegerField
-    DistanceCourseAPied = models.IntegerField
 
 
 class Tache(models.Model):
