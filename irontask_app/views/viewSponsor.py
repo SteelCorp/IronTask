@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor
+from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='login/')
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
-    sponsor = Sponsor.objects.all().filter()
+    sponsor = Sponsor.objects.all()
     sponsorForm = SponsorForm()
 
     if request.method == 'POST':
@@ -19,7 +21,7 @@ def listSponsor(request):
         return redirect(listSponsor)
     return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'sponsorForm':sponsorForm})
 
-
+@login_required(login_url='login/')
 def editerSponsor(request, siret):
 
 
@@ -46,12 +48,14 @@ def getSponsor(request, siret):
 
     return render(request, "Sponsor.html", locals())
 
-
+@login_required(login_url='login/')
 def deleteSponsor(request, siret):
     sponsor = Sponsor.objects.get(siret=siret)
     sponsor.delete()
+    sponsor.save()
+    return redirect(reverse(viewname=listSponsor))
 
-
+@login_required(login_url='login/')
 def createSponsor(request):
     """
        :param request:
