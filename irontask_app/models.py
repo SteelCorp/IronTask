@@ -63,7 +63,7 @@ class Sponsor(models.Model):
     codePostal = models.CharField(max_length=5, blank=False, null=True)
     ville = models.CharField(max_length=50, blank=False, null=True)
     telephoneFixe = models.CharField(max_length=10, blank=False, null=True)
-    telephonePort = models.CharField(max_length=10, blank=False, null=True)
+    telephonePortable = models.CharField(max_length=10, blank=False, null=True)
     email = models.EmailField(blank=False, null=True)
 
     def __str__(self):
@@ -197,10 +197,12 @@ class Tache(models.Model):
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT, null=False)
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT, null=False)
 
+
     def __str__(self):
         """Retrourne une representation string de l'objet Tache"""
 
         return 'Tache date de fin :' + str(self.dateFin) + ' avec niveau d\'avancement :' + self.niveauAvancement
+
 
 
 class Intervenir(models.Model):
