@@ -79,8 +79,8 @@
                     <td><a href="{% url 'getSponsor' sponsor.siret %}"><img
                             src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
 
-                    <td><a href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal" data-target="#EditerModal"><img
-                            src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
+
+                    <td><a data-toggle="modal" href="{% url 'editerSponsor' sponsor.siret %}" data-remote="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Modal</a></td>
                 </tr>
             {% endfor %}
            

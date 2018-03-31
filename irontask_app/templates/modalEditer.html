@@ -4,8 +4,7 @@
 
 
     <!--bouton ajout-->
-    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#exampleModal">+</button>
-    <!-- Modal -->
+
     <div class="modal fade" id="EditerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -35,6 +34,11 @@
 
     </div>
 
-
+<!-- Script permettant à la modal d'appeler une url -->
+<script>
+$('body').on('click', '[data-toggle="modal"]', function(){
+        $($(this).data("target")+' .modal-body').load($(this).data("remote"));
+    });
+</script>
 
 {% endblock %}

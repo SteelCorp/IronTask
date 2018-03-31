@@ -14,7 +14,7 @@ def listSponsor(request):
     sponsorForm = SponsorForm()
 
     if request.method == 'POST':
-        
+
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
@@ -37,7 +37,7 @@ def editerSponsor(request, siret):
             sponsor.save()
         return render(request, 'listSponsor.html', {'form': sponsorForm})
 
-    return render(request, 'listSponsor.html', {'sponsorForm': sponsorForm})
+    return render(request, 'modalEditer.html', {'form': sponsorForm})
 
 
 def getSponsor(request, siret):
