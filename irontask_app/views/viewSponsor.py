@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core import serializers
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 
 
 @login_required(login_url='login/')
@@ -24,20 +27,31 @@ def listSponsor(request):
     return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm})
 
 
-@login_required(login_url='login/')
+"""""@login_required(login_url='login/')
 def editerSponsor(request, siret):
+
     s = Sponsor.objects.get(siret=siret)
     sponsorForm = SponsorForm(instance=s)
+    html = render_to_string('modalEditer.html', {'form': sponsorForm})
+
+
 
     if request.method == 'POST':
+        s = Sponsor.objects.get(siret=siret)
         sponsorform = SponsorForm(request.POST, instance=s)
 
         if sponsorform.is_valid():
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
-        return render(request, 'listSponsor.html', {'form': sponsorForm})
+            return redirect(listSponsor)
+    return render(request, 'modalEditer.html', {'form' : sponsorForm})"""
 
-    return render(request, 'modalEditer.html', {'form': sponsorForm})
+def editerSponsor(request, siret=None):
+
+    data = serializers.serialize('json', Sponsor.objects.filter(siret=siret) )
+
+    return HttpResponse(data)
+
 
 
 def getSponsor(request, siret):

@@ -1,4 +1,3 @@
-
 {% block modal %}
     {% load static %}
 
@@ -10,21 +9,60 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editer</h5>
+                    <h5 class="modal-title" id="ModalEditer">Editer</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form class="ui form" method="POST">{% csrf_token %}
-                        {% csrf_token %}
-                        {{ form.as_table}}
+
+
+                        <label for="formGroupExampleInput">N° SIRET&nbsp;:</label><input name="siret"
+                                                                                         class="form-control"
+                                                                                         id="siret"
+                                                                                         placeholder="" type="text">
+                        <label for="formGroupExampleInput">Raison Social&nbsp;:</label><input name="raisonSocial"
+                                                                                              id="raisonSocial"
+                                                                                              class="form-control"
+
+                                                                                              placeholder="" required=""
+                                                                                              type="text">
+                        <label for="formGroupExampleInput">Adresse&nbsp;:</label><input name="adresse"
+                                                                                        class="form-control"
+                                                                                        id="adresse"
+                                                                                        placeholder="" required=""
+                                                                                        type="text">
+                        <label for="formGroupExampleInput">Code Postal&nbsp;:</label><input name="codePostal"
+                                                                                            class="form-control"
+                                                                                            id="codePostal"
+                                                                                            placeholder="" maxlength="5"
+                                                                                            required="" type="text">
+                        <label for="formGroupExampleInput">Ville&nbsp;:</label><input name="ville" class="form-control"
+                                                                                      id="ville"
+                                                                                      placeholder="" required=""
+                                                                                      type="text">
+                        <label for="formGroupExampleInput">Téléphone Fixe&nbsp;:</label><input name="telephoneFixe"
+                                                                                               class="form-control"
+                                                                                               id="telephoneFixe"
+                                                                                               placeholder=""
+                                                                                               required="" type="text">
+                        <label for="formGroupExampleInput">Téléphone Portable&nbsp;:</label><input
+                                name="telephonePortable" class="form-control" id="telephonePortable" placeholder=""
+                                required="" type="text">
+                        <label for="formGroupExampleInput">Email&nbsp;:</label><input name="email" class="form-control"
+                                                                                      id="email"
+                                                                                      placeholder="" required=""
+                                                                                      type="text">
 
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
+                    </form>
+
+
                     </form>
                 </div>
             </div>
@@ -34,11 +72,6 @@
 
     </div>
 
-<!-- Script permettant à la modal d'appeler une url -->
-<script>
-$('body').on('click', '[data-toggle="modal"]', function(){
-        $($(this).data("target")+' .modal-body').load($(this).data("remote"));
-    });
-</script>
+
 
 {% endblock %}
