@@ -81,12 +81,10 @@
 
 
                     <td>
-                        <button type="button" class="openEditerModal"
+                        <button  class="btn-dark"
                                 href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal"
                                 data-form="{% url 'editerSponsor' sponsor.siret %}"
-                                id="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Launch
-                            {% url 'editerSponsor' sponsor.siret %}
-                            modal
+                                id="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Editer
                         </button>
                     </td>
 
@@ -157,7 +155,7 @@
                     $('#telephonePortable').val(data[0]['fields']['telephonePortable']);
                     $('#email').val(data[0]['fields']['email']);
 
-                    console.log(data[0]);
+                    console.log($('#adresse').val(data[0]['fields']['adresse']));
 
 
                 },
