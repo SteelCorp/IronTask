@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant
+from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant, viewBenevole
 from django.conf.urls import url, include
 
 from irontask_app import api
@@ -28,6 +28,11 @@ urlpatterns = [
     path('personnel/intervenant/editer/<pk>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
     path('personnel/intervenant/supprimer/<pk>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
 
+    # Gestion des benevoles
+    path('benevole/', viewBenevole.listBenevole, name='listBenevole'),
+    path('benevole/get/<pk>/', viewBenevole.getBenevole, name='getBenevole'),
+    path('benevole/editer/<pk>/', viewBenevole.editerBenevole, name='editerBenevole'),
+    path('benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
 
     # url(r'api/', include(router.urls))
 ]
