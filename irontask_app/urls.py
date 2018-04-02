@@ -13,17 +13,20 @@ urlpatterns = [
     url('logout/', viewLogin.logout_user, name='logout_user'),
     path('', viewIndex.index, name='index'),
 
+    # Menu personnel
+    path('personnel', viewSponsor.listSponsor, name='personnel'),
+
     # Gestion des sponsors
-    path('sponsor/', viewSponsor.listSponsor, name='listSponsor'),
-    path('sponsor/get/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
-    path('sponsor/editer/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
-    path('sponsor/supprimer/<siret>/', viewSponsor.deleteSponsor, name='deleteSponsor'),
+    path('personnel/sponsor/', viewSponsor.listSponsor, name='listSponsor'),
+    path('personnel/sponsor/get/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
+    path('personnel/sponsor/editer/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
+    path('personnel/sponsor/supprimer/<siret>/', viewSponsor.deleteSponsor, name='deleteSponsor'),
 
     # Gestion des intervenants
-    path('intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
-    path('intervenant/get/<pk>/', viewIntervenant.getIntervenant, name='getIntervenant'),
-    path('intervenant/editer/<pk>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
-    path('intervenant/supprimer/<pk>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
+    path('personnel/intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
+    path('personnel/intervenant/get/<pk>/', viewIntervenant.getIntervenant, name='getIntervenant'),
+    path('personnel/intervenant/editer/<pk>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
+    path('personnel/intervenant/supprimer/<pk>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
 
 
     # url(r'api/', include(router.urls))

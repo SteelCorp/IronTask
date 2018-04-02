@@ -48,7 +48,6 @@ def editerSponsor(request, siret):
 
 def editerIntervenant(request, pk=None):
     """Vue qui permet d'éditer un intervenant"""
-
     data = serializers.serialize('json', Intervenant.objects.filter(pk=pk) )
 
     return HttpResponse(data)
@@ -62,7 +61,7 @@ def getIntervenant(request, pk):
     """
     intervenant = Intervenant.objects.get(pk=pk)
 
-    return render(request, "Intervenant.html", locals())
+    return render(request, "personnel/Intervenant.html", locals())
 
 
 @login_required(login_url='login/')
@@ -80,5 +79,4 @@ def deleteIntervenant(request, pk):
 def createIntervenant(request):
     """ Vue qui permet de creer un intervenant
     """
-
-    return render(request, 'add_Intervenant.html', {'IntervenantForm': IntervenantForm})
+    return render(request, 'personnel/add_Intervenant.html', {'IntervenantForm': IntervenantForm})

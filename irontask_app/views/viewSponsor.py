@@ -24,7 +24,7 @@ def listSponsor(request):
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
         return redirect(listSponsor)
-    return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm})
+    return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm })
 
 
 """""@login_required(login_url='login/')
@@ -47,7 +47,6 @@ def editerSponsor(request, siret):
     return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
 def editerSponsor(request, siret=None):
-
     data = serializers.serialize('json', Sponsor.objects.filter(siret=siret) )
 
     return HttpResponse(data)
@@ -74,6 +73,7 @@ def deleteSponsor(request, siret):
 
 @login_required(login_url='login/')
 def createSponsor(request):
+
     """
        :param request:
        :return:
