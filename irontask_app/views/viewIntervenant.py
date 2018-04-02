@@ -14,17 +14,17 @@ def listIntervenant(request):
     """Vue qui retourne la liste de tous les intervenant"""
 
     intervenant = Intervenant.objects.all()
-    sponsorForm = SponsorForm()
+    intervenantForm = IntervenantForm()
 
     if request.method == 'POST':
 
-        sponsorform = SponsorForm(request.POST)
+        intervenantForm = intervenantForm(request.POST)
 
-        if sponsorform.is_valid():
-            sponsor = sponsorform.save(commit=True)
-            sponsor.save()
-        return redirect(listSponsor)
-    return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm})
+        if IntervenantForm.is_valid():
+            intervenant = intervenantForm.save(commit=True)
+            intervenant.save()
+        return redirect(listIntervenant)
+    return render(request, 'listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm})
 
 
 """""@login_required(login_url='login/')
@@ -46,27 +46,31 @@ def editerSponsor(request, siret):
             return redirect(listSponsor)
     return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
-def editerIntervenant(request, siret=None):
+def editerIntervenant(request, pk=None):
+    """Vue qui permet d'éditer un intervenant"""
 
-    data = serializers.serialize('json', Intervenant.objects.filter(siret=siret) )
+    data = serializers.serialize('json', Intervenant.objects.filter(pk=pk) )
 
     return HttpResponse(data)
 
 
 
-def getIntervenant(request, siret):
+def getIntervenant(request, pk):
     """
-    Vue qui retourne le sponsor fournit en paramètre
-    ::param siret est le siret d'un intervenant
+    Vue qui retourne l'intervenant fournit en paramètre
+    :param pk est la primary key d'un intervenant
     """
-    intervenant = Intervenant.objects.get(siret=siret)
+    intervenant = Intervenant.objects.get(pk=pk)
 
     return render(request, "Intervenant.html", locals())
 
 
 @login_required(login_url='login/')
-def deleteIntervenant(request, siret):
-    intervenant = Intervenant.objects.get(siret=siret)
+def deleteIntervenant(request, pk):
+    """Vue qui permet de supprimer un intervenant
+    :param pk est la primary key d'un intervenant
+    """
+    intervenant = Intervenant.objects.get(pk=pk)
     intervenant.delete()
     intervenant.save()
     return redirect(reverse(viewname=listIntervenant))
@@ -74,9 +78,7 @@ def deleteIntervenant(request, siret):
 
 @login_required(login_url='login/')
 def createIntervenant(request):
+    """ Vue qui permet de creer un intervenant
     """
-       :param request:
-       :return:
-       """
 
     return render(request, 'add_Intervenant.html', {'IntervenantForm': IntervenantForm})
