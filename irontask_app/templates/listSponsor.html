@@ -79,11 +79,19 @@
                     <td><a href="{% url 'getSponsor' sponsor.siret %}"><img
                             src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
 
-                    <td><a href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal" data-target="#EditerModal"><img
-                            src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
+
+                    <td>
+                        <button type="button" class="btn btn-info"
+                                href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal"
+                                data-form="{% url 'editerSponsor' sponsor.siret %}"
+                                id="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Editer
+                        </button>
+                    </td>
+
                 </tr>
+
             {% endfor %}
-           
+
             </tbody>
         </table>
     </div>
@@ -120,8 +128,47 @@
         </div>
     </div>
     <!-- Fin pagination -->
-      {% include "modalAjout.html" %}
-    {% include "modalEditer.html" %}
+
+
+    {% include "modalEditerSponsor.html" %}
+    {% include "modalAjout.html" %}
+
+    <script>
+        $('#EditerModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var recipient = button.data('form');
+
+            $.ajax({
+                url: recipient,
+
+
+                type: 'get', // This is the default though, you don't actually need to always mention it
+                dataType: 'json',
+                success: function (data) {
+
+                    $('#siret').val(data[0]['pk']);
+                    $('#raisonSocial').val(data[0]['fields']['raisonSocial']);
+                    $('#adresse').val(data[0]['fields']['adresse']);
+                    $('#codePostal').val(data[0]['fields']['codePostal']);
+                    $('#ville').val(data[0]['fields']['ville']);
+                    $('#telephoneFixe').val(data[0]['fields']['telephoneFixe']);
+                    $('#telephonePortable').val(data[0]['fields']['telephonePortable']);
+                    $('#email').val(data[0]['fields']['email']);
+
+                    console.log($('#adresse').val(data[0]['fields']['adresse']));
+
+
+                },
+                failure: function (data) {
+                    alert('Got an error dude');
+                }
+            });
+        })
+
+    </script>
+
+
+
 {% endblock %}
 
 

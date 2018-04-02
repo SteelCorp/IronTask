@@ -1,0 +1,77 @@
+{% block modal %}
+    {% load static %}
+
+
+    <!--bouton ajout-->
+
+    <div class="modal fade" id="EditerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalEditer">Editer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="ui form" method="POST">{% csrf_token %}
+
+
+                        <label for="formGroupExampleInput">N° SIRET&nbsp;:</label><input name="siret"
+                                                                                         class="form-control"
+                                                                                         id="siret"
+                                                                                         placeholder="" type="text">
+                        <label for="formGroupExampleInput">Raison Social&nbsp;:</label><input name="raisonSocial"
+                                                                                              id="raisonSocial"
+                                                                                              class="form-control"
+                                                                                              placeholder="" required=""
+                                                                                              type="text">
+                        <label for="formGroupExampleInput">Adresse&nbsp;:</label><input name="adresse"
+                                                                                        id="adresse"
+                                                                                        class="form-control"
+                                                                                        placeholder="" required=""
+                                                                                        type="text">
+                        <label for="formGroupExampleInput">Code Postal&nbsp;:</label><input name="codePostal"
+                                                                                            class="form-control"
+                                                                                            id="codePostal"
+                                                                                            placeholder="" maxlength="5"
+                                                                                            required="" type="text">
+                        <label for="formGroupExampleInput">Ville&nbsp;:</label><input name="ville" class="form-control"
+                                                                                      id="ville"
+                                                                                      placeholder="" required=""
+                                                                                      type="text">
+                        <label for="formGroupExampleInput">Téléphone Fixe&nbsp;:</label><input name="telephoneFixe"
+                                                                                               class="form-control"
+                                                                                               id="telephoneFixe"
+                                                                                               placeholder=""
+                                                                                               required="" type="text">
+                        <label for="formGroupExampleInput">Téléphone Portable&nbsp;:</label><input
+                                name="telephonePortable" class="form-control" id="telephonePortable" placeholder=""
+                                required="" type="text">
+                        <label for="formGroupExampleInput">Email&nbsp;:</label><input name="email" class="form-control"
+                                                                                      id="email"
+                                                                                      placeholder="" required=""
+                                                                                      type="text">
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="button" class="btn btn-danger">Supprimer</button>
+                        </div>
+                    </form>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin bouton ajout-->
+
+    </div>
+
+
+
+{% endblock %}
