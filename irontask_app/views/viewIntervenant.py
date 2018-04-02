@@ -46,37 +46,37 @@ def editerSponsor(request, siret):
             return redirect(listSponsor)
     return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
-def editerSponsor(request, siret=None):
+def editerIntervenant(request, siret=None):
 
-    data = serializers.serialize('json', Sponsor.objects.filter(siret=siret) )
+    data = serializers.serialize('json', Intervenant.objects.filter(siret=siret) )
 
     return HttpResponse(data)
 
 
 
-def getSponsor(request, siret):
+def getIntervenant(request, siret):
     """
     Vue qui retourne le sponsor fournit en paramètre
-    ::param siret est le siret d'un sponsor
+    ::param siret est le siret d'un intervenant
     """
-    sponsor = Sponsor.objects.get(siret=siret)
+    intervenant = Intervenant.objects.get(siret=siret)
 
-    return render(request, "Sponsor.html", locals())
-
-
-@login_required(login_url='login/')
-def deleteSponsor(request, siret):
-    sponsor = Sponsor.objects.get(siret=siret)
-    sponsor.delete()
-    sponsor.save()
-    return redirect(reverse(viewname=listSponsor))
+    return render(request, "Intervenant.html", locals())
 
 
 @login_required(login_url='login/')
-def createSponsor(request):
+def deleteIntervenant(request, siret):
+    intervenant = Intervenant.objects.get(siret=siret)
+    intervenant.delete()
+    intervenant.save()
+    return redirect(reverse(viewname=listIntervenant))
+
+
+@login_required(login_url='login/')
+def createIntervenant(request):
     """
        :param request:
        :return:
        """
 
-    return render(request, 'add_Sponsor.html', {'SponsorForm': SponsorForm})
+    return render(request, 'add_Intervenant.html', {'IntervenantForm': IntervenantForm})
