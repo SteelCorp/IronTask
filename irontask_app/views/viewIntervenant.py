@@ -18,10 +18,10 @@ def listIntervenant(request):
 
     if request.method == 'POST':
 
-        intervenantForm = intervenantForm(request.POST)
+        intervenantform = IntervenantForm(request.POST)
 
-        if IntervenantForm.is_valid():
-            intervenant = intervenantForm.save(commit=True)
+        if intervenantform.is_valid():
+            intervenant = intervenantform.save(commit=True)
             intervenant.save()
         return redirect(listIntervenant)
     return render(request, 'listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm})

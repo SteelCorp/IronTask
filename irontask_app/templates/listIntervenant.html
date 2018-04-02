@@ -16,9 +16,7 @@
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
                         </form>
                     </div>
-
                     <div class="col-sm">
-
                         <div class="dropdown float-right">
                             <button class="btn  dropdown-toggle" type="button" id="boutonTri"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,9 +28,7 @@
 
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -55,21 +51,21 @@
             </thead>
             <tbody>
 
-            {% for sponsor in Sponsor %}
+            {% for intervenant in Intervenant %}
                 <tr>
 
-                    <td>{{ sponsor.raisonSocial }}</td>
-                    <td>{{ sponsor.telephone }}</td>
-                    <td>{{ sponsor.email }}</td>
-                    <td><a href="{% url 'getSponsor' sponsor.siret %}"><img
+                    <td>{{ intervenant.raisonSocial }}</td>
+                    <td>{{ intervenant.telephone }}</td>
+                    <td>{{ intervenant.email }}</td>
+                    <td><a href="{% url 'getIntervenant' intervenant.siret %}"><img
                             src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
 
 
                     <td>
                         <button type="button" class="btn btn-info"
-                                href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal"
-                                data-form="{% url 'editerSponsor' sponsor.siret %}"
-                                id="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Editer
+                                href="{% url 'editerIntervenant' intervenant.siret %}" data-toggle="modal"
+                                data-form="{% url 'editerIntervenant' intervenant.siret %}"
+                                id="{% url 'editerIntervenant' intervenant.siret %}" data-target="#EditerModal">Editer
                         </button>
                     </td>
 
@@ -115,40 +111,7 @@
     <!-- Fin pagination -->
 
 
-    {% include "modalEditerSponsor.html" %}
     {% include "modalAjout.html" %}
-
-    <script>
-        $('#EditerModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var recipient = button.data('form');
-
-            $.ajax({
-                url: recipient,
-
-
-                type: 'get', // This is the default though, you don't actually need to always mention it
-                dataType: 'json',
-                success: function (data) {
-
-                    $('#siret').val(data[0]['pk']);
-                    $('#raisonSocial').val(data[0]['fields']['raisonSocial']);
-                    $('#adresse').val(data[0]['fields']['adresse']);
-                    $('#codePostal').val(data[0]['fields']['codePostal']);
-                    $('#ville').val(data[0]['fields']['ville']);
-                    $('#telephoneFixe').val(data[0]['fields']['telephoneFixe']);
-                    $('#telephonePortable').val(data[0]['fields']['telephonePortable']);
-                    $('#email').val(data[0]['fields']['email']);
-
-                    console.log($('#adresse').val(data[0]['fields']['adresse']));
-                },
-                failure: function (data) {
-                    alert('Got an error dude');
-                }
-            });
-        })
-    </script>
-
 
 
 {% endblock %}

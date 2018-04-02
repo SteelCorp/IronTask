@@ -13,6 +13,10 @@ class IntervenantForm(ModelForm):
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
+    type = forms.CharField(label="Type", widget=forms.TextInput(
+                            attrs={"type": "text", "class": "form-control",
+                                   "id": "formGroupExampleInput",
+                                   "placeholder": ""}))
     adresse = forms.CharField(label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
