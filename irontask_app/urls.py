@@ -13,8 +13,6 @@ urlpatterns = [
     url('logout/', viewLogin.logout_user, name='logout_user'),
     path('', viewIndex.index, name='index'),
 
-    # Menu personnel
-    path('personnel', viewSponsor.listSponsor, name='personnel'),
 
     # Gestion des sponsors
     path('personnel/sponsor/', viewSponsor.listSponsor, name='listSponsor'),

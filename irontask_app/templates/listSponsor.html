@@ -2,24 +2,7 @@
 {% block contenu %}
     {% load static %}
 
-    <div class="entête">
-        <div class="container ">
-            <ul class="nav nav-tabs align-content-center" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link " href="{% url 'listBenevole' %}">Bénévoles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{% url 'listIntervenant' %}">Intervenants</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'listSponsor' %}">Sponsors</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
+  {% include 'navBarPersonnel.html' %}
     <div class="container ">
         <div class="row mt-3 ">
             <div class="col   ">
@@ -156,15 +139,12 @@
                     $('#email').val(data[0]['fields']['email']);
 
                     console.log($('#adresse').val(data[0]['fields']['adresse']));
-
-
                 },
                 failure: function (data) {
                     alert('Got an error dude');
                 }
             });
         })
-
     </script>
 
 

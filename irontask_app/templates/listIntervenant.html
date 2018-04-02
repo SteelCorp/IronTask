@@ -2,23 +2,157 @@
 {% block contenu %}
     {% load static %}
 
-   <div class="entête">
-        <div class="container ">
-            <ul class="nav nav-tabs align-content-center" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link " href="{% url 'listBenevole' %}">Bénévoles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active " href="#">Intervenants</a>
-                </li>
+  {% include 'navBarPersonnel.html' %}
 
-                <li class="nav-item">
-                    <a class="nav-link " href="{% url 'listSponsor' %}">Sponsors</a>
-                </li>
-            </ul>
+
+    <div class="container ">
+        <div class="row mt-3 ">
+            <div class="col   ">
+                <div class="row mt-3 mb-1">
+                    <div class="col">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche"
+                                   aria-label="Recherche">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                        </form>
+                    </div>
+
+                    <div class="col-sm">
+
+                        <div class="dropdown float-right">
+                            <button class="btn  dropdown-toggle" type="button" id="boutonTri"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Trier par : AlphaBetique
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="boutonTri">
+                                <a class="dropdown-item" href="">Ville</a>
+                                <a class="dropdown-item" href="">Email</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
 
 
+    <!-- Sponsor -->
+    <div class="container">
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th scope="col">Raison social</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Email</th>
+
+                <th scope="col">Voir</th>
+                <th scope="col">Editer</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for sponsor in Sponsor %}
+                <tr>
+
+                    <td>{{ sponsor.raisonSocial }}</td>
+                    <td>{{ sponsor.telephone }}</td>
+                    <td>{{ sponsor.email }}</td>
+                    <td><a href="{% url 'getSponsor' sponsor.siret %}"><img
+                            src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
+
+
+                    <td>
+                        <button type="button" class="btn btn-info"
+                                href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal"
+                                data-form="{% url 'editerSponsor' sponsor.siret %}"
+                                id="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Editer
+                        </button>
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <!-- Fin Sponsor-->
+
+
+    <span class="plus"></span>
+
+    <!-- Pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 py-5 d-flex">
+                <ul class="pagination mx-auto">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Fin pagination -->
+
+
+    {% include "modalEditerSponsor.html" %}
+    {% include "modalAjout.html" %}
+
+    <script>
+        $('#EditerModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var recipient = button.data('form');
+
+            $.ajax({
+                url: recipient,
+
+
+                type: 'get', // This is the default though, you don't actually need to always mention it
+                dataType: 'json',
+                success: function (data) {
+
+                    $('#siret').val(data[0]['pk']);
+                    $('#raisonSocial').val(data[0]['fields']['raisonSocial']);
+                    $('#adresse').val(data[0]['fields']['adresse']);
+                    $('#codePostal').val(data[0]['fields']['codePostal']);
+                    $('#ville').val(data[0]['fields']['ville']);
+                    $('#telephoneFixe').val(data[0]['fields']['telephoneFixe']);
+                    $('#telephonePortable').val(data[0]['fields']['telephonePortable']);
+                    $('#email').val(data[0]['fields']['email']);
+
+                    console.log($('#adresse').val(data[0]['fields']['adresse']));
+                },
+                failure: function (data) {
+                    alert('Got an error dude');
+                }
+            });
+        })
+    </script>
+
+
+
 {% endblock %}
+
+
+
+
