@@ -4,13 +4,12 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from irontask_app.models import Intervenant, Benevole
 from django.urls import reverse
-from irontask_app.forms.IntervenantForm import IntervenantForm
+from irontask_app.forms.BenevoleForm import BenevoleForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 
 
-class BenevoleForm(object):
-    pass
+
 
 
 @login_required(login_url='login/')
