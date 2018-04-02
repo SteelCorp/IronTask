@@ -27,10 +27,10 @@ urlpatterns = [
     path('personnel/intervenant/supprimer/<pk>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
 
     # Gestion des benevoles
-    path('benevole/', viewBenevole.listBenevole, name='listBenevole'),
-    path('benevole/get/<pk>/', viewBenevole.getBenevole, name='getBenevole'),
-    path('benevole/editer/<pk>/', viewBenevole.editerBenevole, name='editerBenevole'),
-    path('benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
+    path('personnel/benevole/', viewBenevole.listBenevole, name='listBenevole'),
+    path('personnel/benevole/get/<pk>/', viewBenevole.getBenevole, name='getBenevole'),
+    path('personnel/benevole/editer/<pk>/', viewBenevole.editerBenevole, name='editerBenevole'),
+    path('personnel/benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
 
     # url(r'api/', include(router.urls))
 ]
