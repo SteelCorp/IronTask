@@ -5,6 +5,7 @@ from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 
+
 @login_required(login_url='login/')
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
@@ -13,19 +14,19 @@ def listSponsor(request):
     sponsorForm = SponsorForm()
 
     if request.method == 'POST':
+        
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
         return redirect(listSponsor)
-    return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'sponsorForm':sponsorForm})
+    return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm})
+
 
 @login_required(login_url='login/')
 def editerSponsor(request, siret):
-
-
-    s = Sponsor.objects.get(siret = siret)
+    s = Sponsor.objects.get(siret=siret)
     sponsorForm = SponsorForm(instance=s)
 
     if request.method == 'POST':
@@ -34,9 +35,9 @@ def editerSponsor(request, siret):
         if sponsorform.is_valid():
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
-        return render(request, 'editerSponsor.html', {'sponsorForm': sponsorForm})
+        return render(request, 'listSponsor.html', {'form': sponsorForm})
 
-    return render(request, 'editerSponsor.html', {'sponsorForm': sponsorForm})
+    return render(request, 'listSponsor.html', {'sponsorForm': sponsorForm})
 
 
 def getSponsor(request, siret):
@@ -48,12 +49,14 @@ def getSponsor(request, siret):
 
     return render(request, "Sponsor.html", locals())
 
+
 @login_required(login_url='login/')
 def deleteSponsor(request, siret):
     sponsor = Sponsor.objects.get(siret=siret)
     sponsor.delete()
     sponsor.save()
     return redirect(reverse(viewname=listSponsor))
+
 
 @login_required(login_url='login/')
 def createSponsor(request):
@@ -63,4 +66,3 @@ def createSponsor(request):
        """
 
     return render(request, 'add_Sponsor.html', {'SponsorForm': SponsorForm})
-
