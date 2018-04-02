@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from irontask_app.views import viewSponsor, viewIndex, viewLogin
+from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant
 from django.conf.urls import url, include
 
 from irontask_app import api
@@ -18,6 +18,13 @@ urlpatterns = [
     path('sponsor/get/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
     path('sponsor/editer/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
     path('sponsor/supprimer/<siret>/', viewSponsor.deleteSponsor, name='deleteSponsor'),
+
+    # Gestion des intervenants
+    path('intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
+    path('intervenant/get/<pk>/', viewIntervenant.getIntervenant, name='getIntervenant'),
+    path('intervenant/editer/<pk>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
+    path('intervenant/supprimer/<pk>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
+
 
     # url(r'api/', include(router.urls))
 ]
