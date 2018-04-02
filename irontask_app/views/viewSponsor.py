@@ -32,7 +32,7 @@ def editerSponsor(request, siret):
 
     s = Sponsor.objects.get(siret=siret)
     sponsorForm = SponsorForm(instance=s)
-    html = render_to_string('modalEditer.html', {'form': sponsorForm})
+    html = render_to_string('modalEditerSponsor.html', {'form': sponsorForm})
 
 
 
@@ -44,7 +44,7 @@ def editerSponsor(request, siret):
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
             return redirect(listSponsor)
-    return render(request, 'modalEditer.html', {'form' : sponsorForm})"""
+    return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
 def editerSponsor(request, siret=None):
 

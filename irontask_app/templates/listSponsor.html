@@ -81,7 +81,7 @@
 
 
                     <td>
-                        <button  class="btn-dark"
+                        <button type="button" class="btn btn-info"
                                 href="{% url 'editerSponsor' sponsor.siret %}" data-toggle="modal"
                                 data-form="{% url 'editerSponsor' sponsor.siret %}"
                                 id="{% url 'editerSponsor' sponsor.siret %}" data-target="#EditerModal">Editer
@@ -130,7 +130,7 @@
     <!-- Fin pagination -->
 
 
-    {% include "modalEditer.html" %}
+    {% include "modalEditerSponsor.html" %}
     {% include "modalAjout.html" %}
 
     <script>
