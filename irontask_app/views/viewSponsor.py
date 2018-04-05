@@ -27,7 +27,7 @@ def listSponsor(request):
     return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm })
 
 
-"""""@login_required(login_url='login/')
+@login_required(login_url='login/')
 def editerSponsor(request, siret):
 
     s = Sponsor.objects.get(siret=siret)
@@ -44,12 +44,7 @@ def editerSponsor(request, siret):
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
             return redirect(listSponsor)
-    return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
-
-def editerSponsor(request, siret=None):
-    data = serializers.serialize('json', Sponsor.objects.filter(siret=siret) )
-
-    return HttpResponse(data)
+    return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})
 
 
 
@@ -60,7 +55,7 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
 
-    return render(request, "Sponsor.html", locals())
+    return render(request, "voirGenerique.html", locals())
 
 
 @login_required(login_url='login/')
