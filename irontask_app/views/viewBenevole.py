@@ -21,8 +21,9 @@ def listBenevole(request):
 
     if request.method == 'POST':
 
-        benevoleForm = benevoleForm(request.POST)
 
+        benevoleForm = BenevoleForm(request.POST)
+        print(benevoleForm.errors)
         if benevoleForm.is_valid():
             benevole = benevoleForm.save(commit=True)
             benevole.save()

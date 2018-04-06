@@ -17,10 +17,9 @@ class BenevoleForm(ModelForm):
                             attrs={"type": "text", "class": "form-control",
                                    "id": "formGroupExampleInput",
                                    "placeholder": ""}))
-    sexe = forms.CharField(required=True, max_length=1, label="H/F", widget=forms.TextInput(
-                            attrs={"type": "text", "class":"form-control",
-                                            "id": "formGroupExampleInput",
-                                            "placeholder":""}))
+
+
+    sexe = forms.ChoiceField(choices = Benevole.SEX_CHOICES)
     adresse = forms.CharField(max_length=5,label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
