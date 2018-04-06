@@ -54,14 +54,14 @@ def editerIntervenant(request, pk=None):
 
 
 
-def getIntervenant(request, pk):
+def getIntervenant(request, siret):
     """
     Vue qui retourne l'intervenant fournit en paramètre
-    :param pk est la primary key d'un intervenant
+    :param siret est la primary key d'un intervenant
     """
-    intervenant = Intervenant.objects.get(pk=pk)
+    intervenant = Intervenant.objects.get(siret=siret)
 
-    return render(request, "personnel/Intervenant.html", locals())
+    return render(request, "voirIntervenant.html", {'Intervenant' : intervenant} )
 
 
 @login_required(login_url='login/')
