@@ -45,13 +45,9 @@
             <tr>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
-                <th scope="col">Âge</th>
                 <th scope="col">Sexe</th>
-                <th scope="col">Adresse</th>
                 <th scope="col">Ville</th>
-                <th scope="col">Code Postal</th>
-                <th scope="col">Voir</th>
-                <th scope="col">Editer</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -61,21 +57,10 @@
 
                     <td>{{ benevole.nom }}</td>
                     <td>{{ benevole.prenom }}</td>
-                    <td>{{ benevole.dateNaissance }}</td>
                     <td>{{ benevole.sexe }}</td>
-                    <td>{{ benevole.adresse }}</td>
                     <td>{{ benevole.ville }}</td>
-                    <td>{{ benevole.codePostal }}</td>
-
-
-
-                    <td><a href="{% url 'getBenevole' benevole.pk %}"><img
-                            src="{% static 'img/eye.svg' %}" alt="eye"/></a></td>
-                    <td>
-                        <button type="button" class="btn btn-info"
-                                href="{% url 'editerBenevole' benevole.pk %}" data-toggle="modal"
-                                data-form="{% url 'editerBenevole' benevole.pk  %}"
-                                id="{% url 'editerBenevole' benevole.pk  %}" data-target="#EditerModal">Editer
+                       <<td>
+                        <a href="{% url 'getBenevole' benevole.pk %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
                         </button>
                     </td>
 

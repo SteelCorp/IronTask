@@ -61,7 +61,10 @@ def getBenevole(request, pk):
     Vue qui retourne l'intervenant fournit en paramètre
     :param pk est la primary key d'un intervenant
     """
-    pass
+
+    benevole = Benevole.objects.get(pk=pk)
+
+    return render(request, "voirBenevole.html", {'Benevole': benevole})
 
 
 @login_required(login_url='login/')

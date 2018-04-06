@@ -61,7 +61,7 @@ def getIntervenant(request, siret):
     """
     intervenant = Intervenant.objects.get(siret=siret)
 
-    return render(request, "voirIntervenant.html", {'Intervenant' : intervenant} )
+    return render(request, "voirIntervenant.html", {'Intervenant': intervenant})
 
 
 @login_required(login_url='login/')

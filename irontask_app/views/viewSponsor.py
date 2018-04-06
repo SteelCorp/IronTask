@@ -55,7 +55,7 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
 
-    return render(request, "voirSponsor.html", locals())
+    return render(request, "voirSponsor.html", {'Sponsor': sponsor})
 
 
 @login_required(login_url='login/')
