@@ -13,7 +13,7 @@ class BenevoleForm(ModelForm):
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
-    typedateNaissance = forms.DateField(required=True, label="Date de naissance", widget=forms.TextInput(
+    dateNaissance = forms.DateField(required=True, label="Date de naissance", widget=forms.TextInput(
                             attrs={"type": "text", "class": "form-control",
                                    "id": "formGroupExampleInput",
                                    "placeholder": ""}))

@@ -23,7 +23,7 @@ def listBenevole(request):
 
         benevoleForm = benevoleForm(request.POST)
 
-        if BenevoleForm.is_valid():
+        if benevoleForm.is_valid():
             benevole = benevoleForm.save(commit=True)
             benevole.save()
         return redirect(listBenevole)
