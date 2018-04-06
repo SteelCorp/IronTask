@@ -46,7 +46,6 @@
                 <th scope="col">Raison social</th>
                 <th scope="col">Telephone</th>
                 <th scope="col">Email</th>
-
                 <th scope="col">Voir / Editer</th>
 
             </tr>
@@ -55,17 +54,11 @@
 
             {% for sponsor in Sponsor %}
                 <tr>
-
                     <td>{{ sponsor.raisonSocial }}</td>
-                    <td>{{ sponsor.telephone }}</td>
+                    <td>{{ sponsor.telephonePortable }}</td>
                     <td>{{ sponsor.email }}</td>
-
-
-
                     <td>
                         <a href="{% url 'getSponsor' sponsor.siret %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
-
-
                         </button>
                     </td>
 

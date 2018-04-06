@@ -63,3 +63,5 @@ venv/
 *.sqlite3
 irontask/irontask_app/migrations/
 irontask_app/migrations/
+
+setup\.py
