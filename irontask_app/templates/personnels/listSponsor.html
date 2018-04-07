@@ -2,7 +2,7 @@
 {% block contenu %}
     {% load static %}
 
-  {% include 'personnels/navBarPersonnel.html' %}
+    {% include 'personnels/navBarPersonnel.html' %}
     <div class="container ">
         <div class="row mt-3 ">
             <div class="col   ">
@@ -36,11 +36,17 @@
 
     <div class="container">
     {% if messages %}
+
                             <div class="alert alert-danger" role="alert">
+
                                 {% for message in messages %}
+
                                     {{ message }}
+
                                 {% endfor %}
+
                             </div>
+
                         {% endif %}
         <table class="table table-striped ">
             <thead>
@@ -52,13 +58,15 @@
             </tr>
             </thead>
             <tbody>
+
             {% for sponsor in Sponsor %}
                 <tr>
                     <td>{{ sponsor.raisonSocial }}</td>
                     <td>{{ sponsor.telephonePortable }}</td>
                     <td>{{ sponsor.email }}</td>
                     <td>
-                        <a href="{% url 'getSponsor' sponsor.siret %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
+                        <a href="{% url 'getSponsor' sponsor.siret %}" class="btn btn-info  active" role="button"
+                           aria-pressed="true">Voir / Editer</a>
                         </button>
                     </td>
                 </tr>
@@ -66,6 +74,7 @@
             </tbody>
         </table>
     </div>
+   
     <!-- Fin Sponsor-->
 
     <!-- Bouton Plus pour ajouter un Benevole -->
@@ -78,26 +87,36 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 py-5 d-flex">
                 <ul class="pagination mx-auto">
-                    <div class="pagination">
-                        <span class="step-links">
-                            {% if Sponsor.has_previous %}
-                                <a href="?page={{ Sponsor.previous_page_number }}">Precèdent</a>
-                            {% endif %}
-                            <span class="current">
-                                Page {{ Sponsor.number }} de {{ Sponsor.paginator.num_pages }}.
-                            </span>
-                                {% if Sponsor.has_next %}
-                                    <a href="?page={{ Sponsor.next_page_number }}">Suivant</a>
-                                {% endif %}
-                         </span>
-                    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if Sponsor.has_previous %}
+                <a href="?page={{ Sponsor.previous_page_number }}">Precèdent</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ Sponsor.number }} de {{ Sponsor.paginator.num_pages }}.
+            </span>
+
+            {% if Sponsor.has_next %}
+                <a href="?page={{ Sponsor.next_page_number }}">Suivant</a>
+            {% endif %}
+        </span>
+    </div>
                 </ul>
             </div>
-        </div>
-    </div>
 
     <!-- Fin pagination -->
+
+
+
+
+
     {% include "personnels/modalAjout.html" %}
+
+
+
+
+
 {% endblock %}
 
 

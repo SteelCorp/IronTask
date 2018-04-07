@@ -17,24 +17,25 @@ def listSponsor(request):
     sponsorForm = SponsorForm()
 
     """ Implémentation de la pagination"""
-    paginator = Paginator(sponsor, 2)
+    paginator = Paginator(sponsor, 25)
     page = request.GET.get('page')
     sponsor = paginator.get_page(page)
 
     if request.method == 'POST':
-
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
-            sponsor = sponsorform.save(commit=True)
-            sponsor.save()
+            sponsorform.save(commit=True)
+
         else:
             """ Passe le message d'error du formulaire à la template
              afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, sponsorform.errors)
 
         return redirect(listSponsor)
-    return render(request, 'personnels/listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm, 'page': page, 'paginator': paginator})
+    return render(request, 'personnels/listSponsor.html', {'Sponsor': sponsor,
+                                                           'form': sponsorForm, 'page': page,
+                                                           'paginator': paginator})
 
 
 @login_required(login_url='login/')
@@ -76,12 +77,3 @@ def deleteSponsor(request, siret):
     return redirect(reverse(viewname=listSponsor))
 
 
-@login_required(login_url='login/')
-def createSponsor(request):
-
-    """
-       :param request:
-       :return:
-       """
-
-    return render(request, 'add_Sponsor.html', {'SponsorForm': SponsorForm})
