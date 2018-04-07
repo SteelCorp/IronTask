@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block contenu %}
+    {% load static %}
+    <form>
+        SIRET:<br>
+        <input type="text" name="siret" value="{{ Sponsor.siret }}"><br>
+        Raison Social:<br>
+        <input type="text" name="raisonSocial" value="{{ Sponsor.raisonSocial }}"><br>
+        Adresse:<br>
+        <input type="text" name="adresse" value="{{ Sponsor.adresse }}"><br>
+        Code Postal: <br>
+        <input type="text" name="codePostal" value="{{ Sponsor.codePostal }}"><br>
+        Ville:<br>
+        <input type="text" name="ville" value="{{ Sponsor.ville }}"><br>
+        Téléphone fixe: <br>
+        <input type="text" name="telephoneFixe" value="{{ Sponsor.telephoneFixe }}"><br>
+        Téléphone portable: <br>
+        <input type="text" name="telephonePortable" value="{{ Sponsor.telephonePortable }}"><br>
+        E-mail: <br>
+        <input type="text" name="email" value="{{ Sponsor.email }}"><br>
+    </form>
+
+
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block contenu %}
+    {% load static %}
+    <form>
+        Nom:<br>
+        <input type="text" name="nom" value="{{ Benevole.prenom }}"><br>
+        Prénom:<br>
+        <input type="text" name="prenom" value="{{ Benevole.nom  }}"><br>
+        Date de naissance:<br>
+        <input type="text" name="dateNaissance" value="{{ Benevole.dateNaissance }}"><br>
+        Sexe:<br>
+        <input type="text" name="sexe" value="{{ Benevole.sexe  }}"><br>
+        Adresse:<br>
+        <input type="text" name="adresse" value="{{ Benevole.adresse }}"><br>
+        Code Postal: <br>
+        <input type="text" name="codePostal" value="{{ Benevole.codePostal  }}"><br>
+        Ville:<br>
+        <input type="text" name="ville" value="{{ Benevole.ville }}"><br>
+        Téléphone fixe: <br>
+        <input type="text" name="telephoneFixe" value="{{ Benevole.telephoneFixe }}"><br>
+        Téléphone portable: <br>
+        <input type="text" name="telephonePortable" value="{{ Benevole.telephonePortable  }}"><br>
+        E-mail: <br>
+        <input type="text" name="email" value="{{ Benevole.email  }}"><br>
+    </form>
+
+
+{% endblock %}
+

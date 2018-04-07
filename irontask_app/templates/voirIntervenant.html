@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block contenu %}
+    {% load static %}
+    <form>
+        SIRET:<br>
+        <input type="text" name="siret" value="{{ Intervenant.siret  }}"><br>
+        Raison Social:<br>
+        <input type="text" name="raisonSocial" value="{{ Intervenant.raisonSocial  }}"><br>
+        Adresse:<br>
+        <input type="text" name="adresse" value="{{ Intervenant.adresse  }}"><br>
+        Code Postal: <br>
+        <input type="text" name="codePostal" value="{{ Intervenant.codePostal  }}"><br>
+        Ville:<br>
+        <input type="text" name="ville" value="{{ Intervenant.ville  }}"><br>
+        Téléphone fixe: <br>
+        <input type="text" name="telephoneFixe" value="{{ Intervenant.telephoneFixe  }}"><br>
+        Téléphone portable: <br>
+        <input type="text" name="telephonePortable" value="{{ Intervenant.telephonePort  }}"><br>
+        E-mail: <br>
+        <input type="text" name="email" value="{{ Intervenant.email }}"><br>
+    </form>
+
+
+{% endblock %}
+
