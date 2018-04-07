@@ -41,6 +41,7 @@
                 <th scope="col">Prénom</th>
                 <th scope="col">Sexe</th>
                 <th scope="col">Ville</th>
+                <th scope="col">Téléphone</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -51,6 +52,7 @@
                     <td>{{ benevole.prenom }}</td>
                     <td>{{ benevole.sexe }}</td>
                     <td>{{ benevole.ville }}</td>
+                    <td>{{ benevole.telephoneFixe }}</td>
                        <td>
                         <a href="{% url 'getBenevole' benevole.pk %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
                         </button>
