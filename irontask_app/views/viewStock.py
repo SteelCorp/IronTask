@@ -29,7 +29,7 @@ def listStock(request):
             afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, stockForm.errors)
         return redirect(listStock)
-    return render(request, 'listStock.html', {'Stock': stock, 'form': stockForm})
+    return render(request, 'stocks/listStock.html', {'Stock': stock, 'form': stockForm})
 
 
 @login_required(login_url='login/')

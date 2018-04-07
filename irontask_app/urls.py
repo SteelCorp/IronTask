@@ -32,8 +32,8 @@ urlpatterns = [
     path('personnel/benevole/editer/<pk>/', viewBenevole.editerBenevole, name='editerBenevole'),
     path('personnel/benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
 
-    # Gestion des Stocks
-    path('stocks/', viewStock.listStock, name='listStocks'),
+    # Gestion des stocks
+    path('stocks/', viewStock.listStock, name='listStock'),
     path('stocks/get/<pk>/', viewStock.getStock, name='getStock'),
     path('stocks/editer/<pk>/', viewStock.editerStock, name='editerStock'),
     path('stocks/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
