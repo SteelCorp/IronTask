@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import RegexValidator
+from irontask_app.validators import *
 from django.contrib.auth.models import User
 import datetime
 
@@ -27,8 +27,8 @@ class Intervenant(models.Model):
     adresse = models.CharField(max_length=200, blank=False, null=True)
     codePostal = models.CharField(max_length=5, blank=False, null=True)
     ville = models.CharField(max_length=50, blank=False, null=True)
-    telephoneFixe = models.CharField(max_length=10, blank=False, null=True)
-    telephonePort = models.CharField(max_length=10, blank=False, null=True)
+    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
+    telephonePort = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=False)
 
     def __str__(self):
@@ -48,8 +48,8 @@ class Sponsor(models.Model):
     adresse = models.CharField(max_length=200, blank=False, null=True)
     codePostal = models.CharField(max_length=5, blank=False, null=True)
     ville = models.CharField(max_length=50, blank=False, null=True)
-    telephoneFixe = models.CharField(max_length=10, blank=False, null=True)
-    telephonePortable = models.CharField(max_length=10, blank=False, null=True)
+    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
+    telephonePortable = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=True)
 
     def __str__(self):
@@ -117,8 +117,8 @@ class Benevole(models.Model):
     adresse = models.CharField(max_length=50, blank=False, null=True)
     codePostal = models.CharField(max_length=5, blank=False, null=True)
     ville = models.CharField(max_length=50, blank=False, null=True)
-    telephoneFixe = models.CharField(max_length=10, blank=False, null=True)
-    telephonePortable = models.CharField(max_length=10, blank=False, null=False)
+    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
+    telephonePortable = models.CharField(max_length=10, blank=False, null=False, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=False)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=False)
 

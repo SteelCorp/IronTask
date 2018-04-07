@@ -7,6 +7,7 @@ from django.urls import reverse
 from irontask_app.forms.IntervenantForm import IntervenantForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @login_required(login_url='login/')
@@ -16,6 +17,11 @@ def listIntervenant(request):
     intervenant = Intervenant.objects.all()
     intervenantForm = IntervenantForm()
 
+    """ Implémentation de la pagination"""
+    paginator = Paginator(intervenant,2)
+    page = request.GET.get('page')
+    intervenant = paginator.get_page(page)
+
     if request.method == 'POST':
 
         intervenantform = IntervenantForm(request.POST)
@@ -24,7 +30,7 @@ def listIntervenant(request):
             intervenant = intervenantform.save(commit=True)
             intervenant.save()
         return redirect(listIntervenant)
-    return render(request, 'listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm})
+    return render(request, 'personnels/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm, 'paginator': paginator})
 
 
 """""@login_required(login_url='login/')
@@ -61,7 +67,7 @@ def getIntervenant(request, siret):
     """
     intervenant = Intervenant.objects.get(siret=siret)
 
-    return render(request, "voirIntervenant.html", {'Intervenant': intervenant})
+    return render(request, "personnels/voirIntervenant.html", {'Intervenant': intervenant})
 
 
 @login_required(login_url='login/')

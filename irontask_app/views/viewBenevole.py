@@ -7,6 +7,7 @@ from django.urls import reverse
 from irontask_app.forms.BenevoleForm import BenevoleForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
@@ -19,6 +20,12 @@ def listBenevole(request):
     benevole = Benevole.objects.all()
     benevoleForm = BenevoleForm()
 
+
+    """ Implémentation de la pagination"""
+    paginator = Paginator(benevole, 2)
+    page = request.GET.get('page')
+    benevole = paginator.get_page(page)
+
     if request.method == 'POST':
 
 
@@ -28,7 +35,7 @@ def listBenevole(request):
             benevole = benevoleForm.save(commit=True)
             benevole.save()
         return redirect(listBenevole)
-    return render(request, 'listBenevole.html', {'Benevole': benevole, 'form': benevoleForm})
+    return render(request, 'personnels/listBenevole.html', {'Benevole': benevole, 'form': benevoleForm, 'paginator': paginator})
 
 
 """""@login_required(login_url='login/')
@@ -64,7 +71,7 @@ def getBenevole(request, pk):
 
     benevole = Benevole.objects.get(pk=pk)
 
-    return render(request, "voirBenevole.html", {'Benevole': benevole})
+    return render(request, "personnels/voirBenevole.html", {'Benevole': benevole})
 
 
 @login_required(login_url='login/')
