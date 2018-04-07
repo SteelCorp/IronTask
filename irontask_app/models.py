@@ -1,7 +1,6 @@
 from django.db import models
 from irontask_app.validators import *
 from django.contrib.auth.models import User
-import datetime
 
 
 
@@ -30,6 +29,7 @@ class Intervenant(models.Model):
     telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     telephonePort = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """
@@ -51,6 +51,7 @@ class Sponsor(models.Model):
     telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     telephonePortable = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=True)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.raisonSocial
@@ -72,6 +73,7 @@ class Categorie(models.Model):
     ageMin = models.PositiveSmallIntegerField(blank=False, null=False)
     ageMax = models.PositiveSmallIntegerField(blank=False, null=False)
     sexe = models.CharField(max_length=1, choices=SEX_CHOICES)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """
@@ -89,6 +91,7 @@ class Materiel(models.Model):
     type = models.CharField(max_length=50, blank=False, null=False)
     qteTotal = models.PositiveIntegerField(blank=False, null=False)
     lieuStockage = models.CharField(max_length=50, blank=False, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """
@@ -121,6 +124,7 @@ class Benevole(models.Model):
     telephonePortable = models.CharField(max_length=10, blank=False, null=False, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=False)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """String du benevole (lol)"""
@@ -134,6 +138,7 @@ class TypeTriathlon(models.Model):
     distanceNatation = models.PositiveIntegerField(blank=False, null=False)
     distanceCyclisme = models.PositiveIntegerField(blank=False, null=False)
     distanceCourseAPied = models.PositiveIntegerField(blank=False, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """Retourne un string des parametre du type de triathlon"""
@@ -149,6 +154,7 @@ class Triathlon(models.Model):
     adresse = models.CharField(max_length=50, null=False, blank=False)
     ville = models.CharField(max_length=50, null=False, blank=False)
     fk_TypeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """Retourne une représentation string de l'objet Triathlon
@@ -182,6 +188,7 @@ class Tache(models.Model):
     niveauPriorite = models.CharField(max_length=1, choices=NIV_PRIOROTE)
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT, null=False)
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """Retrourne une representation string de l'objet Tache"""
@@ -196,6 +203,7 @@ class Intervenir(models.Model):
     prixDevis = models.PositiveIntegerField(null=False, blank=False)
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_intervenant = models.ForeignKey(Intervenant, on_delete=models.CASCADE, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
 
 class Sponsoriser(models.Model):
@@ -204,6 +212,7 @@ class Sponsoriser(models.Model):
     donation = models.PositiveIntegerField(null=False, blank=False)
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_sponsoriser = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
 
 class Caracteriser(models.Model):
@@ -212,6 +221,7 @@ class Caracteriser(models.Model):
     nbrParticipant = models.PositiveIntegerField(null=False, blank=False)
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
 
 class Allouer(models.Model):
@@ -221,6 +231,7 @@ class Allouer(models.Model):
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_materiel = models.ForeignKey(Materiel, on_delete=models.CASCADE, null=False)
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False)
+    dateAjout = models.DateField(auto_now_add=True)
 
     class Meta:
         unique_together = (('fk_triathlon', 'fk_benevole'),)
@@ -231,3 +242,4 @@ class Affecter(models.Model):
 
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False)
     fk_tache = models.ForeignKey(Tache, on_delete=models.CASCADE, blank=False, null=False)
+    dateAjout = models.DateField(auto_now_add=True)

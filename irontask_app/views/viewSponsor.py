@@ -68,7 +68,9 @@ def getSponsor(request, siret):
     sponsor = Sponsor.objects.get(siret=siret)
     listDonationSponsor = Sponsoriser.objects.filter(fk_sponsoriser=siret)
 
-    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,  'listDonationSponsor': listDonationSponsor})
+
+    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,
+                                                           'listDonationSponsor': listDonationSponsor})
 
 
 @login_required(login_url='login/')
