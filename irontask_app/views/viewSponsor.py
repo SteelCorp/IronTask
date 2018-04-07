@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 
 @login_required(login_url='login/')
@@ -26,8 +25,7 @@ def listSponsor(request):
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
-            sponsor = sponsorform.save(commit=True)
-            sponsor.save()
+            sponsorform.save(commit=True)
         else:
             """ Passe le message d'error du formulaire à la template
              afin de l'afficher en cas d'erreur dans le formulaire"""
