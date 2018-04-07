@@ -6,7 +6,7 @@ from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 
 
@@ -26,8 +26,8 @@ def listSponsor(request):
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
-            sponsorform.save(commit=True)
-
+            sponsor = sponsorform.save(commit=True)
+            sponsor.save()
         else:
             """ Passe le message d'error du formulaire à la template
              afin de l'afficher en cas d'erreur dans le formulaire"""

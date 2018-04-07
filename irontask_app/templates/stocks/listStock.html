@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% block contenu %}
+{% block  contenu %}
     {% load static %}
-
-  {% include 'personnels/navBarPersonnel.html' %}
 
     <!-- Fonction recherche et tri -->
 
@@ -35,41 +33,35 @@
         </div>
     </div>
 
-    <!-- Sponsor -->
+    <!-- Stock -->
 
     <div class="container">
     {% if messages %}
-
                             <div class="alert alert-danger" role="alert">
-
                                 {% for message in messages %}
-
                                     {{ message }}
-
                                 {% endfor %}
-
                             </div>
-
                         {% endif %}
         <table class="table table-striped ">
             <thead>
             <tr>
-                <th scope="col">Raison social</th>
-                <th scope="col">Telephone</th>
-                <th scope="col">Email</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Type</th>
+                <th scope="col">Quantité totale</th>
+                <th scope="col">Lieu de stockage</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-
-            {% for sponsor in Sponsor %}
+            {% for stock in Stock %}
                 <tr>
-                    <td>{{ sponsor.raisonSocial }}</td>
-                    <td>{{ sponsor.telephonePortable }}</td>
-                    <td>{{ sponsor.email }}</td>
+                    <td>{{ stock.nom }}</td>
+                    <td>{{ stock.type}}</td>
+                    <td>{{ stock.qteTotal }}</td>
+                    <td>{{ stock.lieuStockage }}</td>
                     <td>
-                        <a href="{% url 'getSponsor' sponsor.siret %}" class="btn btn-info  active" role="button"
-                           aria-pressed="true">Voir / Editer</a>
+                        <a href="{% url 'getStock' stock.pk %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
                         </button>
                     </td>
                 </tr>
@@ -77,50 +69,40 @@
             </tbody>
         </table>
     </div>
-   
-    <!-- Fin Sponsor-->
+
+    <!-- Fin Stock-->
 
     <!-- Bouton Plus pour ajouter un Benevole -->
 
     <span class="plus"></span>
 
     <!-- Pagination -->
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3 py-5 d-flex">
                 <ul class="pagination mx-auto">
-    <div class="pagination">
-        <span class="step-links">
-            {% if Sponsor.has_previous %}
-                <a href="?page={{ Sponsor.previous_page_number }}">Precèdent</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ Sponsor.number }} de {{ Sponsor.paginator.num_pages }}.
-            </span>
-
-            {% if Sponsor.has_next %}
-                <a href="?page={{ Sponsor.next_page_number }}">Suivant</a>
-            {% endif %}
-        </span>
-    </div>
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if Stock.has_previous %}
+                                <a href="?page={{ Stock.previous_page_number }}">Precèdent</a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ Stock.number }} de {{ Stock.paginator.num_pages }}.
+                            </span>
+                                {% if Stock.has_next %}
+                                    <a href="?page={{ Stock.next_page_number }}">Suivant</a>
+                                {% endif %}
+                         </span>
+                    </div>
                 </ul>
             </div>
+        </div>
+    </div>
 
     <!-- Fin pagination -->
 
-
-
-
-
-    {% include "personnels/modalAjout.html" %}
-
-
-
-
+    <!-- bouton pr ajouter -->
+     {% include "stocks/modalAjout.html" %}
 
 {% endblock %}
-
-
-
-
