@@ -4,168 +4,121 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1 py-5 ">
-                <div class="card bg-light mb-3 ">
-                    <div class="card-header">
-                        Détail
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-user-information">
-                            <tr>
-                                <td>SIRET :</td>
-                                <td>{{ Sponsor.siret }}</td>
-                            </tr>
-                            <tr>
-                                <td>Raison social :</td>
-                                <td>{{ Sponsor.raisonSocial }}</td>
-                            </tr>
-                            <tr>
-                                <td>Adresse : </td>
-                                <td>{{ Sponsor.adresse }}</td>
-                            </tr>
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 py-5 ">
+            <div class="card bg-light mb-3 ">
+                <div class="card-header">
+                    Détail
+                </div>
+                <div class="card-body">
+                    <table class="table table-user-information">
+                        <tr>
+                            <td>SIRET :</td>
+                            <td>{{ Sponsor.siret }}</td>
+                        </tr>
+                        <tr>
+                            <td>Raison social :</td>
+                            <td>{{ Sponsor.raisonSocial }}</td>
+                        </tr>
+                        <tr>
+                            <td>Adresse : </td>
+                            <td>{{ Sponsor.adresse }}</td>
+                        </tr>
 
-                            <tr>
-                            <tr>
-                                <td>Code postal :</td>
-                                <td>{{ Sponsor.codePostal }}</td>
-                            </tr>
-                            <tr>
-                                <td>Ville</td>
-                                <td>{{ Sponsor.ville }}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><a href="mailto:{{ Sponsor.email }}">{{ Sponsor.email }}</a></td>
-                            </tr>
-                            <td>Téléphone :</td>
-                            <td>{{ Sponsor.telephoneFixe }} (Fixe)<br><br>{{ Sponsor.telephoneFixe }} (Portable)
-                            </td>
+                        <tr>
+                        <tr>
+                            <td>Code postal :</td>
+                            <td>{{ Sponsor.codePostal }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ville</td>
+                            <td>{{ Sponsor.ville }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><a href="mailto:{{ Sponsor.email }}">{{ Sponsor.email }}</a></td>
+                        </tr>
+                        <td>Téléphone :</td>
+                        <td>{{ Sponsor.telephoneFixe }} (Fixe)<br><br>{{ Sponsor.telephoneFixe }} (Portable)
+                        </td>
 
-                            </tr>
-                        </table>
+                        </tr>
+                    </table>
 
-                    </div>
-                    <div class="card-body text-center">
-                        <button type="button" class="btn btn-link">Modifier</button>
-                        <button type="button" class="btn btn-link">Supprimer</button>
-                    </div>
-                    <div class="card-header">
-                        Donation
-                    </div>
-                    <div class="card-body">
-                        <div class="card-deck">
-
-                            <div class="card mb-2 btn" data-toggle="modal" data-target="#modalAjoutDon">
-
+                </div>
+                <div class="card-body text-center">
+                    <button type="button" class="btn btn-link">Modifier</button>
+                    <button type="button" class="btn btn-link">Supprimer</button>
+                </div>
+                <div class="card-header">
+                    Donation
+                </div>
+                <div class="card-body">
+                    <div class="row card-group">
+                        <div class="col-sm-4">
+                            <div class="card btn" data-toggle="modal" data-target="#modalAjoutDon">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Ajouter donation</h5>
                                     <h1 class="card-text">+</h1>
                                 </div>
-
-                            </div>
-                              <div class="card mb-4">
-
-                                <div class="card-header text-center">
-                                     <small class="text-muted">Ajouté le 18 mars 2018</small>
-
-                                </div>
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Triathlon 28 mars</h5>
-                                    <p class="card-text">100 euros</p>
-                                </div>
-                                <div class="card-footer">
-                                     <button type="button" class="btn btn-link">Modifier</button>
-                                    <button type="button" class="btn btn-link">Supprimer</button>
-                                </div>
-                            </div>
-                             <div class="card mb-4">
-
-                                <div class="card-header text-center">
-                                     <small class="text-muted">Ajouté le 18 mars 2018</small>
-
-                                </div>
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Triathlon 28 mars</h5>
-                                    <p class="card-text">100 euros</p>
-                                </div>
-                                <div class="card-footer">
-                                     <button type="button" class="btn btn-link">Modifier</button>
-                                    <button type="button" class="btn btn-link">Supprimer</button>
-                                </div>
                             </div>
                         </div>
-                        <div class="card-deck">
-                            <div class="card mb-4">
-
+                        {% for donation in listDonationSponsor %}
+                             <div class="col-sm-4">
+                            <div class="card">
                                 <div class="card-header text-center">
-                                     <small class="text-muted">Ajouté le 18 mars 2018</small>
-
+                                    <small class="text-muted">Ajouté le 18 mars 2018</small>
                                 </div>
-
                                 <div class="card-body">
-                                    <h5 class="card-title">Triathlon 28 mars</h5>
-                                    <p class="card-text">100 euros</p>
+                                    <h5 class="card-title">{{ donation.fk_triathlon }}</h5>
+                                    <p class="card-text">{{ donation.donation }}</p>
                                 </div>
-                                <div class="card-footer">
-                                     <button type="button" class="btn btn-link">Modifier</button>
-                                    <button type="button" class="btn btn-link">Supprimer</button>
-                                </div>
-                            </div>
-
-                             <div class="card mb-4">
-
-                                <div class="card-header text-center">
-                                     <small class="text-muted">Ajouté le 18 mars 2018</small>
-
-                                </div>
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Triathlon 28 mars</h5>
-                                    <p class="card-text">100 euros</p>
-                                </div>
-                                <div class="card-footer">
-                                     <button type="button" class="btn btn-link">Modifier</button>
+                                <div class="card-footer text-center">
+                                    <button type="button" class="btn btn-link">Modifier</button>
                                     <button type="button" class="btn btn-link">Supprimer</button>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Ajouté le 18 mars 2018</small>
+
+                        {% endfor %}
+
+
+
                     </div>
                 </div>
+                <div class="card-footer">
+                    <small class="text-muted">Ajouté le 18 mars 2018</small>
+                </div>
+
             </div>
 
         </div>
     </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="modalAjoutDon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- Modal -->
+    <div class="modal fade" id="modalAjoutDon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--fin bouton ajout-->
+    <!--fin bouton ajout-->
 
 
 {% endblock %}
