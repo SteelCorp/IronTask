@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from irontask_app.models import Sponsor
+from irontask_app.models import Sponsor, Sponsoriser
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 @login_required(login_url='login/')
@@ -58,15 +59,16 @@ def editerSponsor(request, siret):
     return render(request, 'personnels/modalEditerSponsor.html', {'form' : sponsorForm})
 
 
-
+@login_required(login_url='login/')
 def getSponsor(request, siret):
     """
     Vue qui retourne le sponsor fournit en paramètre
     ::param siret est le siret d'un sponsor
     """
     sponsor = Sponsor.objects.get(siret=siret)
+    listDonationSponsor = Sponsoriser.objects.filter(fk_sponsoriser=siret)
 
-    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor})
+    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,  'listDonationSponsor': listDonationSponsor})
 
 
 @login_required(login_url='login/')
