@@ -6,6 +6,7 @@ from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @login_required(login_url='login/')
@@ -14,6 +15,11 @@ def listSponsor(request):
 
     sponsor = Sponsor.objects.all()
     sponsorForm = SponsorForm()
+
+    """ Implémentation de la pagination"""
+    paginator = Paginator(sponsor, 2)
+    page = request.GET.get('page')
+    sponsor = paginator.get_page(page)
 
     if request.method == 'POST':
 
@@ -28,7 +34,7 @@ def listSponsor(request):
             messages.add_message(request, messages.INFO, sponsorform.errors)
 
         return redirect(listSponsor)
-    return render(request, 'listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm })
+    return render(request, 'personnels/listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm, 'page': page, 'paginator': paginator})
 
 
 @login_required(login_url='login/')
@@ -36,7 +42,7 @@ def editerSponsor(request, siret):
 
     s = Sponsor.objects.get(siret=siret)
     sponsorForm = SponsorForm(instance=s)
-    html = render_to_string('modalEditerSponsor.html', {'form': sponsorForm})
+    html = render_to_string('personnels/modalEditerSponsor.html', {'form': sponsorForm})
 
 
 
@@ -48,7 +54,7 @@ def editerSponsor(request, siret):
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
             return redirect(listSponsor)
-    return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})
+    return render(request, 'personnels/modalEditerSponsor.html', {'form' : sponsorForm})
 
 
 
@@ -59,7 +65,7 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
 
-    return render(request, "voirSponsor.html", {'Sponsor': sponsor})
+    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor})
 
 
 @login_required(login_url='login/')

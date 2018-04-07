@@ -24,7 +24,7 @@ def listIntervenant(request):
             intervenant = intervenantform.save(commit=True)
             intervenant.save()
         return redirect(listIntervenant)
-    return render(request, 'listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm})
+    return render(request, 'personnels/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm})
 
 
 """""@login_required(login_url='login/')
@@ -61,7 +61,7 @@ def getIntervenant(request, siret):
     """
     intervenant = Intervenant.objects.get(siret=siret)
 
-    return render(request, "voirIntervenant.html", {'Intervenant': intervenant})
+    return render(request, "personnels/voirIntervenant.html", {'Intervenant': intervenant})
 
 
 @login_required(login_url='login/')

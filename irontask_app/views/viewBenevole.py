@@ -28,7 +28,7 @@ def listBenevole(request):
             benevole = benevoleForm.save(commit=True)
             benevole.save()
         return redirect(listBenevole)
-    return render(request, 'listBenevole.html', {'Benevole': benevole, 'form': benevoleForm})
+    return render(request, 'personnels/listBenevole.html', {'Benevole': benevole, 'form': benevoleForm})
 
 
 """""@login_required(login_url='login/')
@@ -64,7 +64,7 @@ def getBenevole(request, pk):
 
     benevole = Benevole.objects.get(pk=pk)
 
-    return render(request, "voirBenevole.html", {'Benevole': benevole})
+    return render(request, "personnels/voirBenevole.html", {'Benevole': benevole})
 
 
 @login_required(login_url='login/')
