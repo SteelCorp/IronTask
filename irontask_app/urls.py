@@ -32,5 +32,9 @@ urlpatterns = [
     path('personnel/benevole/editer/<pk>/', viewBenevole.editerBenevole, name='editerBenevole'),
     path('personnel/benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
 
-    # url(r'api/', include(router.urls))
+    # Gestion des triathlon
+    path('triathlon/select/<id>/', viewSponsor.listSponsor, name='listSponsor'),
+
+
+
 ]
