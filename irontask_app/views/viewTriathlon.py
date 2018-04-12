@@ -10,9 +10,11 @@ def selectTriathlon(request, id):
     """
     if request.session.get('idTriathlon'):
         request.session['idTriathlon'] = None
-        request.session.pop('idTriathlon', id)
+        request.session['idTriathlon'] = id
+        return redirect('/')
     else:
-        request.session.pop('idTriathlon', id)
+        request.session['idTriathlon']= id
+        return redirect('/')
 
 def listTriathlon(request):
     """Vue qui retourne la liste de tous les triathlons"""

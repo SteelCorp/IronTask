@@ -6,7 +6,7 @@ from irontask_app.forms.SponsorForm import SponsorForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 
 
@@ -18,12 +18,11 @@ def listSponsor(request):
     sponsorForm = SponsorForm()
 
     """ Implémentation de la pagination"""
-    paginator = Paginator(sponsor, 2)
+    paginator = Paginator(sponsor, 25)
     page = request.GET.get('page')
     sponsor = paginator.get_page(page)
 
     if request.method == 'POST':
-
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
@@ -35,7 +34,9 @@ def listSponsor(request):
             messages.add_message(request, messages.INFO, sponsorform.errors)
 
         return redirect(listSponsor)
-    return render(request, 'personnels/listSponsor.html', {'Sponsor': sponsor, 'form': sponsorForm, 'page': page, 'paginator': paginator})
+    return render(request, 'personnels/listSponsor.html', {'Sponsor': sponsor,
+                                                           'form': sponsorForm, 'page': page,
+                                                           'paginator': paginator})
 
 
 @login_required(login_url='login/')
@@ -67,7 +68,9 @@ def getSponsor(request, siret):
     sponsor = Sponsor.objects.get(siret=siret)
     listDonationSponsor = Sponsoriser.objects.filter(fk_sponsoriser=siret)
 
-    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,  'listDonationSponsor': listDonationSponsor})
+
+    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,
+                                                           'listDonationSponsor': listDonationSponsor})
 
 
 @login_required(login_url='login/')
@@ -78,12 +81,3 @@ def deleteSponsor(request, siret):
     return redirect(reverse(viewname=listSponsor))
 
 
-@login_required(login_url='login/')
-def createSponsor(request):
-
-    """
-       :param request:
-       :return:
-       """
-
-    return render(request, 'add_Sponsor.html', {'SponsorForm': SponsorForm})

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant, viewBenevole
+from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant, viewBenevole, viewStock, viewTriathlon
 from django.conf.urls import url, include
 
 from irontask_app import api
@@ -23,7 +23,6 @@ urlpatterns = [
     # Gestion des intervenants
     path('personnel/intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
     path('personnel/intervenant/get/<siret>/', viewIntervenant.getIntervenant, name='getIntervenant'),
-    path('personnel/intervenant/editer/<siret>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
     path('personnel/intervenant/supprimer/<siret>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
 
     # Gestion des benevoles
@@ -32,8 +31,19 @@ urlpatterns = [
     path('personnel/benevole/editer/<pk>/', viewBenevole.editerBenevole, name='editerBenevole'),
     path('personnel/benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
 
+    # Gestion des stocks
+    path('stocks/', viewStock.listStock, name='listStock'),
+    path('stocks/get/<pk>/', viewStock.getStock, name='getStock'),
+    path('stocks/editer/<pk>/', viewStock.editerStock, name='editerStock'),
+    path('stocks/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
+
+    # Gestion des taches
+    path('tache/', viewTache.listTache, name='listTache' ),
+
+    # url(r'api/', include(router.urls))
+
     # Gestion des triathlon
-    path('triathlon/select/<id>/', viewSponsor.listSponsor, name='listSponsor'),
+    path('triathlon/select/<id>/', viewTriathlon.selectTriathlon, name='selectTriathlon'),
 
 
 

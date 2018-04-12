@@ -4,7 +4,7 @@ from django.forms import ModelForm
 
 
 class SponsorForm(ModelForm):
-    siret = forms.CharField(required=False, label="N° SIRET", widget=forms.TextInput(
+    siret = forms.CharField(label="N° SIRET", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
