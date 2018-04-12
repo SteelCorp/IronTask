@@ -94,7 +94,7 @@ def getSponsor(request, siret):
             """afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, DonationForm.errors)
 
-    return redirect('/')
+        return redirect('/')
 
     return render(request, "personnels/voirSponsor.html", {'sponsor': sponsor,
                                                            'listDonationSponsor': listDonationSponsor,
