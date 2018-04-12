@@ -7,10 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.core.paginator import Paginator
+from irontask_app.decorators import triathlon_required
 
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 

@@ -21,8 +21,6 @@ def getTriathlonNonFini():
 
 @register.filter
 def getTriathlonEnCours(session):
-
-
     triathlon = Triathlon.objects.get(pk=session)
     return triathlon
 
