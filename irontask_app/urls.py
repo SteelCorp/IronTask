@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant, viewBenevole, viewStock
+from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant, viewBenevole, viewStock, viewTache
 from django.conf.urls import url, include
 
 from irontask_app import api
@@ -36,6 +36,9 @@ urlpatterns = [
     path('stocks/get/<pk>/', viewStock.getStock, name='getStock'),
     path('stocks/editer/<pk>/', viewStock.editerStock, name='editerStock'),
     path('stocks/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
+
+    # Gestion des taches
+    path('tache/', viewTache.listTache, name='listTache' ),
 
     # url(r'api/', include(router.urls))
     # Gestion des triathlon

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block  contenu %}
+    {% load static %}
+
+     <!-- Fonction recherche et tri -->
+
+    <div class="container ">
+        <div class="row mt-3 ">
+            <div class="col   ">
+                <div class="row mt-3 mb-1">
+                    <div class="col">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche"
+                                   aria-label="Recherche">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <div class="dropdown float-right">
+                            <button class="btn  dropdown-toggle" type="button" id="boutonTri"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Trier par : AlphaBetique
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="boutonTri">
+                                <a class="dropdown-item" href="">Ville</a>
+                                <a class="dropdown-item" href="">Email</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taches -->
+
+    <div class="container">
+    {% if messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Type</th>
+                <th scope="col">Quantité totale</th>
+                <th scope="col">Lieu de stockage</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stock in Stock %}
+                <tr>
+                    <td>{{ stock.nom }}</td>
+                    <td>{{ stock.type}}</td>
+                    <td>{{ stock.qteTotal }}</td>
+                    <td>{{ stock.lieuStockage }}</td>
+                    <td>
+                        <a href="{% url 'getStock' stock.pk %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Fin Stock-->
+
+    <!-- Bouton Plus pour ajouter un Benevole -->
+
+    <span class="plus"></span>
+
+    <!-- Pagination -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 py-5 d-flex">
+                <ul class="pagination mx-auto">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if Stock.has_previous %}
+                                <a href="?page={{ Stock.previous_page_number }}">Precèdent</a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ Stock.number }} de {{ Stock.paginator.num_pages }}.
+                            </span>
+                                {% if Stock.has_next %}
+                                    <a href="?page={{ Stock.next_page_number }}">Suivant</a>
+                                {% endif %}
+                         </span>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fin pagination -->
+
+
+    {% include "stocks/modalAjout.html" %}
+
+{% endblock %}
