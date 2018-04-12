@@ -29,7 +29,8 @@ def listBenevole(request):
             benevole = benevoleForm.save(commit=True)
             benevole.save()
         return redirect(listBenevole)
-    return render(request, 'personnels/listBenevole.html', {'Benevole': benevole, 'form': benevoleForm, 'paginator': paginator})
+    return render(request, 'personnels/listBenevole.html',
+                  {'Benevole': benevole, 'form': benevoleForm, 'paginator': paginator})
 
 
 """""@login_required(login_url='login/')
