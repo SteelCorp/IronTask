@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from irontask_app.models import Sponsor, Sponsoriser
+from irontask_app.models import Sponsor, Sponsoriser, Triathlon
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
 from irontask_app.forms.DonationForm import DonationForm
@@ -77,16 +77,22 @@ def getSponsor(request, siret):
 
 
         if donationForm.is_valid():
-            donationForm.save(commit=False)
-            donationForm.fk_triathlon = request.session['id_Triathlon']
-            donationForm.fk_sponsoriser = siret
-            donationForm.save(commit=True)
+            """
+            si le formulaire est valide alors on ne commit pas de suite car il n'y a que donation dans donationForm            
+            """
+            donation = donationForm.save(commit=False)
+            """ obligé de passer idTriathlon dans l'objet triat idem avec spon pour enregister dans donation"""
+            triat = Triathlon.objects.get(id=request.session['idTriathlon'])
+            spon = Sponsor.objects.get(siret=siret)
+            donation.fk_triathlon = triat
+            donation.fk_sponsoriser = spon
+            donation.save()
         else:
-            """ Passe le message d'error du formulaire à la template
-             afin de l'afficher en cas d'erreur dans le formulaire"""
+            """ Passe le message d'error du formulaire à la template"""
+            """afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, DonationForm.errors)
 
-        return redirect('/')
+    return redirect('/')
 
     return render(request, "personnels/voirSponsor.html", {'sponsor': sponsor,
                                                            'listDonationSponsor': listDonationSponsor,

@@ -11,4 +11,4 @@ class DonationForm(ModelForm):
 
     class Meta:
         model = Sponsoriser
-        fields = '__all__'
+        exclude = {'fk_sponsoriser','fk_triathlon'}
