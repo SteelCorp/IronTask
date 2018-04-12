@@ -20,7 +20,7 @@
 
                             {% getTriathlonNonFini as triathlons %}
                             {% for triathlon in triathlons %}
-                                <a class="dropdown-item" href="#">{{ triathlon }}</a>
+                                <a class="dropdown-item" href="{% url 'selectTriathlon' triathlon.id %}">{{ triathlon }}</a>
                             {% endfor %}
 
                             <div class="dropdown-divider"></div>
@@ -43,6 +43,13 @@
                     <li class="nav-item {% if  '/stocks/' in request.path %}active{% endif %}  px-3"><a class="nav-link" href="{% url 'listStock' %}">Stocks</a></li>
                 </ul>
                 <ul class="navbar-nav ml-auto w-100 justify-content-end">
+
+                        {% if request.session.idTriathlon %}
+                        {{ request.session.idTriathlon | getTriathlonEnCours }}
+                        {% else %}
+                            Aucun Triathlon Selectionner
+                        {% endif %}
+
 
                     <li class="nav-item px-3 ">
                         <a class="nav-link" href="#">

@@ -16,6 +16,13 @@ def nbrTachesPourTriathlon():
 
 @register.simple_tag
 def getTriathlonNonFini():
-    triathlons = Triathlon.objects.all()
+    triathlons = Triathlon.objects.filter(date__gt=datetime.date.today())
     return triathlons
+
+@register.filter
+def getTriathlonEnCours(session):
+
+
+    triathlon = Triathlon.objects.get(pk=session)
+    return triathlon
 
