@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block contenu %}
     {% load static %}
-
+    {% load filters %}
 
 
     <div class="container">
@@ -15,33 +15,33 @@
 
                         <table class="table table-user-information">
                             <tr>
-                                <td>Nom :</td>
-                                <td>{{ Sponsor.siret }}</td>
+                                <td>SIRET :</td>
+                                <td>{{ sponsor.siret }}</td>
                             </tr>
                             <tr>
                                 <td>Raison social :</td>
-                                <td>{{ Sponsor.raisonSocial }}</td>
+                                <td>{{ sponsorponsor.raisonSocial }}</td>
                             </tr>
                             <tr>
                                 <td>Adresse : </td>
-                                <td>{{ Sponsor.adresse }}</td>
+                                <td>{{ sponsor.adresse }}</td>
                             </tr>
 
                             <tr>
                             <tr>
                                 <td>Code postal :</td>
-                                <td>{{ Sponsor.codePostal }}</td>
+                                <td>{{sponsor.codePostal }}</td>
                             </tr>
                             <tr>
                                 <td>Ville</td>
-                                <td>{{ Sponsor.ville }}</td>
+                                <td>{{ sponsor.ville }}</td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><a href="mailto:{{ Sponsor.email }}">{{ Sponsor.email }}</a></td>
+                                <td><a href="mailto:{{ sponsor.email }}">{{ sponsor.email }}</a></td>
                             </tr>
                             <td>Téléphone :</td>
-                            <td>{{ Sponsor.telephoneFixe }} (Fixe)<br><br>{{ Sponsor.telephoneFixe }} (Portable)
+                            <td>{{ sponsor.telephoneFixe }} (Fixe)<br><br>{{ sponsor.telephoneFixe }} (Portable)
                             </td>
 
                             </tr>
@@ -65,58 +65,63 @@
                                     </div>
                                 </div>
                             </div>
-                            {% for donation in listDonationSponsor %}
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <div class="card-header text-center">
-                                            <small class="text-muted">Ajouté le : {{ donation.dateAjout }}</small>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ donation.fk_triathlon }}</h5>
-                                            <p class="card-text">{{ donation.donation }}</p>
-                                        </div>
-                                        <div class="card-footer text-center">
-                                            <button type="button" class="btn btn-link">Modifier</button>
-                                            <button type="button" class="btn btn-link">Supprimer</button>
-                                        </div>
+                        </div>
+                        {% for donation in listDonationSponsor %}
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <small class="text-muted">Ajouté le : {{ donation.dateAjout }}</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ donation.fk_triathlon }}</h5>
+                                        <p class="card-text">{{ donation.donation }}</p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <button type="button" class="btn btn-link">Modifier</button>
+                                        <button type="button" class="btn btn-link">Supprimer</button>
                                     </div>
                                 </div>
+                            </div>
 
 
-                            {% endfor %}
+                        {% endfor %}
 
 
 
-                        </div>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">{{  Sponsor.dateAjout }}</small>
-                    </div>
-
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{  Sponsor.dateAjout }}</small>
                 </div>
 
             </div>
+
         </div>
+    </div>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="modalAjoutDon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalAjoutDon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une donation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">{% csrf_token %}
+                        {{ request.session.idTriathlon | getTriathlonEnCours }}
+                        {{ sponsor.siret}}
+                        {{ donationForm.donation }}
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

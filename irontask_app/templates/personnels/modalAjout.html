@@ -20,12 +20,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="ui form" method="POST">{% csrf_token %}
+                    <form class="ui form" method="POST">
+                        {% csrf_token %}
                         {{ form.as_table }}
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
                         </div>
                     </form>
                 </div>

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor, Sponsoriser
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
+from irontask_app.forms.DonationForm import DonationForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -16,6 +17,7 @@ def listSponsor(request):
 
     sponsor = Sponsor.objects.all()
     sponsorForm = SponsorForm()
+
 
     """ Implémentation de la pagination"""
     paginator = Paginator(sponsor, 25)
@@ -67,10 +69,29 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
     listDonationSponsor = Sponsoriser.objects.filter(fk_sponsoriser=siret)
+    donationForm = DonationForm
+
+    """ si méthode POST alors sauvegarder resultat du formulaire"""
+    if request.method == 'POST':
+        donationForm = DonationForm(request.POST)
 
 
-    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,
-                                                           'listDonationSponsor': listDonationSponsor})
+        if donationForm.is_valid():
+            donationForm.save(commit=False)
+            donationForm.fk_triathlon = request.session['id_Triathlon']
+            donationForm.fk_sponsoriser = siret
+            donationForm.save(commit=True)
+        else:
+            """ Passe le message d'error du formulaire à la template
+             afin de l'afficher en cas d'erreur dans le formulaire"""
+            messages.add_message(request, messages.INFO, DonationForm.errors)
+
+        return redirect('/')
+
+    return render(request, "personnels/voirSponsor.html", {'sponsor': sponsor,
+                                                           'listDonationSponsor': listDonationSponsor,
+                                                           'donationForm': donationForm
+                                                           })
 
 
 @login_required(login_url='login/')
