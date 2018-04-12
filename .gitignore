@@ -57,7 +57,12 @@ docs/_build/
 # PyBuilder
 target/
 venv/
+venv1/
 .idea/
 *.iml
 *.xml
 *.sqlite3
+irontask/irontask_app/migrations/
+/irontask_app/migrations/
+
+setup\.py

@@ -1,10 +1,11 @@
 from django import forms
-from irontask_app.models import Sponsor
+from irontask_app.models import Intervenant
 from django.forms import ModelForm
 
 
-class SponsorForm(ModelForm):
-    siret = forms.CharField(label="N° SIRET", widget=forms.TextInput(
+
+class IntervenantForm(ModelForm):
+    siret = forms.CharField(required=False, label="N° SIRET", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
@@ -12,6 +13,10 @@ class SponsorForm(ModelForm):
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
+    type = forms.CharField(label="Type", widget=forms.TextInput(
+                            attrs={"type": "text", "class": "form-control",
+                                   "id": "formGroupExampleInput",
+                                   "placeholder": ""}))
     adresse = forms.CharField(label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
@@ -38,5 +43,5 @@ class SponsorForm(ModelForm):
                                             "placeholder":""}))
 
     class Meta:
-        model = Sponsor
+        model = Intervenant
         fields = '__all__'

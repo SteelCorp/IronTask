@@ -1,22 +1,30 @@
 from django import forms
-from irontask_app.models import Sponsor
+from irontask_app.models import Benevole
 from django.forms import ModelForm
 
 
-class SponsorForm(ModelForm):
-    siret = forms.CharField(label="N° SIRET", widget=forms.TextInput(
+
+class BenevoleForm(ModelForm):
+    nom = forms.CharField(required=True, label="Nom", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
-    raisonSocial = forms.CharField(label="Raison Social", widget=forms.TextInput(
+    prenom = forms.CharField(required=True, label="Prénom", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
-    adresse = forms.CharField(label="Adresse", widget=forms.TextInput(
+    dateNaissance = forms.DateField(required=True, label="Date de naissance", widget=forms.TextInput(
+                            attrs={"type": "text", "class": "form-control",
+                                   "id": "formGroupExampleInput",
+                                   "placeholder": ""}))
+
+
+    sexe = forms.ChoiceField(choices = Benevole.SEX_CHOICES)
+    adresse = forms.CharField(max_length=5,label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
-    codePostal = forms.CharField(max_length=5,label="Code Postal", widget=forms.TextInput(
+    codePostal = forms.CharField(label="Code Postal", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
@@ -38,5 +46,5 @@ class SponsorForm(ModelForm):
                                             "placeholder":""}))
 
     class Meta:
-        model = Sponsor
+        model = Benevole
         fields = '__all__'

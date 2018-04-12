@@ -71,3 +71,9 @@
 	z-index: 1;
 	top: 1em;
 }
+.cardpadding{
+	display: -webkit-box;
+ display: -webkit-flex;
+ display: -ms-flexbox;
+ display: flex;
+}

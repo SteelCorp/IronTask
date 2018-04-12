@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block  contenu %}
+    {% load static %}
+
+     <!-- Fonction recherche et tri -->
+
+    <div class="container ">
+        <div class="row mt-3 ">
+            <div class="col   ">
+                <div class="row mt-3 mb-1">
+                    <div class="col">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche"
+                                   aria-label="Recherche">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <div class="dropdown float-right">
+                            <button class="btn  dropdown-toggle" type="button" id="boutonTri"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Trier par : AlphaBetique
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="boutonTri">
+                                <a class="dropdown-item" href="">Ville</a>
+                                <a class="dropdown-item" href="">Email</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taches -->
+    {% for tache in Tache %}
+        {{ tache.niveauPriorite }}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                {% if tache.niveauPriorite == '0' %}
+                    <span class="badge badge-pill badge-light">Aucune</span>
+                {% endif %}
+                {% if tache.niveauPriorite == '1' %}
+                    <span class="badge badge-pill badge-success">Faible</span>
+                {% endif %}
+            {% if tache.niveauPriorite == '2' %}
+                    <span class="badge badge-pill badge-warning">Moyenne</span>
+                {% endif %}
+            {% if tache.niveauPriorite == '3' %}
+                    <span class="badge badge-pill badge-dager">Forte</span>
+                {% endif %}
+                {{ tache.nomTache }}
+                <div class="float-right"> Créer par : Hadrien</div>
+            </div>
+
+            <div class="card-body">
+                <div class="float-right">
+                    <a><img class="iconeadmin" alt="messagerie" src="{% static 'img/alerte.png' %}">18/09/2018</a>
+                </div>
+                <h5 class="card-title">Special title treatment</h5>
+                <div class="float-right">
+                    <a><img class="iconeadmin" alt="messagerie" src="{% static 'img/clock.png' %}">18/09/2018</a>
+                </div>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Modifier</a>
+
+            </div>
+        </div>
+    </div>
+    {%  endfor %}
+
+    <!-- Fin Stock-->
+
+    <!-- Bouton Plus pour ajouter un Benevole -->
+
+    <span class="plus"></span>
+
+    <!-- Pagination -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 py-5 d-flex">
+                <ul class="pagination mx-auto">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if Stock.has_previous %}
+                                <a href="?page={{ Stock.previous_page_number }}">Precèdent</a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ Stock.number }} de {{ Stock.paginator.num_pages }}.
+                            </span>
+                                {% if Stock.has_next %}
+                                    <a href="?page={{ Stock.next_page_number }}">Suivant</a>
+                                {% endif %}
+                         </span>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fin pagination -->
+
+
+    {% include "stocks/modalAjout.html" %}
+
+{% endblock %}

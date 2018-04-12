@@ -3,6 +3,19 @@ from django.contrib.auth.decorators import login_required
 from irontask_app.models import Triathlon
 from django.contrib.auth.decorators import login_required
 
+
+def selectTriathlon(request, id):
+    """Fonction qui met dans l'objet cookies,
+    l'id d'un triathlon afin de le reutiliser dans les autres vues
+    """
+    if request.session.get('idTriathlon'):
+        request.session['idTriathlon'] = None
+        request.session['idTriathlon'] = id
+        return redirect('/')
+    else:
+        request.session['idTriathlon']= id
+        return redirect('/')
+
 def listTriathlon(request):
     """Vue qui retourne la liste de tous les triathlons"""
 
