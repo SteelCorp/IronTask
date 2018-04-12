@@ -1,5 +1,7 @@
 {% block navBar %}
     {% load static %}
+    {% load filters %}
+
     {% with request.resolver_match.url_name as url_name %}
         <header class="navbar navbar-dark bg-primary navbar-expand-md bg-faded justify-content-center">
             <img class="logoit" alt="logo" src="{% static 'img/logo.png' %}"> <a href="/"
@@ -15,8 +17,12 @@
                             id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"> Triathlon </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Triathlon du 01.01.2017</a>
-                            <a class="dropdown-item" href="#">Triathlon du 02.02.2018</a>
+
+                            {% getTriathlonNonFini as triathlons %}
+                            {% for triathlon in triathlons %}
+                                <a class="dropdown-item" href="#">{{ triathlon }}</a>
+                            {% endfor %}
+
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalAjoutTriathlon">
                                 <img class="iconeadmin" alt="messagerie"
@@ -24,12 +30,14 @@
                                 un Triathlon</a>
                         </div>
                     </li>
+
                     <li class="nav-item  px-3 "><a class="nav-link" href="#">Tâches
                         <span class="sr-only">(current)</span>
                     </a></li>
                     <li class="ligne_verticale"></li>
-                    <li class="nav-item {% if  '/personnel/' in request.path %}active{% endif %} px-3"><a class="nav-link"
-                                                                                                     href="{% url 'listSponsor' %}">Personnels</a>
+                    <li class="nav-item {% if  '/personnel/' in request.path %}active{% endif %} px-3"><a
+                            class="nav-link"
+                            href="{% url 'listSponsor' %}">Personnels</a>
                     </li>
                     <li class="ligne_verticale"></li>
                     <li class="nav-item  px-3"><a class="nav-link" href="{% url 'listStock' %}">Stocks</a></li>
@@ -38,13 +46,13 @@
 
                     <li class="nav-item px-3 ">
                         <a class="nav-link" href="#">
-                            <span id="noti_Counter">5</span>
+                            <span id="noti_Counter">{% nbrDonationPourTriatlon %}  </span>
 
                             <img class="messagerie" alt="messagerie" src="{% static 'img/euro-8x.png' %}"></a></li>
 
                     <li class="nav-item px-3 ">
                         <a class="nav-link" href="#">
-                            <span id="noti_Counter">12</span>
+                            <span id="noti_Counter">{% nbrTachesPourTriathlon %}</span>
 
                             <img class="messagerie" alt="messagerie" src="{% static 'img/task-8x.png' %}"></a></li>
 

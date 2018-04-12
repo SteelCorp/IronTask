@@ -39,4 +39,9 @@ urlpatterns = [
     path('stocks/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
 
     # url(r'api/', include(router.urls))
+    # Gestion des triathlon
+    path('triathlon/select/<id>/', viewSponsor.listSponsor, name='listSponsor'),
+
+
+
 ]

@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from irontask_app.models import Triathlon
 from django.contrib.auth.decorators import login_required
 
+
+def selectTriathlon(request, id):
+    request.session.pop('idTriathlon', id)
+
 def listTriathlon(request):
     """Vue qui retourne la liste de tous les triathlons"""
 

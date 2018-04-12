@@ -128,7 +128,7 @@ class Benevole(models.Model):
 
     def __str__(self):
         """String du benevole (lol)"""
-        return 'Benevole :' + self.nom + " " + self.prenom + ' Status' + self.status
+        return 'Benevole :' + self.nom + " " + self.prenom
 
 
 class TypeTriathlon(models.Model):
