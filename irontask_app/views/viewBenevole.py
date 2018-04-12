@@ -9,10 +9,6 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-
-
-
-
 @login_required(login_url='login/')
 def listBenevole(request):
     """Vue qui retourne la liste de tous les intervenant"""
@@ -27,10 +23,8 @@ def listBenevole(request):
     benevole = paginator.get_page(page)
 
     if request.method == 'POST':
-
-
         benevoleForm = BenevoleForm(request.POST)
-        print(benevoleForm.errors)
+
         if benevoleForm.is_valid():
             benevole = benevoleForm.save(commit=True)
             benevole.save()

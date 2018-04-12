@@ -5,7 +5,14 @@ from django.contrib.auth.decorators import login_required
 
 
 def selectTriathlon(request, id):
-    request.session.pop('idTriathlon', id)
+    """Fonction qui met dans l'objet cookies,
+    l'id d'un triathlon afin de le reutiliser dans les autres vues
+    """
+    if request.session.get('idTriathlon'):
+        request.session['idTriathlon'] = None
+        request.session.pop('idTriathlon', id)
+    else:
+        request.session.pop('idTriathlon', id)
 
 def listTriathlon(request):
     """Vue qui retourne la liste de tous les triathlons"""
