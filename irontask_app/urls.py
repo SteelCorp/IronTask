@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
-from irontask_app.views import viewSponsor, viewIndex, viewLogin, viewIntervenant, viewBenevole, viewStock, viewTriathlon
+from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
+    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache
 from django.conf.urls import url, include
 
 from irontask_app import api
