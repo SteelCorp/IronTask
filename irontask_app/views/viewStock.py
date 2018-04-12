@@ -4,7 +4,7 @@ from irontask_app.models import Materiel
 from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
 from django.contrib import messages
-
+from irontask_app.models import Materiel
 
 @login_required(login_url='login/')
 def listStock(request):
@@ -34,11 +34,13 @@ def listStock(request):
 
 @login_required(login_url='login/')
 def editerStock(request):
+
     return render(request)
 
 @login_required(login_url='login/')
-def getStock(request):
-    return render(request)
+def getStock(request,pk):
+    stock = Materiel.objects.get(pk=pk)
+    return render(request, 'stocks/voirStocks.html', {'Stock': stock})
 
 @login_required(login_url='login/')
 def deleteStock(request):

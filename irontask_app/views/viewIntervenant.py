@@ -52,11 +52,7 @@ def editerSponsor(request, siret):
             return redirect(listSponsor)
     return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
-def editerIntervenant(request, pk=None):
-    """Vue qui permet d'éditer un intervenant"""
-    data = serializers.serialize('json', Intervenant.objects.filter(pk=pk) )
 
-    return HttpResponse(data)
 
 
 

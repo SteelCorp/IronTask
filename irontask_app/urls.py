@@ -23,7 +23,6 @@ urlpatterns = [
     # Gestion des intervenants
     path('personnel/intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
     path('personnel/intervenant/get/<siret>/', viewIntervenant.getIntervenant, name='getIntervenant'),
-    path('personnel/intervenant/editer/<siret>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
     path('personnel/intervenant/supprimer/<siret>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
 
     # Gestion des benevoles
