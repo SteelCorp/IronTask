@@ -34,41 +34,42 @@
     </div>
 
     <!-- Taches -->
-
+    {% for tache in Tache %}
+        {{ tache.niveauPriorite }}
     <div class="container">
-    {% if messages %}
-                            <div class="alert alert-danger" role="alert">
-                                {% for message in messages %}
-                                    {{ message }}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-        <table class="table table-striped ">
-            <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Type</th>
-                <th scope="col">Quantité totale</th>
-                <th scope="col">Lieu de stockage</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for stock in Stock %}
-                <tr>
-                    <td>{{ stock.nom }}</td>
-                    <td>{{ stock.type}}</td>
-                    <td>{{ stock.qteTotal }}</td>
-                    <td>{{ stock.lieuStockage }}</td>
-                    <td>
-                        <a href="{% url 'getStock' stock.pk %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
-                        </button>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header">
+                {% if tache.niveauPriorite == '0' %}
+                    <span class="badge badge-pill badge-light">Aucune</span>
+                {% endif %}
+                {% if tache.niveauPriorite == '1' %}
+                    <span class="badge badge-pill badge-success">Faible</span>
+                {% endif %}
+            {% if tache.niveauPriorite == '2' %}
+                    <span class="badge badge-pill badge-warning">Moyenne</span>
+                {% endif %}
+            {% if tache.niveauPriorite == '3' %}
+                    <span class="badge badge-pill badge-dager">Forte</span>
+                {% endif %}
+                {{ tache.nomTache }}
+                <div class="float-right"> Créer par : Hadrien</div>
+            </div>
+
+            <div class="card-body">
+                <div class="float-right">
+                    <a><img class="iconeadmin" alt="messagerie" src="{% static 'img/alerte.png' %}">18/09/2018</a>
+                </div>
+                <h5 class="card-title">Special title treatment</h5>
+                <div class="float-right">
+                    <a><img class="iconeadmin" alt="messagerie" src="{% static 'img/clock.png' %}">18/09/2018</a>
+                </div>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Modifier</a>
+
+            </div>
+        </div>
     </div>
+    {%  endfor %}
 
     <!-- Fin Stock-->
 
