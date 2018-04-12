@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from irontask_app.models import Sponsor, Sponsoriser
+from irontask_app.models import Sponsor, Sponsoriser, Triathlon
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
+from irontask_app.forms.DonationForm import DonationForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -18,6 +19,7 @@ def listSponsor(request):
 
     sponsor = Sponsor.objects.all()
     sponsorForm = SponsorForm()
+
 
     """ Implémentation de la pagination"""
     paginator = Paginator(sponsor, 25)
@@ -69,10 +71,35 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
     listDonationSponsor = Sponsoriser.objects.filter(fk_sponsoriser=siret)
+    donationForm = DonationForm
+
+    """ si méthode POST alors sauvegarder resultat du formulaire"""
+    if request.method == 'POST':
+        donationForm = DonationForm(request.POST)
 
 
-    return render(request, "personnels/voirSponsor.html", {'Sponsor': sponsor,
-                                                           'listDonationSponsor': listDonationSponsor})
+        if donationForm.is_valid():
+            """
+            si le formulaire est valide alors on ne commit pas de suite car il n'y a que donation dans donationForm            
+            """
+            donation = donationForm.save(commit=False)
+            """ obligé de passer idTriathlon dans l'objet triat idem avec spon pour enregister dans donation"""
+            triat = Triathlon.objects.get(id=request.session['idTriathlon'])
+            spon = Sponsor.objects.get(siret=siret)
+            donation.fk_triathlon = triat
+            donation.fk_sponsoriser = spon
+            donation.save()
+        else:
+            """ Passe le message d'error du formulaire à la template"""
+            """afin de l'afficher en cas d'erreur dans le formulaire"""
+            messages.add_message(request, messages.INFO, DonationForm.errors)
+
+    return redirect('/')
+
+    return render(request, "personnels/voirSponsor.html", {'sponsor': sponsor,
+                                                           'listDonationSponsor': listDonationSponsor,
+                                                           'donationForm': donationForm
+                                                           })
 
 
 @login_required(login_url='login/')
