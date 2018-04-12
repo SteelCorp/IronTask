@@ -2,52 +2,52 @@
 {% block contenu %}
     {% load static %}
 
-      <div class="container">
-    <div class="row">
-        <div class="col-lg-10 offset-lg-1 py-5 ">
-            <div class="card bg-light mb-3 ">
-                <div class="card-header">
-                    Détails
-                </div>
-                <div class="card-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 py-5 ">
+                <div class="card bg-light mb-3 ">
+                    <div class="card-header">
+                        Détails
+                    </div>
+                    <div class="card-body">
 
-                    <table class="table table-user-information">
-                        <tr>
-                            <td>Nom :</td>
-                            <td>{{ Stock.nom }}</td>
-                        </tr>
-                        <tr>
-                            <td>Type :</td>
-                            <td>{{ Stock.type }}</td>
-                        </tr>
-                        <tr>
-                            <td>Quantité totale : </td>
-                            <td>{{ Stock.qteTotal }}</td>
-                        </tr>
-                        <tr>
-                            <td>Lieu de stockage</td>
-                            <td>{{ Stock.lieuStockage }}</td>
-                        </tr>
+                        <table class="table table-user-information">
+                            <tr>
+                                <td>Nom :</td>
+                                <td>{{ Stock.nom }}</td>
+                            </tr>
+                            <tr>
+                                <td>Type :</td>
+                                <td>{{ Stock.type }}</td>
+                            </tr>
+                            <tr>
+                                <td>Quantité totale : </td>
+                                <td>{{ Stock.qteTotal }}</td>
+                            </tr>
+                            <tr>
+                                <td>Lieu de stockage</td>
+                                <td>{{ Stock.lieuStockage }}</td>
+                            </tr>
 
 
-                        </tr>
-                    </table>
+                            </tr>
+                        </table>
 
-                </div>
-                <div class="card-body text-center">
-                    <button type="button" class="btn btn-link">Modifier</button>
-                    <button type="button" class="btn btn-link">Supprimer</button>
-                </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <button type="button" class="btn btn-link">Modifier</button>
+                        <button type="button" class="btn btn-link">Supprimer</button>
+                    </div>
 
-                <div class="card-footer">
-                    <small class="text-muted">{{ Stock.dateAjout }}</small>
+                    <div class="card-footer">
+                        <small class="text-muted">{{ Stock.dateAjout }}</small>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
     </div>
-
 
 {% endblock %}
 
