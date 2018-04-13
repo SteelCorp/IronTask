@@ -37,6 +37,9 @@ class Intervenant(models.Model):
         """
         return self.raisonSocial
 
+    class Meta:
+        verbose_name_plural = "Intervenant"
+
 
 class Sponsor(models.Model):
     """
@@ -55,6 +58,9 @@ class Sponsor(models.Model):
 
     def __str__(self):
         return self.raisonSocial
+
+    class Meta:
+        verbose_name_plural = "Sponsor"
 
 
 class Categorie(models.Model):
@@ -80,6 +86,8 @@ class Categorie(models.Model):
         :return: String représentant l'objet Catégorie par son libellé
         """
         return self.libelle
+    class Meta:
+        verbose_name_plural = "Catégories"
 
 
 class Materiel(models.Model):
@@ -98,6 +106,9 @@ class Materiel(models.Model):
         :return: String représentant l'objet Materiel par son nom et son lieu de stockage
         """
         return self.nom + ' stocké a : ' + self.lieuStockage
+
+    class Meta:
+        verbose_name_plural = "Matèriel"
 
 
 class Benevole(models.Model):
@@ -130,6 +141,9 @@ class Benevole(models.Model):
         """String du benevole (lol)"""
         return 'Benevole :' + self.nom + " " + self.prenom
 
+    class Meta:
+        verbose_name_plural = "Bénévole"
+
 
 class TypeTriathlon(models.Model):
     """Class representant un type de triathlon"""
@@ -143,6 +157,8 @@ class TypeTriathlon(models.Model):
     def __str__(self):
         """Retourne un string des parametre du type de triathlon"""
         return 'Type triathlon de libelle ' + self.libelle
+    class Meta:
+        verbose_name_plural = "Type Triathlon"
 
 
 class Triathlon(models.Model):
@@ -161,6 +177,9 @@ class Triathlon(models.Model):
         (utile pour la partie admin) """
 
         return 'Triathlon du ' + str(self.date) + ' à ' + self.ville
+
+    class Meta:
+        verbose_name_plural = "Triathlon"
 
 
 class Tache(models.Model):
@@ -195,6 +214,9 @@ class Tache(models.Model):
 
         return 'Tache date de fin :' + str(self.dateFin) + ' avec niveau d\'avancement :' + self.niveauAvancement
 
+    class Meta:
+        verbose_name_plural = "Tâches"
+
 
 class Intervenir(models.Model):
     """Class Representant le lien entre triathlon et Intervenant"""
@@ -205,6 +227,9 @@ class Intervenir(models.Model):
     fk_intervenant = models.ForeignKey(Intervenant, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Intervenir"
+
 
 class Sponsoriser(models.Model):
     """Class Representant le lien entre triathlon et Sponsor"""
@@ -214,6 +239,9 @@ class Sponsoriser(models.Model):
     fk_sponsoriser = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Donations"
+
 
 class Caracteriser(models.Model):
     """Class Representant le lien entre triathlon et catégorie (exemple 20 filles seniors pour triat Lyon"""
@@ -222,6 +250,9 @@ class Caracteriser(models.Model):
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Caractériser"
 
 
 class Allouer(models.Model):
@@ -235,6 +266,7 @@ class Allouer(models.Model):
 
     class Meta:
         unique_together = (('fk_triathlon', 'fk_benevole'),)
+        verbose_name_plural = "Allocation du matériel"
 
 
 class Affecter(models.Model):
@@ -243,3 +275,6 @@ class Affecter(models.Model):
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False)
     fk_tache = models.ForeignKey(Tache, on_delete=models.CASCADE, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Affectation des bénévoles"
