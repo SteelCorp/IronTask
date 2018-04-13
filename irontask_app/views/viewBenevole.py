@@ -72,7 +72,7 @@ def getBenevole(request, pk):
 
     benevole = Benevole.objects.get(pk=pk)
 
-    return render(request, "personnels/Benevole/../templates/personnels/voirBenevole.html", {'Benevole': benevole})
+    return render(request, "personnels/Benevole/voirBenevole.html", {'Benevole': benevole})
 
 
 @login_required(login_url='login/')
