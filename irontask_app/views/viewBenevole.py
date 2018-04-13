@@ -31,7 +31,7 @@ def listBenevole(request):
             benevole = benevoleForm.save(commit=True)
             benevole.save()
         return redirect(listBenevole)
-    return render(request, 'personnels/Benevole/../templates/personnels/listBenevole.html',
+    return render(request, 'personnels/Benevole/listBenevole.html',
                   {'Benevole': benevole, 'form': benevoleForm, 'paginator': paginator})
 
 
