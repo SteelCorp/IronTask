@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 from irontask_app.models import Materiel
 from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
@@ -48,8 +50,9 @@ def getStock(request,pk):
 
 @login_required(login_url='login/')
 @triathlon_required
-def deleteStock(request):
-    return render(request)
+def deleteStock(request,pk):
+    Materiel.objects.filter(pk=pk).delete()
+    return redirect(listStock)
 
 @login_required(login_url='login/')
 @triathlon_required

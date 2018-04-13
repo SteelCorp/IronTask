@@ -102,7 +102,15 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary">Ajouter</button>
+                   <!-- <button type="button" class="btn btn-primary">Ajouter</button> -->
+
+                    <form class="ui form" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

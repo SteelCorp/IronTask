@@ -20,6 +20,7 @@ class BenevoleForm(ModelForm):
 
 
     sexe = forms.ChoiceField(choices = Benevole.SEX_CHOICES)
+
     adresse = forms.CharField(max_length=5,label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",

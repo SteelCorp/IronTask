@@ -32,6 +32,9 @@ def listTriathlon(request):
 
     listTriathlon = Triathlon.objets.all()
 
+    """if request.method == 'POST':
+
+"""
     return render(request, 'triatlon.html', {'triathlon': listTriathlon})
 
 
