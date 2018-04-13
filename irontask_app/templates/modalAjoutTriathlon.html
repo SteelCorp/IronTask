@@ -68,12 +68,20 @@
                                     <input type="text" class="form-control" data-toggle="datepicker">
                                 </div>
                             </div>
-                            <div class="row espaceModale">
+                            <div class="row ">
                                 <div class ="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text"><img class="iconeadmin" alt="messagerie" src="{% static 'img/time.png' %}">Heure</label>
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie" src="{% static 'img/time.png' %}">
+                                            Heure
+                                        </label>
                                     </div>
-                                    <input class="form-control" type="time"  >
+                                    <div class=" clockpicker">
+                                        <input type="text" class="form-control" value="18:00">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -109,5 +117,14 @@
             });
         });
     </script>
+  <script type="text/javascript">
+        $('.clockpicker').clockpicker({
+            placement: 'top',
+            align: 'left',
+            donetext: 'Done'
+        });
+    </script>
+
+
 
 {% endblock %}
