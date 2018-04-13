@@ -96,7 +96,7 @@ def getSponsor(request, siret):
             """afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, DonationForm.errors)
 
-        return redirect('/')
+
 
     return render(request, "personnels/Sponsor/voirSponsor.html", {'sponsor': sponsor,
                                                            'listDonationSponsor': listDonationSponsor,
@@ -110,4 +110,10 @@ def deleteSponsor(request, siret):
     Sponsor.objects.filter(siret=siret).delete()
     return redirect(reverse(viewname=listSponsor))
 
+
+@login_required(login_url='login/')
+@triathlon_required
+def deleteDonation(request, idDonation):
+    Sponsoriser.objects.filter(id=idDonation).delete()
+    return redirect('/')
 
