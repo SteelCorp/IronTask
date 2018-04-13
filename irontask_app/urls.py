@@ -21,6 +21,12 @@ urlpatterns = [
     path('personnel/sponsor/editer/<siret>/', viewSponsor.editerSponsor, name='editerSponsor'),
     path('personnel/sponsor/supprimer/<siret>/', viewSponsor.deleteSponsor, name='deleteSponsor'),
 
+    # Gestion des donations
+    path('personnel/donation/', viewSponsor.listSponsor, name='listDonation'),
+    path('personnel/donation/get/<id>/', viewSponsor.getSponsor, name='getDonation'),
+    path('personnel/donation/editer/<id>/', viewSponsor.editerSponsor, name='editerDonation'),
+    path('personnel/donation/supprimer/<id>/', viewSponsor.deleteDonation, name='deleteDonation'),
+
     # Gestion des intervenants
     path('personnel/intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
     path('personnel/intervenant/get/<siret>/', viewIntervenant.getIntervenant, name='getIntervenant'),
