@@ -8,9 +8,11 @@ from irontask_app.forms.IntervenantForm import IntervenantForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from irontask_app.decorators import triathlon_required
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def listIntervenant(request):
     """Vue qui retourne la liste de tous les intervenant"""
 
@@ -55,7 +57,8 @@ def editerSponsor(request, siret):
 
 
 
-
+@login_required(login_url='login/')
+@triathlon_required
 def getIntervenant(request, siret):
     """
     Vue qui retourne l'intervenant fournit en paramètre
@@ -67,6 +70,7 @@ def getIntervenant(request, siret):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def deleteIntervenant(request, pk):
     """Vue qui permet de supprimer un intervenant
     :param pk est la primary key d'un intervenant
@@ -78,6 +82,7 @@ def deleteIntervenant(request, pk):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def createIntervenant(request):
     """ Vue qui permet de creer un intervenant
     """

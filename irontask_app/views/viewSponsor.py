@@ -44,6 +44,7 @@ def listSponsor(request):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def editerSponsor(request, siret):
 
     s = Sponsor.objects.get(siret=siret)
@@ -64,6 +65,7 @@ def editerSponsor(request, siret):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def getSponsor(request, siret):
     """
     Vue qui retourne le sponsor fournit en paramètre
@@ -103,6 +105,7 @@ def getSponsor(request, siret):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def deleteSponsor(request, siret):
     sponsor = Sponsor.objects.get(siret=siret)
     sponsor.delete()

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
 from irontask_app.models import Triathlon
-from django.contrib.auth.decorators import login_required
+import datetime
+
 
 
 def selectTriathlon(request, id):
@@ -16,12 +18,22 @@ def selectTriathlon(request, id):
         request.session['idTriathlon']= id
         return redirect('/')
 
+
+def choisirTriathlon(request):
+    """Page redirige par le decorator triathlon_required, afin de forcer l'utilisateur
+    à choisir un triathlon"""
+    triathlons = Triathlon.objects.filter(date__gt=datetime.date.today())
+
+    return render(request, 'triathlon/choisirTriathlon.html', {'triathlons': triathlons})
+
+
 def listTriathlon(request):
     """Vue qui retourne la liste de tous les triathlons"""
 
     listTriathlon = Triathlon.objets.all()
 
     return render(request, 'triatlon.html', {'triathlon': listTriathlon})
+
 
 
 def getTriathlon(request, id):

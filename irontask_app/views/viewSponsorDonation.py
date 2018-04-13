@@ -3,8 +3,10 @@ from irontask_app.models import Sponsoriser
 from django.contrib.auth.decorators import login_required
 from irontask_app.forms.DonationForm import DonationForm
 from django.contrib import messages
+from irontask_app.decorators import triathlon_required
 
 @login_required(login_url='login/')
+@triathlon_required
 def listDonationSponsorsTriathlon(request, idSponsors):
     """vue qui return toutes les donations"""
     listDonationSponsorsTriathlon = Sponsoriser.objets.filter(fk_sponsoriser=idSponsors)
@@ -27,7 +29,8 @@ def listDonationSponsorsTriathlon(request, idSponsors):
 
     return render(request, 'donation.html', {'donation': listDonationSponsorsTriathlon})
 
-
+@login_required(login_url='login/')
+@triathlon_required
 def listDonationSponsor(request, idSponsor):
     """
     Vue qui retourne la list des donations pour un sponsors donné fournit en paramètre
@@ -38,7 +41,8 @@ def listDonationSponsor(request, idSponsor):
 
     return render(request, "viewSpo.html", {'donationSponsor': listDonationSponsor})
 
-
+@login_required(login_url='login/')
+@triathlon_required
 def listDonationTriathlon(request, idTriathlon):
     """
     Vue qui retourne la list des donations pour un sponsors donné fournit en paramètre

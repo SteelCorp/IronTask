@@ -5,8 +5,10 @@ from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Materiel
+from irontask_app.decorators import triathlon_required
 
 @login_required(login_url='login/')
+@triathlon_required
 def listStock(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
@@ -33,19 +35,23 @@ def listStock(request):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def editerStock(request):
 
     return render(request)
 
 @login_required(login_url='login/')
+@triathlon_required
 def getStock(request,pk):
     stock = Materiel.objects.get(pk=pk)
     return render(request, 'stocks/voirStocks.html', {'Stock': stock})
 
 @login_required(login_url='login/')
+@triathlon_required
 def deleteStock(request):
     return render(request)
 
 @login_required(login_url='login/')
+@triathlon_required
 def createStock(request):
     return render(request)

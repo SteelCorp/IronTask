@@ -5,8 +5,10 @@ from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
+from irontask_app.decorators import triathlon_required
 
 @login_required(login_url='login/')
+@triathlon_required
 def listTache(request):
     """Vue qui retourne la liste de toutes les taches"""
 
@@ -33,16 +35,20 @@ def listTache(request):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def editerTache(request):
 
     return render(request)
 
 @login_required(login_url='login/')
+@triathlon_required
 def getTache(request,pk):
     tache = Materiel.objects.get(pk=pk)
     return render(request, 'tache/voirTache.html', {'Tache': tache})
 
+
 @login_required(login_url='login/')
+@triathlon_required
 def deleteTache(request):
     return render(request)
 

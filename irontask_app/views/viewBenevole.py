@@ -8,8 +8,10 @@ from irontask_app.forms.BenevoleForm import BenevoleForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from irontask_app.decorators import triathlon_required
 
 @login_required(login_url='login/')
+@triathlon_required
 def listBenevole(request):
     """Vue qui retourne la liste de tous les intervenant"""
 
@@ -52,12 +54,16 @@ def editerSponsor(request, siret):
             return redirect(listSponsor)
     return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
+
+@login_required(login_url='login/')
+@triathlon_required
 def editerBenevole(request, pk=None):
     """Vue qui permet d'éditer un intervenant"""
     pass
 
 
-
+@login_required(login_url='login/')
+@triathlon_required
 def getBenevole(request, pk):
     """
     Vue qui retourne l'intervenant fournit en paramètre
@@ -70,6 +76,7 @@ def getBenevole(request, pk):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def deleteBenevole(request, pk):
     """Vue qui permet de supprimer un intervenant
     :param pk est la primary key d'un intervenant
@@ -78,6 +85,7 @@ def deleteBenevole(request, pk):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def createBenevole(request):
     """ Vue qui permet de creer un intervenant
     """
