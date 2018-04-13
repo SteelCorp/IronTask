@@ -81,6 +81,9 @@ class Categorie(models.Model):
         """
         return self.libelle
 
+    class Meta:
+        verbose_name_plural = "Catègories"
+
 
 class Materiel(models.Model):
     """
@@ -162,6 +165,9 @@ class Triathlon(models.Model):
 
         return 'Triathlon du ' + str(self.date) + ' à ' + self.ville
 
+    class Meta:
+        verbose_name_plural = "Triathlon"
+
 
 class Tache(models.Model):
     """Class Representant une Tache"""
@@ -195,6 +201,9 @@ class Tache(models.Model):
 
         return 'Tache date de fin :' + str(self.dateFin) + ' avec niveau d\'avancement :' + self.niveauAvancement
 
+    class Meta:
+        verbose_name_plural = "Tâches"
+
 
 class Intervenir(models.Model):
     """Class Representant le lien entre triathlon et Intervenant"""
@@ -205,6 +214,9 @@ class Intervenir(models.Model):
     fk_intervenant = models.ForeignKey(Intervenant, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Intervenir"
+
 
 class Sponsoriser(models.Model):
     """Class Representant le lien entre triathlon et Sponsor"""
@@ -214,6 +226,9 @@ class Sponsoriser(models.Model):
     fk_sponsoriser = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Donations"
+
 
 class Caracteriser(models.Model):
     """Class Representant le lien entre triathlon et catégorie (exemple 20 filles seniors pour triat Lyon"""
@@ -222,6 +237,9 @@ class Caracteriser(models.Model):
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Caractériser"
 
 
 class Allouer(models.Model):
@@ -235,6 +253,7 @@ class Allouer(models.Model):
 
     class Meta:
         unique_together = (('fk_triathlon', 'fk_benevole'),)
+        verbose_name_plural = "Allocation du matériel"
 
 
 class Affecter(models.Model):
@@ -243,3 +262,6 @@ class Affecter(models.Model):
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False)
     fk_tache = models.ForeignKey(Tache, on_delete=models.CASCADE, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Affectation des bénévoles"
