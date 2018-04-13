@@ -38,7 +38,7 @@ def listSponsor(request):
             messages.add_message(request, messages.INFO, sponsorform.errors)
 
         return redirect(listSponsor)
-    return render(request, 'personnels/listSponsor.html', {'Sponsor': sponsor,
+    return render(request, 'personnels/Sponsor/listSponsor.html', {'Sponsor': sponsor,
                                                            'form': sponsorForm, 'page': page,
                                                            'paginator': paginator})
 
@@ -98,18 +98,16 @@ def getSponsor(request, siret):
 
         return redirect('/')
 
-    return render(request, "personnels/voirSponsor.html", {'sponsor': sponsor,
+    return render(request, "personnels/Sponsor/voirSponsor.html", {'sponsor': sponsor,
                                                            'listDonationSponsor': listDonationSponsor,
                                                            'donationForm': donationForm
-                                                           })
+                                                                   })
 
 
 @login_required(login_url='login/')
 @triathlon_required
 def deleteSponsor(request, siret):
-    sponsor = Sponsor.objects.get(siret=siret)
-    sponsor.delete()
-    sponsor.save()
+    Sponsor.objects.filter(siret=siret).delete()
     return redirect(reverse(viewname=listSponsor))
 
 
