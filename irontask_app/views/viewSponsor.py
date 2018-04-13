@@ -17,7 +17,12 @@ from irontask_app.decorators import triathlon_required
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
-    sponsor = Sponsor.objects.all()
+    tria = Triathlon.objects.get(id=request.session['idTriathlon'])
+
+    """Donne les sponsors affeter au triathlon courant"""
+    sponsor = Sponsor.objects.filter(sponsoriser__fk_triathlon=tria)
+
+
     sponsorForm = SponsorForm()
 
 

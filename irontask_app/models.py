@@ -236,7 +236,7 @@ class Sponsoriser(models.Model):
 
     donation = models.PositiveIntegerField(null=False, blank=False)
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
-    fk_sponsoriser = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
+    fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
     class Meta:
