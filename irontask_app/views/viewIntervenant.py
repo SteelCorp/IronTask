@@ -71,13 +71,11 @@ def getIntervenant(request, siret):
 
 @login_required(login_url='login/')
 @triathlon_required
-def deleteIntervenant(request, pk):
+def deleteIntervenant(request, siret):
     """Vue qui permet de supprimer un intervenant
     :param pk est la primary key d'un intervenant
     """
-    intervenant = Intervenant.objects.get(pk=pk)
-    intervenant.delete()
-    intervenant.save()
+    Intervenant.objects.filter(siret=siret).delete()
     return redirect(reverse(viewname=listIntervenant))
 
 
