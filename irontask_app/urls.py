@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
-    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache
+    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewDonations
 from django.conf.urls import url, include
 
 from irontask_app import api
@@ -22,7 +22,7 @@ urlpatterns = [
     path('personnel/sponsor/supprimer/<siret>/', viewSponsor.deleteSponsor, name='deleteSponsor'),
 
     # Gestion des donations
-    path('personnel/donation/', viewSponsor.listSponsor, name='listDonation'),
+    path('donation/', viewDonations.listDonations, name='listDonations'),
     path('personnel/donation/get/<id>/', viewSponsor.getSponsor, name='getDonation'),
     path('personnel/donation/editer/<id>/', viewSponsor.editerSponsor, name='editerDonation'),
     path('personnel/donation/supprimer/<id>/', viewSponsor.deleteDonation, name='deleteDonation'),
