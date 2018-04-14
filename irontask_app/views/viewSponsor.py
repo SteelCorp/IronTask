@@ -19,10 +19,10 @@ def listSponsor(request):
 
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
 
-    """Donne les sponsors affeter au triathlon courant"""
+    """Donne les sponsors affecter au triathlon courant"""
     sponsor = Sponsor.objects.filter(sponsoriser__fk_triathlon=tria)
 
-
+    # Instancie le formulaire sponsorForm
     sponsorForm = SponsorForm()
 
 
@@ -31,6 +31,7 @@ def listSponsor(request):
     page = request.GET.get('page')
     sponsor = paginator.get_page(page)
 
+    #Si le requeste est de type POST
     if request.method == 'POST':
         sponsorform = SponsorForm(request.POST)
 
@@ -77,7 +78,7 @@ def getSponsor(request, siret):
     ::param siret est le siret d'un sponsor
     """
     sponsor = Sponsor.objects.get(siret=siret)
-    listDonationSponsor = Sponsoriser.objects.filter(fk_sponsoriser=siret)
+    listDonationSponsor = Sponsoriser.objects.filter(fk_sponsor=siret)
     donationForm = DonationForm
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""

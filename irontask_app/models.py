@@ -138,7 +138,7 @@ class Benevole(models.Model):
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        """String du benevole (lol)"""
+        """Retourne un string representant le benevole"""
         return 'Benevole :' + self.nom + " " + self.prenom
 
     class Meta:
