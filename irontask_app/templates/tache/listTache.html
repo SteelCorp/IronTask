@@ -37,6 +37,7 @@
     {% for tache in Tache %}
         <div class="container">
             <div class="card">
+                <!--  titre des cartes -->
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-2">
@@ -58,10 +59,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- corps des cartes -->
                 <div class="card-body">
                     <div class="row">
+                        <!-- description et infos -->
                         <div class="col-sm-9">
+                            <div class="h-75">
                             <p class="card-text">{{  tache.description }}</p>
+                            </div>
+                            <div class="border-bottom mb-1"></div>
                             <div class="row">
                                 <div class="col-sm-3">
                                     {% if tache.niveauAvancement == 'P' %}
@@ -80,35 +86,43 @@
                                         </div>
                                     {% endif %}
                                 </div>
-                                <div class="col-sm-5">
-                                    <div class="well well-sm">
-                                    <a>
-                                        Reponsable :
-                                        <img class="iconeadmin" alt="responsable" src="{% static 'img/badge.svg' %}">
-                                        {{ tache.fk_benevole.nom }} {{ tache.fk_benevole.prenom }}
-                                        <img class="iconeadmin" alt="tel reponsable" src="{% static 'img/phone.svg' %}">
-                                        {{  tache.fk_benevole.telephonePortable }}
-                                    </a>
-
+                                <div class="col-sm-5 m-auto">
+                                    <div class="">
+                                        <a>
+                                            Reponsable :
+                                            <img class="iconeadmin" alt="responsable" src="{% static 'img/badge.svg' %}">
+                                            {{ tache.fk_benevole.nom }} {{ tache.fk_benevole.prenom }}
+                                            <img class="iconeadmin" alt="tel reponsable" src="{% static 'img/phone.svg' %}">
+                                            {{  tache.fk_benevole.telephonePortable }}
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- dates et bouton -->
                         <div class="col-sm-3">
-                            <div class="float-right">
-                                <a><img class="iconeadmin" alt="debut" src="{% static 'img/media-play.svg' %}">{{ tache.dateDebut }}</a>
+                            <div class="mb-3">
+                                <div class="float-right">
+                                    <a><img class="iconeadmin" alt="debut" src="{% static 'img/media-play.svg' %}">{{ tache.dateDebut }}</a>
+                                </div>
                             </div>
                             <br>
-                            <div class="float-right">
-                                <a><img class="iconeadmin" alt="fin" src="{% static 'img/clock.png' %}">{{  tache.dateFin }}</a>
+                            <div class="mb-3">
+                                <div class="float-right">
+                                    <a><img class="iconeadmin" alt="fin" src="{% static 'img/clock.png' %}">{{  tache.dateFin }}</a>
+                                </div>
                             </div>
                             <br>
-                            <div class="float-right">
-                                <a><img class="iconeadmin" alt="alarme" src="{% static 'img/alerte.png' %}">{{ tache.dateRappel }}</a>
+                            <div class="mb-3">
+                                <div class="float-right">
+                                    <a><img class="iconeadmin" alt="alarme" src="{% static 'img/alerte.png' %}">{{ tache.dateRappel }}</a>
+                                </div>
                             </div>
                             <br>
-                            <div class="float-right">
-                                <a href="#" class="btn btn-primary ">Modifier</a>
+                            <div class="mb-3">
+                                <div class="float-right">
+                                    <a href="#" class="btn btn-primary ">Modifier</a>
+                                </div>
                             </div>
                         </div>
                     </div>
