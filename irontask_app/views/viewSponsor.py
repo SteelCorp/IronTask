@@ -21,6 +21,7 @@ def listSponsor(request):
 
     """Donne les sponsors affecter au triathlon courant"""
     sponsor = Sponsor.objects.filter(sponsoriser__fk_triathlon=tria)
+    
 
     # Instancie le formulaire sponsorForm
     sponsorForm = SponsorForm()

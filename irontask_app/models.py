@@ -2,18 +2,12 @@ from django.db import models
 from irontask_app.validators import *
 from django.contrib.auth.models import User
 
-
-
-
 class UserProfile(models.Model):
     """
     Class pour la gestion des utilateurs du logiciel (connexion etc...)
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # pagination_config = models.IntegerField(default=25)
-
-
-
 
 
 class Intervenant(models.Model):
