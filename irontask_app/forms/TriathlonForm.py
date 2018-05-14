@@ -3,6 +3,7 @@ from django import forms
 from irontask_app.models import Triathlon, TypeTriathlon
 
 class TriathlonForm(ModelForm):
+    description = forms.Textarea()
     date = forms.CharField(widget=forms.DateInput(attrs={"type": "text", "class": "form-control", "data-toggle": "datepicker"}))
     heureDepart = forms.CharField(widget=forms.TextInput({"class": "form-control", "type": "text", "value":"18:00"}))
     codePostal = forms.CharField(max_length=5, widget=forms.TextInput({"class":"form-control col-3", "type":"text", "value":"99999"}))

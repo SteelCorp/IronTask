@@ -24,7 +24,7 @@ def selectTriathlon(request, id):
 def choisirTriathlon(request):
     """Page redirige par le decorator triathlon_required, afin de forcer l'utilisateur
     à choisir un triathlon"""
-    triathlons = Triathlon.objects.filter(date__gt=datetime.date.today())
+    triathlons = Triathlon.objects.filter()
 
     return render(request, 'triathlon/choisirTriathlon.html', {'triathlons': triathlons})
 
@@ -81,11 +81,13 @@ def ajouterTriathlon(request):
 
     if request.method == 'POST':
         tria = TriathlonForm(request.POST)
+        print(request.POST)
         print(tria.errors)
-        print(tria)
+        print("coucou")
+
         if tria.is_valid():
 
             tria.save()
-            print(tria.errors)
+
 
     return redirect('/')
