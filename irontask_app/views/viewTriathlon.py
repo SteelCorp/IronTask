@@ -52,6 +52,13 @@ def voirTriathlon(request, pk):
 def editerTriathlon(request, pk):
     tria = Triathlon.objects.get(pk=pk)
     triathlonForm = TriathlonForm(instance=tria)
+
+    if request.method == "POST":
+        form = TriathlonForm(request.POST, instance=tria)
+        if form.is_valid():
+            form.save()
+
+        return redirect('/')
     return render(request, 'triathlon/editerTriathlon.html', {"form": triathlonForm})
 
 def supprimerTriathlon(request, pk):
