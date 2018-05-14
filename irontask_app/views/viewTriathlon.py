@@ -7,8 +7,9 @@ import datetime
 
 
 
+
 def selectTriathlon(request, id):
-    """Fonction qui met dans l'objet cookies,
+    """Fonction qui met dans l'objet triathlon selectionner dans le cookies,
     l'id d'un triathlon afin de le reutiliser dans les autres vues
     """
     if request.session.get('idTriathlon'):
@@ -16,7 +17,7 @@ def selectTriathlon(request, id):
         request.session['idTriathlon'] = id
         return redirect('/')
     else:
-        request.session['idTriathlon']= id
+        request.session['idTriathlon'] = id
         return redirect('/')
 
 
@@ -33,21 +34,23 @@ def listTriathlon(request):
 
     listTriathlon = Triathlon.objets.all()
 
-    """if request.method == 'POST':
 
-"""
     return render(request, 'triatlon.html', {'triathlon': listTriathlon})
 
 
+@login_required(login_url='login/')
 
-def getTriathlon(request, id):
+def editerTriathlon(request, pk):
     """
     Vue qui retourne le triatlon fournit en paramètre
     ::param id est l'id d'un triathlon
     """
-    triathlon = Triathlon.objets.get(id=id)
+    triathlon = Triathlon.objects.get(pk=pk)
 
-    return render(request, "triatlon.html", {'triathlon': triathlon})
+    return render(request, "triathlon/editerTriathlon.html", {'triathlon': triathlon})
+
+
+
 
 
 def ajouterTriathlon(request):

@@ -53,6 +53,7 @@ urlpatterns = [
     path('triathlon/select/<id>/', viewTriathlon.selectTriathlon, name='selectTriathlon'),
     path('triathlon/choisirTriathlon/', viewTriathlon.choisirTriathlon, name='choisirTriathlon'),
     path('triathlon/ajouterTriathlon/', viewTriathlon.ajouterTriathlon, name='ajouterTriathlon'),
+    path('triathlon/editerTriathlon/<pk>/', viewTriathlon.editerTriathlon, name='editerTriathlon'),
 
 
 

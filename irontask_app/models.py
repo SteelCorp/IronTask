@@ -159,6 +159,7 @@ class Triathlon(models.Model):
     """Class Répresentant un Triathlon"""
 
     date = models.DateField(null=False, blank=False)
+    description = models.TextField()
     heureDepart = models.TimeField(null=False, blank=False)
     codePostal = models.CharField(max_length=5, null=False, blank=False)
     adresse = models.CharField(max_length=50, null=False, blank=False)
