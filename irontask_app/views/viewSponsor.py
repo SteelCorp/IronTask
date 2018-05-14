@@ -59,7 +59,6 @@ def editerSponsor(request, siret):
     html = render_to_string('personnels/modalEditerSponsor.html', {'form': sponsorForm})
 
 
-
     if request.method == 'POST':
         s = Sponsor.objects.get(siret=siret)
         sponsorform = SponsorForm(request.POST, instance=s)

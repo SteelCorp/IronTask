@@ -150,7 +150,7 @@ class TypeTriathlon(models.Model):
 
     def __str__(self):
         """Retourne un string des parametre du type de triathlon"""
-        return 'Type triathlon de libelle ' + self.libelle
+        return self.libelle
     class Meta:
         verbose_name_plural = "Type Triathlon"
 

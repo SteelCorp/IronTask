@@ -1,5 +1,6 @@
 from django import template
 from irontask_app.models import *
+from irontask_app.forms.TriathlonForm import *
 from django.utils.translation import ugettext as _
 import json
 import datetime
@@ -23,4 +24,9 @@ def getTriathlonNonFini():
 def getTriathlonEnCours(session):
     triathlon = Triathlon.objects.get(pk=session)
     return triathlon
+
+@register.simple_tag
+def triathlon_form():
+    """ Permet d'inclure le formulaire d'ajout d'un triathlon dans toutes les pages"""
+    return TriathlonForm
 

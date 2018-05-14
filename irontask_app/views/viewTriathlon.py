@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from irontask_app.models import Triathlon
+from irontask_app.forms.TriathlonForm import *
 import datetime
 
 
@@ -47,3 +48,17 @@ def getTriathlon(request, id):
     triathlon = Triathlon.objets.get(id=id)
 
     return render(request, "triatlon.html", {'triathlon': triathlon})
+
+
+def ajouterTriathlon(request):
+
+    if request.method == 'POST':
+        tria = TriathlonForm(request.POST)
+        print(tria.errors)
+        print(tria)
+        if tria.is_valid():
+
+            tria.save()
+            print(tria.errors)
+
+    return redirect('/')
