@@ -49,7 +49,12 @@ def editerTriathlon(request, pk):
 
     return render(request, "triathlon/editerTriathlon.html", {'triathlon': triathlon})
 
+def supprimerTriathlon(request, pk):
+    Triathlon.objects.filter(pk=pk).delete()
+    request.session['idTriathlon'] = None
+    request.session.modified = True
 
+    return redirect('/')
 
 
 
