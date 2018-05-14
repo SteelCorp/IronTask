@@ -49,7 +49,7 @@
 
                     {% if request.session.idTriathlon %}
                         <li class="nav-item px-10"><a class="nav-link"
-                                                      href="{% url 'editerTriathlon' request.session.idTriathlon %}">{{ request.session.idTriathlon | getTriathlonEnCours }}</a>
+                                                      href="{% url 'voirTriathlon' request.session.idTriathlon %}">{{ request.session.idTriathlon | getTriathlonEnCours }}</a>
                         </li>
                     {% else %}
                         <a class="nav-link" href="{% url 'choisirTriathlon' %}">Aucun Triathlon Selectionné</a></li>

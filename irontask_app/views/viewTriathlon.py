@@ -40,14 +40,19 @@ def listTriathlon(request):
 
 @login_required(login_url='login/')
 
-def editerTriathlon(request, pk):
+def voirTriathlon(request, pk):
     """
     Vue qui retourne le triatlon fournit en paramètre
     ::param id est l'id d'un triathlon
     """
     triathlon = Triathlon.objects.get(pk=pk)
 
-    return render(request, "triathlon/editerTriathlon.html", {'triathlon': triathlon})
+    return render(request, "triathlon/voirTriathlon.html", {'triathlon': triathlon})
+
+def editerTriathlon(request, pk):
+    tria = Triathlon.objects.get(pk=pk)
+    triathlonForm = TriathlonForm(instance=tria)
+    return render(request, 'triathlon/editerTriathlon.html', {"form": triathlonForm})
 
 def supprimerTriathlon(request, pk):
     Triathlon.objects.filter(pk=pk).delete()

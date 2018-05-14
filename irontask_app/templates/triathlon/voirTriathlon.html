@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block contenu %}
+    {% load static %}
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 py-5 ">
+                <div class="card bg-light mb-3 ">
+                    <div class="card-header">
+                        Détails du Triathlon
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-user-information">
+                            <tr>
+                                <td>Date :</td>
+                                <td>{{ triathlon.date }}</td>
+                            </tr>
+                            <tr>
+                                <td>Heure de Départ :</td>
+                                <td>{{ triathlon.heureDepart }}</td>
+                            </tr>
+                            <tr>
+                                <td>Ville :</td>
+                                <td>{{ triathlon.ville }}</td>
+                            </tr>
+                            <tr>
+                                <td>Adresse</td>
+                                <td>{{ triathlon.adresse }}</td>
+                            </tr>
+                            <tr>
+                                <td>Code postal :</td>
+                                <td>{{ triathlon.codePostal }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Description</td>
+                                <td>{{ triathlon.description }}</td>
+                            </tr>
+
+
+
+
+
+                        </table>
+
+                    </div>
+                    <div class="card-body text-center">
+                        <a class="button btn btn-link"  href="{% url 'editerTriathlon' triathlon.pk %}">Modifier </a>
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprTriathlon" >Supprimer</button>
+                    </div>
+
+                    <div class="card-footer">
+                        <small class="text-muted">Date d'ajout : {{ triathlon.dateAjout }}</small>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+ <!-- Modal suppimer Triathlon -->
+    <div class="modal fade" id="modalSupprTriathlon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    Voulez-vous supprimer le Triathlon selectionné, ainsi que toutes les tâches affecter à selui ci ?<br>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <form action="{% url 'supprimerTriathlon' triathlon.pk  %}">
+                                 <button class="btn btn-primary" >Supprimer</button>
+                            </form>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin bouton benevole-->
+
+
+{% endblock %}

@@ -53,8 +53,9 @@ urlpatterns = [
     path('triathlon/select/<id>/', viewTriathlon.selectTriathlon, name='selectTriathlon'),
     path('triathlon/choisirTriathlon/', viewTriathlon.choisirTriathlon, name='choisirTriathlon'),
     path('triathlon/ajouterTriathlon/', viewTriathlon.ajouterTriathlon, name='ajouterTriathlon'),
-    path('triathlon/editerTriathlon/<pk>/', viewTriathlon.editerTriathlon, name='editerTriathlon'),
+    path('triathlon/voirTriathlon/<pk>/', viewTriathlon.voirTriathlon, name='voirTriathlon'),
     path('triathlon/supprimer/<pk>/', viewTriathlon.supprimerTriathlon, name='supprimerTriathlon'),
+    path('triathlon/editer/<pk>/', viewTriathlon.editerTriathlon, name='editerTriathlon'),
 
 
 
