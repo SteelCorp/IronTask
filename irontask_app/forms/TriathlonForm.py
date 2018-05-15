@@ -9,7 +9,7 @@ class TriathlonForm(ModelForm):
     codePostal = forms.CharField(max_length=5, widget=forms.TextInput({"class":"form-control col-3", "type":"text", "value":"99999"}))
     adresse = forms.CharField(max_length=50, widget=forms.TextInput({"class":"form-control", "type":"text", "value":"Adresse"}))
     ville = forms.CharField(max_length=50, widget=forms.TextInput({"type":"text", "class":"form-control", "value":"Ville", "id":"villeTriatlhon"}))
-    fk_TypeTriathlon = forms.ModelChoiceField(queryset=TypeTriathlon.objects.all(), widget=forms.Select({"class":"custom-select", "id":"inputGroupSelect03"}))
+    fk_TypeTriathlon = forms.ModelChoiceField(label='Type de Triathlon', queryset=TypeTriathlon.objects.all(), widget=forms.Select({"class":"custom-select", "id":"inputGroupSelect03"}))
 
     class Meta:
         model = Triathlon
