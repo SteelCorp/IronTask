@@ -1,35 +1,128 @@
 {% extends 'base.html' %}
 {% block contenu %}
     {% load static %}
-        <div class="container">
+
+    <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 py-5 ">
                 <div class="card bg-light mb-3 ">
                     <div class="card-header">
-                        Voir le Triathlon
-                    </div>
-                    <form method="POST">{% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-sm">Enregistrer les modifications</button>
+                        <form method="POST">{% csrf_token %}
+
+
+                            <div class="container-fluid">
+
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">Description :</label>
+                                    {{ form.description }}
+                                </div>
+                                <div class="row">
+                                    <div class="input-group  mb-1">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/home-8x.png' %}">
+                                                Adresse
+                                            </label>
+                                        </div>
+                                        {{ form.adresse }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/home-8x.png' %}">
+                                                Cp
+                                            </label>
+                                        </div>
+                                        {{ form.codePostal }}
+
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text col-form-label">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/home-8x.png' %}">
+                                                Ville
+                                            </label>
+                                        </div>
+                                        {{ form.ville }}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row ">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/date.png' %}">
+                                                Date triathlon
+                                            </label>
+                                        </div>
+                                        {{ form.date }}
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/time.png' %}">
+                                                Heure
+                                            </label>
+                                        </div>
+                                        <div class=" clockpicker">
+
+
+                                            {{ form.heureDepart }}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-1">
+                                        {{ form.fk_TypeTriathlon }}
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="inputGroupSelect03">Format</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
                         </form>
 
 
                     </div>
-                    <div class="card-body text-center">
-
-                   coucou
-                    </div>
-
-
-
                 </div>
-
             </div>
         </div>
     </div>
 
+    <!-- script pour les selecteurs de date-->
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="datepicker"]').datepicker({
+                format: 'yyyy-mm-dd',
+                autoHide: true,
+                zIndex: 2048,
+            });
+        });
+    </script>
+    <script>
+        $('.clockpicker').clockpicker({
+            placement: 'top',
+            align: 'left',
+            donetext: 'Valider'
+        });
+    </script>
+
 
 
 {% endblock %}
-
 

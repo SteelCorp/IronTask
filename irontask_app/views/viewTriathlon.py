@@ -61,13 +61,6 @@ def editerTriathlon(request, pk):
     return render(request, 'triathlon/editerTriathlon.html', {"form": triathlonForm})
 
 
-def supprimerTriathlon(request, pk):
-    Triathlon.objects.filter(pk=pk).delete()
-    request.session['idTriathlon'] = None
-    request.session.modified = True
-
-    return redirect('/')
-
 
 def ajouterTriathlon(request):
     if request.method == 'POST':
