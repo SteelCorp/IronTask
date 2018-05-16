@@ -11,6 +11,7 @@
                         Vous devez choisir un triathlon
                     </div>
                     <select class="form-control" onchange="location = this.value;">
+                    <option value=""></option>
                         {% for tria in triathlons %}
                             <option value="{% url 'selectTriathlon' tria.id %}">{{ tria }}</option>
                         {% endfor %}

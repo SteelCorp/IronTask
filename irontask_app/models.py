@@ -133,7 +133,7 @@ class Benevole(models.Model):
 
     def __str__(self):
         """Retourne un string representant le benevole"""
-        return 'Benevole :' + self.nom + " " + self.prenom
+        return self.nom + " " + self.prenom
 
     class Meta:
         verbose_name_plural = "Bénévole"
@@ -234,6 +234,9 @@ class Sponsoriser(models.Model):
     fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return str(self.donation) +"€ de " + self.fk_sponsor.__str__() +" pour le " + self.fk_triathlon.__str__()
+
     class Meta:
         verbose_name_plural = "Donations"
 
@@ -270,6 +273,9 @@ class Affecter(models.Model):
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False)
     fk_tache = models.ForeignKey(Tache, on_delete=models.CASCADE, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.fk_benevole.__str__() + " affecter à la tâche id :" + str(self.fk_tache.id)
 
     class Meta:
         verbose_name_plural = "Affectation des bénévoles"

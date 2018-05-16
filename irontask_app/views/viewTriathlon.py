@@ -6,8 +6,6 @@ from irontask_app.forms.TriathlonForm import *
 import datetime
 
 
-
-
 def selectTriathlon(request, id):
     """Fonction qui met dans l'objet triathlon selectionner dans le cookies,
     l'id d'un triathlon afin de le reutiliser dans les autres vues
@@ -34,10 +32,7 @@ def listTriathlon(request):
 
     listTriathlon = Triathlon.objets.all()
 
-
     return render(request, 'triatlon.html', {'triathlon': listTriathlon})
-
-
 
 
 @login_required(login_url='login/')
@@ -49,10 +44,7 @@ def voirTriathlon(request, pk):
     triathlon = Triathlon.objects.get(pk=pk)
     nbrSponsor = Sponsor.objects.filter(sponsoriser__fk_triathlon=triathlon).count()
 
-
-    return render(request, "triathlon/voirTriathlon.html", {'triathlon': triathlon, 'nbrSponsor' : nbrSponsor})
-
-
+    return render(request, "triathlon/voirTriathlon.html", {'triathlon': triathlon, 'nbrSponsor': nbrSponsor})
 
 
 @login_required(login_url='login/')
@@ -68,6 +60,7 @@ def editerTriathlon(request, pk):
         return redirect('/')
     return render(request, 'triathlon/editerTriathlon.html', {"form": triathlonForm})
 
+
 def supprimerTriathlon(request, pk):
     Triathlon.objects.filter(pk=pk).delete()
     request.session['idTriathlon'] = None
@@ -76,18 +69,20 @@ def supprimerTriathlon(request, pk):
     return redirect('/')
 
 
-
 def ajouterTriathlon(request):
-
     if request.method == 'POST':
         tria = TriathlonForm(request.POST)
-        print(request.POST)
-        print(tria.errors)
-        print("coucou")
-
         if tria.is_valid():
-
             tria.save()
 
+    return redirect('/')
+
+
+def supprimerTriathlon(request, pk):
+    Triathlon.objects.filter(pk=pk).delete()
+
+    # Si le triathlon supprimer est dans le cookies, alors rétablir idTriathlon dans le cookies à None
+    if pk == request.session['idTriathlon']:
+        del request.session['idTriathlon']
 
     return redirect('/')
