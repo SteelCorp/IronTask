@@ -35,31 +35,23 @@ def listBenevole(request):
                   {'Benevole': benevole, 'form': benevoleForm, 'paginator': paginator})
 
 
-"""""@login_required(login_url='login/')
-def editerSponsor(request, siret):
-
-    s = Sponsor.objects.get(siret=siret)
-    sponsorForm = SponsorForm(instance=s)
-    html = render_to_string('modalEditerSponsor.html', {'form': sponsorForm})
-
-
-
-    if request.method == 'POST':
-        s = Sponsor.objects.get(siret=siret)
-        sponsorform = SponsorForm(request.POST, instance=s)
-
-        if sponsorform.is_valid():
-            sponsor = sponsorform.save(commit=True)
-            sponsor.save()
-            return redirect(listSponsor)
-    return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
-
-
 @login_required(login_url='login/')
-@triathlon_required
-def editerBenevole(request, pk=None):
-    """Vue qui permet d'éditer un intervenant"""
-    pass
+def editerBenevole(request, pk):
+    benevole = Benevole.objects.get(pk=pk)
+    benevoleForm = BenevoleForm(instance=benevole)
+
+    if request.method == "POST":
+        form = benevoleForm(request.POST, instance=benevole)
+        if form.is_valid():
+            form.save()
+
+        return redirect('/')
+
+
+    return render(request, 'personnels/Benevole/editerBenevole.html', {'form' : benevoleForm})
+
+
+
 
 
 @login_required(login_url='login/')
