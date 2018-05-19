@@ -56,7 +56,6 @@ def editerSponsor(request, siret):
 
     s = Sponsor.objects.get(siret=siret)
     sponsorForm = SponsorForm(instance=s)
-    html = render_to_string('personnels/modalEditerSponsor.html', {'form': sponsorForm})
 
 
     if request.method == 'POST':
@@ -67,7 +66,7 @@ def editerSponsor(request, siret):
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
             return redirect(listSponsor)
-    return render(request, 'personnels/modalEditerSponsor.html', {'form' : sponsorForm})
+    return render(request, 'personnels/Sponsor/editerSponsor.html', {'form' : sponsorForm})
 
 
 @login_required(login_url='login/')
