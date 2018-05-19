@@ -95,7 +95,7 @@ def getSponsor(request, siret):
             triat = Triathlon.objects.get(id=request.session['idTriathlon'])
             spon = Sponsor.objects.get(siret=siret)
             donation.fk_triathlon = triat
-            donation.fk_sponsoriser = spon
+            donation.fk_sponsor = spon
             donation.save()
         else:
             """ Passe le message d'error du formulaire à la template"""

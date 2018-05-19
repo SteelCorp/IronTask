@@ -6,7 +6,9 @@
 
 .entête{
 	background: #F7F7F7;
-	padding-top: 54px;
+	padding-top: 12px;
+	/*background-image: url("https://d112e54l47d6r7.cloudfront.net/runtime/p3media/pic-header-roadfitness-2015-triathlon-2000x400px-jpg-add217f270-1953.jpg");
+	*/
 }
 
 .ligne_verticale
@@ -46,6 +48,10 @@
 .messagerie {
 	width: 2em;
 	height: 2em;
+}
+.messagerie2 {
+	width: 1.5em;
+	height: 1.5em;
 }
 .compte {
 	width: 2em;
