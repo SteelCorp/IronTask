@@ -30,3 +30,9 @@ def triathlon_form():
     """ Permet d'inclure le formulaire d'ajout d'un triathlon dans toutes les pages"""
     return TriathlonForm
 
+@register.simple_tag
+def retard(ladate):
+    if ladate < datetime.date.today():
+        return True
+    else:
+        return False

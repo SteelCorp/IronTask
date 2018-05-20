@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
 from irontask_app.decorators import triathlon_required
+from datetime import date
 
 @login_required(login_url='login/')
 @triathlon_required
