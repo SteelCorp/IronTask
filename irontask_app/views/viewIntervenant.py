@@ -2,25 +2,28 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django_tables2 import RequestConfig
+
 from irontask_app.models import Intervenant
 from django.urls import reverse
 from irontask_app.forms.IntervenantForm import IntervenantForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from irontask_app.decorators import triathlon_required
+from irontask_app.tables import IntervenantTables
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def listIntervenant(request):
     """Vue qui retourne la liste de tous les intervenant"""
 
     intervenant = Intervenant.objects.all()
     intervenantForm = IntervenantForm()
 
-    """ Implémentation de la pagination"""
-    paginator = Paginator(intervenant,2)
-    page = request.GET.get('page')
-    intervenant = paginator.get_page(page)
+    table = IntervenantTables(Intervenant.objects.all())
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
     if request.method == 'POST':
 
@@ -30,7 +33,7 @@ def listIntervenant(request):
             intervenant = intervenantform.save(commit=True)
             intervenant.save()
         return redirect(listIntervenant)
-    return render(request, 'personnels/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm, 'paginator': paginator})
+    return render(request, 'personnels/Intervenant/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm, 'table':table})
 
 
 """""@login_required(login_url='login/')
@@ -55,7 +58,8 @@ def editerSponsor(request, siret):
 
 
 
-
+@login_required(login_url='login/')
+@triathlon_required
 def getIntervenant(request, siret):
     """
     Vue qui retourne l'intervenant fournit en paramètre
@@ -63,21 +67,21 @@ def getIntervenant(request, siret):
     """
     intervenant = Intervenant.objects.get(siret=siret)
 
-    return render(request, "personnels/voirIntervenant.html", {'Intervenant': intervenant})
+    return render(request, "personnels/Intervenant/voirIntervenant.html", {'Intervenant': intervenant})
 
 
 @login_required(login_url='login/')
-def deleteIntervenant(request, pk):
+@triathlon_required
+def deleteIntervenant(request, siret):
     """Vue qui permet de supprimer un intervenant
     :param pk est la primary key d'un intervenant
     """
-    intervenant = Intervenant.objects.get(pk=pk)
-    intervenant.delete()
-    intervenant.save()
+    Intervenant.objects.filter(siret=siret).delete()
     return redirect(reverse(viewname=listIntervenant))
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def createIntervenant(request):
     """ Vue qui permet de creer un intervenant
     """

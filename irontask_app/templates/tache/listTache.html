@@ -1,74 +1,128 @@
 {% extends 'base.html' %}
 {% block  contenu %}
     {% load static %}
+    {% load filters %}
 
-     <!-- Fonction recherche et tri -->
+    <div class="entête">
+        {% include 'dashboard.html' %}
 
-    <div class="container ">
-        <div class="row mt-3 ">
-            <div class="col   ">
-                <div class="row mt-3 mb-1">
-                    <div class="col">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche"
-                                   aria-label="Recherche">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-                        </form>
+        <div class="container ">
+            <ul class="nav nav-tabs align-content-center" role="tablist">
+                <li class="nav-item  px-3">
+                    <a class="nav-link {% if  '/liste' in request.path %}active{% endif %}"  href="{% url 'listTache' %}">Tâches</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link {% if  '/calendrier' in request.path %}active{% endif %} " href="{% url 'listTacheCal' %}">Calendrier</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- Taches -->
+    {% for tache in Tache %}
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            Priorité :
+                            {% if tache.niveauPriorite == '0' %}
+                                <span class="badge badge-pill badge-light">Aucune</span>
+                            {% endif %}
+                            {% if tache.niveauPriorite == '1' %}
+                                <span class="badge badge-pill badge-success">Faible</span>
+                            {% endif %}
+                            {% if tache.niveauPriorite == '2' %}
+                                <span class="badge badge-pill badge-warning">Moyenne</span>
+                            {% endif %}
+                            {% if tache.niveauPriorite == '3' %}
+                                <span class="badge badge-pill badge-danger">Forte</span>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-7">
+                            <h4>{{ tache.nomTache }}</h4>
+                        </div>
+                        <div class="=col-sm-2">
+                            {% retard tache.dateFin as bool %}
+                            {% if bool %}
+                                <div class="alert-danger">
+                                    Cette tâche est en retard !
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="col-sm">
-                        <div class="dropdown float-right">
-                            <button class="btn  dropdown-toggle" type="button" id="boutonTri"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Trier par : AlphaBetique
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="boutonTri">
-                                <a class="dropdown-item" href="">Ville</a>
-                                <a class="dropdown-item" href="">Email</a>
+                </div>
+                <div class="card-body">
+                    <!-- description et dates -->
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="card-text">Description : {{ tache.description }}</p>
+                        </div>
+                        <div class="col-1">
+                            Début
+                            <br>
+                            Fin
+                            <br>
+                            Rappel
+                        </div>
+                        <div class="col-1">
+                            <img class="iconeadmin" alt="debut" src="{% static 'img/date.png' %}">
+                            <br>
+                            <img class="iconeadmin" alt="fin" src="{% static 'img/dateend.png' %}">
+                            <br>
+                            <img class="iconeadmin" alt="rappel" src="{% static 'img/alerte.png' %}">
+                        </div>
+                        <div class="col-2">
+                            {{ tache.dateDebut }}
+                            <br>
+                            {{ tache.dateFin }}
+                            <br>
+                            {{ tache.dateRappel }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <a>
+                                <img class="iconeadmin" alt="responsable" src="{% static 'img/person.svg' %}">
+                                responsable : {{ tache.fk_benevole.prenom }} {{ tache.fk_benevole.nom }}
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            {% if tache.niveauAvancement == 'P' %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Plannifié </div>
+                                </div>
+                            {% endif %}
+                            {% if tache.niveauAvancement == 'E' %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> En cours </div>
+                                </div>
+                            {% endif %}
+                            {% if tache.niveauAvancement == 'V' %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Terminé </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-8">
 
-                            </div>
+                        </div>
+                        <div class="col-2">
+                            <a href="#" class="btn btn-primary">Modifier</a>
+                        </div>
+                        <div class="col-2">
+                            <a href="supprimer/{{ tache.pk }}" class="btn btn-outline-danger">Supprimer</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Taches -->
-
-    <div class="container">
-    {% if messages %}
-                            <div class="alert alert-danger" role="alert">
-                                {% for message in messages %}
-                                    {{ message }}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-        <table class="table table-striped ">
-            <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Type</th>
-                <th scope="col">Quantité totale</th>
-                <th scope="col">Lieu de stockage</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for stock in Stock %}
-                <tr>
-                    <td>{{ stock.nom }}</td>
-                    <td>{{ stock.type}}</td>
-                    <td>{{ stock.qteTotal }}</td>
-                    <td>{{ stock.lieuStockage }}</td>
-                    <td>
-                        <a href="{% url 'getStock' stock.pk %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
-                        </button>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    {%  endfor %}
 
     <!-- Fin Stock-->
 
@@ -84,15 +138,15 @@
                 <ul class="pagination mx-auto">
                     <div class="pagination">
                         <span class="step-links">
-                            {% if Stock.has_previous %}
-                                <a href="?page={{ Stock.previous_page_number }}">Precèdent</a>
+                            {% if Tache.has_previous %}
+                                <a href="?page={{ Tache.previous_page_number }}">Precèdent</a>
                             {% endif %}
                             <span class="current">
-                                Page {{ Stock.number }} de {{ Stock.paginator.num_pages }}.
+                                Page {{ Stock.number }} de {{ Tache.paginator.num_pages }}.
                             </span>
-                                {% if Stock.has_next %}
-                                    <a href="?page={{ Stock.next_page_number }}">Suivant</a>
-                                {% endif %}
+                            {% if Tache.has_next %}
+                                <a href="?page={{ Tache.next_page_number }}">Suivant</a>
+                            {% endif %}
                          </span>
                     </div>
                 </ul>
@@ -103,6 +157,6 @@
     <!-- Fin pagination -->
 
 
-    {% include "stocks/modalAjout.html" %}
+    {% include "tache/modalAjoutTache.html" %}
 
 {% endblock %}

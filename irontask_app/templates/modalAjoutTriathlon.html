@@ -1,5 +1,6 @@
 {% block modal %}
     {% load static %}
+    {% load filters %}
 
     <!-- Modal Ajout Triathlon -->
     <div class="modal fade" id="modalAjoutTriathlon" tabindex="-1" role="dialog" aria-hidden="true">
@@ -12,19 +13,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{% url 'ajouterTriathlon' %}" method="POST">{% csrf_token %}
+                        {% triathlon_form as form %}
+
+
                         <div class="container-fluid">
-                            <div class="row form-group">
-                                <label for="recipient-name2" class="form-control-label">Nom triathlon :</label>
-                                <input type="text" class="form-control" id="recipient-name2">
-                            </div>
+
                             <div class="row form-group">
                                 <label for="message-text" class="form-control-label">Description :</label>
-                                <textarea class="form-control" id="message-text2"></textarea>
+                                {{ form.description }}
                             </div>
-
-
-
                             <div class="row">
                                 <div class ="input-group  mb-1">
                                     <div class="input-group-prepend  ">
@@ -33,7 +31,7 @@
                                             Adresse
                                         </label>
                                     </div>
-                                    <input class="form-control " type="text" value="Adresse">
+                                    {{ form.adresse }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -44,19 +42,17 @@
                                             Cp
                                         </label>
                                     </div>
-                                    <input class="form-control col-3" type="text" value="99999">
+                                    {{ form.codePostal }}
+
                                     <div class="input-group-prepend">
                                         <label class="input-group-text col-form-label">
                                             <img class="iconeadmin" alt="messagerie" src="{% static 'img/home-8x.png' %}">
                                             Ville
                                         </label>
                                     </div>
-                                    <input type="text" class="form-control" value="Ville" id="villeTriatlhon">
+                                    {{ form.ville }}
                                 </div>
-
                             </div>
-
-
                             <div class="row ">
                                 <div class ="input-group mb-1">
                                     <div class="input-group-prepend">
@@ -65,25 +61,25 @@
                                             Date triathlon
                                         </label>
                                     </div>
-                                    <input type="text" class="form-control" data-toggle="datepicker">
+                                    {{ form.date }}
                                 </div>
                             </div>
-                            <div class="row espaceModale">
+                            <div class="row ">
                                 <div class ="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text"><img class="iconeadmin" alt="messagerie" src="{% static 'img/time.png' %}">Heure</label>
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie" src="{% static 'img/time.png' %}">
+                                            Heure
+                                        </label>
                                     </div>
-                                    <input class="form-control" type="time"  >
+                                    <div class=" clockpicker">
+                                        {{ form.heureDepart }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class ="input-group mb-1">
-                                    <select class="custom-select" id="inputGroupSelect03">
-                                        <option selected>Choix...</option>
-                                        <option value="1">Distance S </option>
-                                        <option value="2">Distance M </option>
-                                        <option value="3">Distance L </option>
-                                    </select>
+                                    {{ form.fk_TypeTriathlon }}
                                     <div class="input-group-append">
                                         <label class="input-group-text" for="inputGroupSelect03">Format</label>
                                     </div>
@@ -94,20 +90,34 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary">Ajouter</button>
+                    <!-- <button type="button" class="btn btn-primary">Ajouter</button> -->
+
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+
                 </div>
+
             </div>
         </div>
     </div>
-    <!-- scrip pour les selecteurs de date-->
-    <script>
+    <!-- script pour les selecteurs de date-->
+    <script type="text/javascript">
         $(function() {
             $('[data-toggle="datepicker"]').datepicker({
-                format: 'dd/mm/yyyy',
+                format: 'yyyy-mm-dd',
                 autoHide: true,
                 zIndex: 2048,
             });
         });
     </script>
+
+    <script>
+        $('.clockpicker').clockpicker({
+            placement: 'top',
+            align: 'left',
+            donetext: 'Valider'
+        });
+    </script>
+
+
 
 {% endblock %}

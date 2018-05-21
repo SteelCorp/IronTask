@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block contenu %}
+    {% load static %}
+
+
+    <div class="container ">
+        <div class="row mt-3 ">
+            <div class="col   ">
+                <div class="row mt-3 mb-1">
+                    <div class="alert alert-warning" role="alert">
+                        Vous devez choisir un triathlon
+                    </div>
+                    <select class="form-control" onchange="location = this.value;">
+                    <option value=""></option>
+                        {% for tria in triathlons %}
+                            <option value="{% url 'selectTriathlon' tria.id %}">{{ tria }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Fin pagination -->
+
+    {% include "personnels/modalAjout.html" %}
+{% endblock %}
+
+
+
