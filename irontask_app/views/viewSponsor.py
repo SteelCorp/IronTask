@@ -25,6 +25,7 @@ def listSponsor(request):
 
     # Instancie le formulaire sponsorForm
     sponsorForm = SponsorForm()
+    donationForm = DonationForm()
 
 
     """ Implémentation de la pagination"""
@@ -47,7 +48,7 @@ def listSponsor(request):
         return redirect(listSponsor)
     return render(request, 'personnels/Sponsor/listSponsor.html', {'Sponsor': sponsor,
                                                            'form': sponsorForm, 'page': page,
-                                                           'paginator': paginator})
+                                                           'paginator': paginator, 'donationForm':donationForm})
 
 
 @login_required(login_url='login/')
