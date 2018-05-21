@@ -23,8 +23,8 @@ def listSponsor(request):
     """Donne les sponsors affecter au triathlon courant"""
     sponsor = Sponsor.objects.filter()
 
-    table = SponsorTables(Sponsor.objects.filter(sponsoriser__fk_triathlon=tria))
-    RequestConfig(request).configure(table)
+    table = SponsorTables(Sponsor.objects.filter())
+    RequestConfig(request, paginate={'per_page': 10}).configure(table)
 
     # Instancie le formulaire sponsorForm
     sponsorForm = SponsorForm()

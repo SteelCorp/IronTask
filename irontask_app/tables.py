@@ -7,5 +7,6 @@ from django.utils.translation import ugettext as _
 class SponsorTables(tables.Table):
     class Meta:
         model = Sponsor
-
         template_name = 'django_tables2/bootstrap4.html'
+        attrs = {"class": "table table-condensed table-striped table-hover"}
+        exclude = 'dateAjout',
