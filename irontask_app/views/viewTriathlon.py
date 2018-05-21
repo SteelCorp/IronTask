@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from irontask_app.models import Triathlon, Sponsoriser, Sponsor
 from irontask_app.forms.TriathlonForm import *
+from irontask_app.urls import *
 import datetime
 
 
@@ -13,7 +14,7 @@ def selectTriathlon(request, id):
     if request.session.get('idTriathlon'):
         request.session['idTriathlon'] = None
         request.session['idTriathlon'] = id
-        return redirect('/')
+        return redirect('listTache')
     else:
         request.session['idTriathlon'] = id
         return redirect('/')
