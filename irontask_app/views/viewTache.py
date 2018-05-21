@@ -10,29 +10,20 @@ from irontask_app.decorators import triathlon_required
 from datetime import date
 
 @login_required(login_url='login/')
-@triathlon_required
+
 def listTache(request):
     """Vue qui retourne la liste de toutes les taches"""
 
     tache = Tache.objects.all()
     tacheForm = TacheForm()
 
-    print("mmmmmmm")
-
     """ si méthode POST alors sauvegarder resultat du formulaire"""
     if request.method == 'POST':
         tacheForm = TacheForm(request.POST)
-        print("eeekmlk")
-
-        print(request.session['id_Triathlon'])
-        print("eeekmlk2")
 
         if tacheForm.is_valid():
             tachem = tacheForm.save(commit=False)
-            tachem.fk_triathlon = request.session['id_Triathlon']
-            print("eeee")
-            print(request.session['id_Triathlon'])
-            print("eeee2")
+            tachem.fk_triathlon = Triathlon.objects.get(id=request.session['idTriathlon'])
 
             tachem.save()
         else:
