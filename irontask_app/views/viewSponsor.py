@@ -9,7 +9,8 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from django.core.paginator import Paginator
 from irontask_app.decorators import triathlon_required
-
+from irontask_app.tables import SponsorTables
+from django_tables2 import RequestConfig
 
 
 @login_required(login_url='login/')
@@ -20,20 +21,16 @@ def listSponsor(request):
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
 
     """Donne les sponsors affecter au triathlon courant"""
-    sponsor = Sponsor.objects.filter(sponsoriser__fk_triathlon=tria)
-    
+    sponsor = Sponsor.objects.filter()
+
+    table = SponsorTables(Sponsor.objects.filter(sponsoriser__fk_triathlon=tria))
+    RequestConfig(request).configure(table)
 
     # Instancie le formulaire sponsorForm
     sponsorForm = SponsorForm()
     donationForm = DonationForm()
 
-
-    """ Implémentation de la pagination"""
-    paginator = Paginator(sponsor, 25)
-    page = request.GET.get('page')
-    sponsor = paginator.get_page(page)
-
-    #Si le requeste est de type POST
+    # Si le requeste est de type POST
     if request.method == 'POST':
         sponsorform = SponsorForm(request.POST)
 
@@ -47,17 +44,15 @@ def listSponsor(request):
 
         return redirect(listSponsor)
     return render(request, 'personnels/Sponsor/listSponsor.html', {'Sponsor': sponsor,
-                                                           'form': sponsorForm, 'page': page,
-                                                           'paginator': paginator, 'donationForm':donationForm})
+                                                                   'form': sponsorForm, 'table': table,
+                                                                   'donationForm': donationForm})
 
 
 @login_required(login_url='login/')
 @triathlon_required
 def editerSponsor(request, siret):
-
     s = Sponsor.objects.get(siret=siret)
     sponsorForm = SponsorForm(instance=s)
-
 
     if request.method == 'POST':
         s = Sponsor.objects.get(siret=siret)
@@ -67,7 +62,7 @@ def editerSponsor(request, siret):
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
             return redirect(listSponsor)
-    return render(request, 'personnels/Sponsor/editerSponsor.html', {'form' : sponsorForm})
+    return render(request, 'personnels/Sponsor/editerSponsor.html', {'form': sponsorForm})
 
 
 @login_required(login_url='login/')
@@ -85,7 +80,6 @@ def getSponsor(request, siret):
     if request.method == 'POST':
         donationForm = DonationForm(request.POST)
 
-
         if donationForm.is_valid():
             """
             si le formulaire est valide alors on ne commit pas de suite car il n'y a que donation dans donationForm            
@@ -102,11 +96,9 @@ def getSponsor(request, siret):
             """afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, DonationForm.errors)
 
-
-
     return render(request, "personnels/Sponsor/voirSponsor.html", {'sponsor': sponsor,
-                                                           'listDonationSponsor': listDonationSponsor,
-                                                           'donationForm': donationForm
+                                                                   'listDonationSponsor': listDonationSponsor,
+                                                                   'donationForm': donationForm
                                                                    })
 
 
@@ -122,4 +114,3 @@ def deleteSponsor(request, siret):
 def deleteDonation(request, idDonation):
     Sponsoriser.objects.filter(id=idDonation).delete()
     return redirect('/')
-
