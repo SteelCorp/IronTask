@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block contenu %}
+    {% load static %}
+    {% load render_table from django_tables2 %}
 
-</body>
-</html>
+    {% include 'personnels/navBarPersonnel.html' %}
+<div class="container ">
+        <div class="row mt-3 ">
+
+        </div>
+    </div>
+
+    <div class="container">
+        {% if messages %}
+
+            <div class="alert alert-danger" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% render_table table %}
+    </div>
+
+
+{% endblock %}

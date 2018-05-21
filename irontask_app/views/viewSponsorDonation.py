@@ -1,12 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django_tables2 import RequestConfig
 
 from irontask_app.models import Sponsoriser, Triathlon
 from django.contrib.auth.decorators import login_required
 from irontask_app.forms.DonationForm import DonationForm
 from django.contrib import messages
 from irontask_app.decorators import triathlon_required
+from irontask_app.tables import DonationTriathlonTables
 
 
 @login_required(login_url='login/')
@@ -61,12 +63,12 @@ def listDonationSponsor(request, idSponsor):
 
 @login_required(login_url='login/')
 @triathlon_required
-def listDonationTriathlon(request, idTriathlon):
+def listDonationTriathlon(request):
     """
     Vue qui retourne la list des donations pour un sponsors donné fournit en paramètre
     ::param fk_triathlon est l'id d'un triathlon
     """
+    table = DonationTriathlonTables(Sponsoriser.objects.filter(fk_triathlon=request.session['idTriathlon']))
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
-    listDonationTriathlon = Sponsoriser.objets.filter(fk_triathlon=idTriathlon)
-
-    return render(request, "donationSponsor.html", {'listDonationTriathlon': listDonationTriathlon})
+    return render(request, "dashboard/listDonations.html", {'table' : table})
