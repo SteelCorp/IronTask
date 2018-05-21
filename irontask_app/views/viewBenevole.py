@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django_tables2 import RequestConfig
+
 from irontask_app.models import Intervenant, Benevole
 from django.urls import reverse
 from irontask_app.forms.BenevoleForm import BenevoleForm
@@ -9,20 +11,24 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from irontask_app.decorators import triathlon_required
+from irontask_app.tables import BenevoleTables
+
+from django_tables2 import RequestConfig
+
+
+
 
 @login_required(login_url='login/')
 @triathlon_required
 def listBenevole(request):
     """Vue qui retourne la liste de tous les intervenant"""
 
-    benevole = Benevole.objects.all()
+
     benevoleForm = BenevoleForm()
 
 
-    """ Implémentation de la pagination"""
-    paginator = Paginator(benevole, 2)
-    page = request.GET.get('page')
-    benevole = paginator.get_page(page)
+    table = BenevoleTables(Benevole.objects.all())
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
     if request.method == 'POST':
         benevoleForm = BenevoleForm(request.POST)
@@ -32,26 +38,25 @@ def listBenevole(request):
             benevole.save()
         return redirect(listBenevole)
     return render(request, 'personnels/Benevole/listBenevole.html',
-                  {'Benevole': benevole, 'form': benevoleForm, 'paginator': paginator})
+                  {'form': benevoleForm, 'table':table})
 
 
 @login_required(login_url='login/')
 def editerBenevole(request, pk):
-    benevole = Benevole.objects.get(pk=pk)
-    benevoleForm = BenevoleForm(instance=benevole)
+    bene = Benevole.objects.get(pk=pk)
+    benevoleForm = BenevoleForm(instance=bene)
 
     if request.method == "POST":
-        form = benevoleForm(request.POST, instance=benevole)
+        form = BenevoleForm(request.POST, instance=bene)
+
         if form.is_valid():
             form.save()
+
 
         return redirect('/')
 
 
     return render(request, 'personnels/Benevole/editerBenevole.html', {'form' : benevoleForm})
-
-
-
 
 
 @login_required(login_url='login/')

@@ -53,6 +53,7 @@ urlpatterns = [
     # Gestion des taches
     path('tache/liste/', viewTache.listTache, name='listTache' ),
     path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
+    path('tache/liste/supprimer/<pk>', viewTache.deleteTache, name='deleteTache'),
 
     # url(r'api/', include(router.urls))
 

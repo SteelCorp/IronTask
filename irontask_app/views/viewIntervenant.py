@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django_tables2 import RequestConfig
+
 from irontask_app.models import Intervenant
 from django.urls import reverse
 from irontask_app.forms.IntervenantForm import IntervenantForm
@@ -9,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from irontask_app.decorators import triathlon_required
+from irontask_app.tables import IntervenantTables
 
 
 @login_required(login_url='login/')
@@ -19,10 +22,8 @@ def listIntervenant(request):
     intervenant = Intervenant.objects.all()
     intervenantForm = IntervenantForm()
 
-    """ Implémentation de la pagination"""
-    paginator = Paginator(intervenant,2)
-    page = request.GET.get('page')
-    intervenant = paginator.get_page(page)
+    table = IntervenantTables(Intervenant.objects.all())
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
     if request.method == 'POST':
 
@@ -32,7 +33,7 @@ def listIntervenant(request):
             intervenant = intervenantform.save(commit=True)
             intervenant.save()
         return redirect(listIntervenant)
-    return render(request, 'personnels/Intervenant/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm, 'paginator': paginator})
+    return render(request, 'personnels/Intervenant/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm, 'table':table})
 
 
 """""@login_required(login_url='login/')
