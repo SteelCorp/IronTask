@@ -43,21 +43,22 @@ def listBenevole(request):
 
 @login_required(login_url='login/')
 def editerBenevole(request, pk):
-    benevole = Benevole.objects.get(pk=pk)
-    benevoleForm = BenevoleForm(instance=benevole)
+    print('coucou')
+    bene = Benevole.objects.get(pk=pk)
+    benevoleForm = BenevoleForm(instance=bene)
 
     if request.method == "POST":
-        form = benevoleForm(request.POST, instance=benevole)
+        form = BenevoleForm(request.POST, instance=bene)
+        print(form.errors)
+
         if form.is_valid():
             form.save()
+
 
         return redirect('/')
 
 
     return render(request, 'personnels/Benevole/editerBenevole.html', {'form' : benevoleForm})
-
-
-
 
 
 @login_required(login_url='login/')

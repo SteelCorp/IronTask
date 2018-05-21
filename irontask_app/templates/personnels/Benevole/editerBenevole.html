@@ -16,6 +16,34 @@
                                 <label for="message-text" class="form-control-label">Nom:</label>
                                 {{ form.nom }}
                             </div>
+
+                            <div class="row form-group">
+                                <label for="message-text" class="form-control-label">Prenom:</label>
+                                {{ form.prenom }}
+                            </div>
+
+                            <div class="row ">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/date.png' %}">
+                                                Date de naissance
+                                            </label>
+                                        </div>
+                                        {{ form.dateNaissance }}
+                                    </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="input-group mb-1">
+                                        {{ form.sexe }}
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="inputGroupSelect02">Sexe</label>
+                                        </div>
+                                    </div>
+                                </div>
+
                             <div class="row">
                                 <div class="input-group  mb-1">
                                     <div class="input-group-prepend  ">
@@ -47,49 +75,56 @@
                                         </label>
                                     </div>
                                     {{ form.ville }}
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="row ">
-                                <div class="input-group mb-1">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">
-                                            <img class="iconeadmin" alt="messagerie"
-                                                 src="{% static 'img/date.png' %}">
-                                            Date triathlon
-                                        </label>
-                                    </div>
-                                    {{ form.date }}
                                 </div>
                             </div>
-                            <div class="row ">
-                                <div class="input-group mb-1">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">
-                                            <img class="iconeadmin" alt="messagerie"
-                                                 src="{% static 'img/time.png' %}">
-                                            Heure
-                                        </label>
-                                    </div>
-                                    <div class=" clockpicker">
 
-
-                                        {{ form.heureDepart }}
-
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
-                                <div class="input-group mb-1">
-                                    {{ form.fk_TypeTriathlon }}
-                                    <div class="input-group-append">
-                                        <label class="input-group-text" for="inputGroupSelect03">Format</label>
+                                    <div class="input-group  mb-1">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/tel_fix.png' %}">
+                                                Téléphone Fixe :
+                                            </label>
+                                        </div>
+                                        {{ form.telephoneFixe }}
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="row">
+                                    <div class="input-group  mb-1">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/phone-8x.png' %}">
+                                                Téléphone Portable :
+                                            </label>
+                                        </div>
+                                        {{ form.telephonePortable }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-group  mb-1">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/email.png' %}">
+                                                mail :
+                                            </label>
+                                        </div>
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-group mb-1">
+                                        {{ form.status }}
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="inputGroupSelect02">Statut :</label>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
 
 
@@ -103,4 +138,17 @@
         </div>
     </div>
 </div>
+
+       <!-- script pour les selecteurs de date-->
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="datepicker"]').datepicker({
+                format: 'yyyy-mm-dd',
+                autoHide: true,
+                zIndex: 2048,
+            });
+        });
+    </script>
+
+
 {% endblock %}

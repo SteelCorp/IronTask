@@ -15,13 +15,12 @@ class BenevoleForm(ModelForm):
                                             "placeholder":""}))
     dateNaissance = forms.DateField(required=True, label="Date de naissance", widget=forms.TextInput(
                             attrs={"type": "text", "class": "form-control",
-                                   "id": "formGroupExampleInput",
-                                   "placeholder": ""}))
+                                   "data-toggle": "datepicker"}))
 
 
     sexe = forms.ChoiceField(choices = Benevole.SEX_CHOICES)
 
-    adresse = forms.CharField(max_length=5,label="Adresse", widget=forms.TextInput(
+    adresse = forms.CharField(label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
@@ -45,6 +44,8 @@ class BenevoleForm(ModelForm):
                             attrs={"type": "text", "class":"form-control",
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
+
+    status = forms.ChoiceField(choices = Benevole.STATUS_CHOICES)
 
     class Meta:
         model = Benevole
