@@ -49,8 +49,9 @@ def getTache(request,pk):
 
 @login_required(login_url='login/')
 @triathlon_required
-def deleteTache(request):
-    return render(request)
+def deleteTache(request, pk):
+    Tache.objects.filter(pk=pk).delete()
+    return redirect('listTache')
 
 @login_required(login_url='login/')
 def createTache(request):
