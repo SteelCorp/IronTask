@@ -1,3 +1,4 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
@@ -41,8 +42,8 @@ def ajouterDonation(request):
             donation = donationForm.save(commit=False)
             donation.fk_triathlon = tria
             donation.save()
-            return ('/')
-    return('/')
+            return HttpResponseRedirect('/personnel/sponsor/')
+        return HttpResponseRedirect('/personnel/sponsor/')
 
 @login_required(login_url='login/')
 @triathlon_required
