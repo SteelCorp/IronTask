@@ -7,6 +7,7 @@ from django.conf.urls import url, include
 from irontask_app import api
 from irontask_app import views
 
+admin.site.site_header = 'IronTask Administration'
 urlpatterns = [
 
     # Gestion de la session
