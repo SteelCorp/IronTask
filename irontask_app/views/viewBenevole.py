@@ -53,7 +53,7 @@ def editerBenevole(request, pk):
             form.save()
 
 
-        return redirect('/')
+        return redirect('listBenevole')
 
 
     return render(request, 'personnels/Benevole/editerBenevole.html', {'form' : benevoleForm})
