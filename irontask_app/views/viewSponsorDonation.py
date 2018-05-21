@@ -19,7 +19,7 @@ def listDonationSponsorsTriathlon(request, idSponsors):
 
         if donationForm.is_valid():
             donation = donationForm.save(commit=False)
-            donation.fk_triathlon = request.session['id_Triathlon']
+            donation.fk_triathlon = request.session['idTriathlon']
             donation.fk_sponsoriser = idSponsors
             donation.save()
         else:
@@ -30,6 +30,16 @@ def listDonationSponsorsTriathlon(request, idSponsors):
         return redirect(listDonationSponsorsTriathlon)
 
     return render(request, 'donation.html', {'donation': listDonationSponsorsTriathlon})
+
+
+def ajouterDonation(request):
+    if request.method == 'POST':
+        donationForm = DonationForm(request.POST)
+        if donationForm.is_valid():
+            donation = donationForm.save(commit=False)
+            donation.fk_triathlon = request.session['idTriathlon']
+            donation.save()
+    return('/')
 
 @login_required(login_url='login/')
 @triathlon_required
