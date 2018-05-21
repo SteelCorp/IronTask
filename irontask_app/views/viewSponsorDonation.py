@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from irontask_app.models import Sponsoriser
+from irontask_app.models import Sponsoriser, Triathlon
 from django.contrib.auth.decorators import login_required
 from irontask_app.forms.DonationForm import DonationForm
 from django.contrib import messages
@@ -33,12 +33,15 @@ def listDonationSponsorsTriathlon(request, idSponsors):
 
 
 def ajouterDonation(request):
+    tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         donationForm = DonationForm(request.POST)
         if donationForm.is_valid():
+
             donation = donationForm.save(commit=False)
-            donation.fk_triathlon = request.session['idTriathlon']
+            donation.fk_triathlon = tria
             donation.save()
+            return ('/')
     return('/')
 
 @login_required(login_url='login/')
