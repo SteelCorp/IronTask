@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+from irontask_app.forms.TacheFrom import TacheForm
 from irontask_app.models import Materiel
-from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
@@ -14,7 +15,7 @@ def listTache(request):
     """Vue qui retourne la liste de toutes les taches"""
 
     tache = Tache.objects.all()
-    tacheForm = StockForm()
+    tacheForm = TacheForm()
 
     """ Implémentation de la pagination"""
     paginator = Paginator(tache,2)
@@ -23,7 +24,7 @@ def listTache(request):
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""
     if request.method == 'POST':
-        tacheForm = StockForm(request.POST)
+        tacheForm = TacheForm(request.POST)
 
         if tacheForm.is_valid():
             tacheForm.save(commit=True)

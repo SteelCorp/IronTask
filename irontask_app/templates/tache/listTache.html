@@ -115,14 +115,14 @@
                 <ul class="pagination mx-auto">
                     <div class="pagination">
                         <span class="step-links">
-                            {% if Stock.has_previous %}
-                                <a href="?page={{ Stock.previous_page_number }}">Precèdent</a>
+                            {% if Tache.has_previous %}
+                                <a href="?page={{ Tache.previous_page_number }}">Precèdent</a>
                             {% endif %}
                             <span class="current">
-                                Page {{ Stock.number }} de {{ Stock.paginator.num_pages }}.
+                                Page {{ Stock.number }} de {{ Tache.paginator.num_pages }}.
                             </span>
-                                {% if Stock.has_next %}
-                                    <a href="?page={{ Stock.next_page_number }}">Suivant</a>
+                                {% if Tache.has_next %}
+                                    <a href="?page={{ Tache.next_page_number }}">Suivant</a>
                                 {% endif %}
                          </span>
                     </div>
@@ -134,6 +134,6 @@
     <!-- Fin pagination -->
 
 
-    {% include "stocks/modalAjout.html" %}
+    {% include "tache/modalAjout.html" %}
 
 {% endblock %}
