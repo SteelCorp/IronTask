@@ -18,7 +18,7 @@ class TacheForm(ModelForm):
 
     niveauAvancement = forms.ChoiceField(choices=Tache.NIV_AVANCEMENT, widget=forms.Select(
                                                   {"class": "custom-select", "id": "inputGroupSelect05 "}))
-    niveauPriorite = forms.ChoiceField(choices=Tache.NIV_PRIOROTE, widget=forms.Select(
+    niveauPriorite = forms.ChoiceField(choices=Tache.NIV_PRIORITE, widget=forms.Select(
                                                   {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
     fk_benevole = forms.ModelChoiceField(label='Benevole', queryset=Benevole.objects.all(), widget=forms.Select(

@@ -1,4 +1,4 @@
-from irontask_app.models import Sponsor, Intervenant, Benevole
+from irontask_app.models import Sponsor, Intervenant, Benevole, Tache
 import django_tables2 as tables
 from django.urls import reverse
 from django_tables2.utils import A
@@ -35,3 +35,37 @@ class BenevoleTables(tables.Table):
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout', 'id', 'sexe', 'status'
+
+
+
+class PriorityColumn(tables.Column):
+    """
+    Class qui sert à colorer les cellules en fonction de leurs
+    priorité
+    """
+
+    def render(self, value):
+        if value == dict(Tache.NIV_PRIORITE).get('3') :
+            self.attrs = {"td": {"bgcolor": "FF3333"}}
+
+        elif value == dict(Tache.NIV_PRIORITE).get('2'):
+            self.attrs = {"td": {"bgcolor": "FF8585"}}
+
+        elif value == dict(Tache.NIV_PRIORITE).get('1'):
+            self.attrs = {"td": {"bgcolor": "FFC299"}}
+
+        elif value == dict(Tache.NIV_PRIORITE).get('0'):
+            self.attrs = {"td": {"bgcolor": "FFE2CE"}}
+
+
+        return value
+
+class TachesTables(tables.Table):
+    niveauPriorite = PriorityColumn()
+    editer = tables.LinkColumn('getTache', args=[A('id')], text='voir')
+
+    class Meta:
+        model = Tache
+        template_name = 'django_tables2/bootstrap4.html'
+        attrs = {"class": "table table-condensed table-striped table-hover"}
+        exclude ='id', 'fk_triathlon', 'fk_benevole'

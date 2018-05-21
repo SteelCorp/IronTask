@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django_tables2 import RequestConfig
 
 from irontask_app.forms.TacheFrom import TacheForm
 from irontask_app.models import Materiel, Triathlon
@@ -9,12 +10,16 @@ from irontask_app.models import Tache
 from irontask_app.decorators import triathlon_required
 from datetime import date
 
+from irontask_app.tables import TachesTables
+
+
 @login_required(login_url='login/')
 
 def listTache(request):
     """Vue qui retourne la liste de toutes les taches"""
 
-    tache = Tache.objects.all()
+    table = TachesTables(Tache.objects.filter(fk_triathlon=request.session['idTriathlon']))
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
     tacheForm = TacheForm()
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""
@@ -31,7 +36,7 @@ def listTache(request):
             afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, tacheForm.errors)
         return redirect(listTache)
-    return render(request, 'tache/listTache.html', {'Tache': tache, 'form': tacheForm})
+    return render(request, 'tache/listTaches.html', {'table': table, 'form': tacheForm})
 
 
 @login_required(login_url='login/')
@@ -42,8 +47,8 @@ def editerTache(request):
 
 @login_required(login_url='login/')
 @triathlon_required
-def getTache(request,pk):
-    tache = Materiel.objects.get(pk=pk)
+def getTache(request, id):
+    tache = Materiel.objects.get(pk=id)
     return render(request, 'tache/voirTache.html', {'Tache': tache})
 
 

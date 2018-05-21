@@ -51,6 +51,7 @@ urlpatterns = [
 
     # Gestion des taches
     path('tache/liste/', viewTache.listTache, name='listTache' ),
+    path('tache/get/<id>/', viewTache.getTache, name='getTache' ),
     path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
     path('tache/liste/supprimer/<pk>', viewTache.deleteTache, name='deleteTache'),
 
