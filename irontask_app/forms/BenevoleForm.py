@@ -18,7 +18,8 @@ class BenevoleForm(ModelForm):
                                    "data-toggle": "datepicker"}))
 
 
-    sexe = forms.ChoiceField(choices = Benevole.SEX_CHOICES)
+    sexe = forms.ChoiceField(choices = Benevole.SEX_CHOICES, widget=forms.Select(
+                                                  {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
     adresse = forms.CharField(label="Adresse", widget=forms.TextInput(
                             attrs={"type": "text", "class":"form-control",
@@ -45,7 +46,8 @@ class BenevoleForm(ModelForm):
                                             "id": "formGroupExampleInput",
                                             "placeholder":""}))
 
-    status = forms.ChoiceField(choices = Benevole.STATUS_CHOICES)
+    status = forms.ChoiceField(choices = Benevole.STATUS_CHOICES, widget=forms.Select(
+                                                  {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
     class Meta:
         model = Benevole
