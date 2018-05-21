@@ -38,6 +38,7 @@ def listBenevole(request):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def editerBenevole(request, pk):
     bene = Benevole.objects.get(pk=pk)
     benevoleForm = BenevoleForm(instance=bene)

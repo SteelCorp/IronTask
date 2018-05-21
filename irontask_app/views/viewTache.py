@@ -14,6 +14,7 @@ from irontask_app.tables import TachesTables
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def listTache(request):
     """Vue qui retourne la liste de toutes les taches"""
 

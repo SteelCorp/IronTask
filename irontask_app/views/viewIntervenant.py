@@ -37,24 +37,6 @@ def listIntervenant(request):
                   {'Intervenant': intervenant, 'form': intervenantForm, 'table': table})
 
 
-"""""@login_required(login_url='login/')
-def editerSponsor(request, siret):
-
-    s = Sponsor.objects.get(siret=siret)
-    sponsorForm = SponsorForm(instance=s)
-    html = render_to_string('modalEditerSponsor.html', {'form': sponsorForm})
-
-
-
-    if request.method == 'POST':
-        s = Sponsor.objects.get(siret=siret)
-        sponsorform = SponsorForm(request.POST, instance=s)
-
-        if sponsorform.is_valid():
-            sponsor = sponsorform.save(commit=True)
-            sponsor.save()
-            return redirect(listSponsor)
-    return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
 
 
 @login_required(login_url='login/')

@@ -36,6 +36,8 @@ def listDonationSponsorsTriathlon(request, idSponsors):
     return render(request, 'donation.html', {'donation': listDonationSponsorsTriathlon})
 
 
+@login_required(login_url='login/')
+@triathlon_required
 def ajouterDonation(request):
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
