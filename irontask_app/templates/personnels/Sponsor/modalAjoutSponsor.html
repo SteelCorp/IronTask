@@ -80,6 +80,12 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                             <button type="submit" class="btn btn-primary">Ajouter</button>
                         </div>
+                        {% if successful_submit == True %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#demo-1").modal('show');
+        });
+    </script>
                     </form>
                 </div>
             </div>
@@ -87,6 +93,7 @@
     </div>
     <!--fin bouton ajout-->
 
+{% endif %}
 
 
 {% endblock %}

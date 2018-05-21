@@ -18,6 +18,7 @@ from django_tables2 import RequestConfig
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
+
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
 
     """Donne les sponsors affecter au triathlon courant"""
@@ -35,17 +36,24 @@ def listSponsor(request):
         sponsorform = SponsorForm(request.POST)
 
         if sponsorform.is_valid():
+
             sponsor = sponsorform.save(commit=True)
             sponsor.save()
+
+
         else:
             """ Passe le message d'error du formulaire à la template
              afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, sponsorform.errors)
 
-        return redirect(listSponsor)
+        return render(request, 'personnels/Sponsor/listSponsor.html', {'Sponsor': sponsor,
+                                                                       'form': sponsorForm, 'table': table,
+                                                                       'donationForm': donationForm,
+                                                                       'successful_submit': True})
+
     return render(request, 'personnels/Sponsor/listSponsor.html', {'Sponsor': sponsor,
                                                                    'form': sponsorForm, 'table': table,
-                                                                   'donationForm': donationForm})
+                                                                   'donationForm': donationForm, 'successful_submit': False})
 
 
 @login_required(login_url='login/')
