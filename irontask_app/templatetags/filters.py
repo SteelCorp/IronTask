@@ -10,6 +10,11 @@ import datetime
 register = template.Library()
 
 @register.filter
+def nbrBenevolesAffecte(session):
+    # à Refaire marche pas pour le moment
+    return Tache.objects.filter(fk_triathlon=session).count()
+
+@register.filter
 def nbrTacheEnRetardPourTriathlon(session):
     return Tache.objects.filter(fk_triathlon=session, dateFin__lt =datetime.date.today()).count()
 
