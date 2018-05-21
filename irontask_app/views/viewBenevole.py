@@ -43,13 +43,11 @@ def listBenevole(request):
 
 @login_required(login_url='login/')
 def editerBenevole(request, pk):
-    print('coucou')
     bene = Benevole.objects.get(pk=pk)
     benevoleForm = BenevoleForm(instance=bene)
 
     if request.method == "POST":
         form = BenevoleForm(request.POST, instance=bene)
-        print(form.errors)
 
         if form.is_valid():
             form.save()
