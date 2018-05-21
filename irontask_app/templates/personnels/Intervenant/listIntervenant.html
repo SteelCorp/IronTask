@@ -1,100 +1,41 @@
 {% extends 'base.html' %}
 {% block contenu %}
     {% load static %}
+    {% load render_table from django_tables2 %}
 
-  {% include 'personnels/navBarPersonnel.html' %}
-
+    {% include 'personnels/navBarPersonnel.html' %}
 
     <div class="container ">
         <div class="row mt-3 ">
-            <div class="col   ">
-                <div class="row mt-3 mb-1">
-                    <div class="col">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche"
-                                   aria-label="Recherche">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-                        </form>
-                    </div>
-                    <div class="col-sm">
-                        <div class="dropdown float-right">
-                            <button class="btn  dropdown-toggle" type="button" id="boutonTri"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Trier par : AlphaBetique
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="boutonTri">
-                                <a class="dropdown-item" href="">Ville</a>
-                                <a class="dropdown-item" href="">Email</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
 
-    <!-- Sponsor -->
+    <!-- Intervenant -->
 
     <div class="container">
-        <table class="table table-striped ">
-            <thead>
-            <tr>
-                <th scope="col">Raison social</th>
-                <th scope="col">Telephone</th>
-                <th scope="col">Email</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for intervenant in Intervenant %}
-                <tr>
-                    <td>{{ intervenant.raisonSocial }}</td>
-                    <td>{{ intervenant.telephonePort }}</td>
-                    <td>{{ intervenant.email }}</td>
-                    <td>
-                        <a href="{% url 'getIntervenant' intervenant.siret %}" class="btn btn-info  active" role="button" aria-pressed="true">Voir / Editer</a>
-                        </button>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        {% if messages %}
 
-    <!-- Fin Sponsor-->
+            <div class="alert alert-danger" role="alert">
 
-    <!-- Bouton Plus pour ajouter un Benevole -->
+                {% for message in messages %}
 
-    <span class="plus"></span>
+                    {{ message }}
 
-     <!-- Pagination -->
+                {% endfor %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 py-5 d-flex">
-                <ul class="pagination mx-auto">
-                    <div class="pagination">
-                         <span class="step-links">
-                            {% if Intervenant.has_previous %}
-                                <a href="?page={{ Intervenant.previous_page_number }}">Precèdent</a>
-                            {% endif %}
-
-                             <span class="current">
-                                Page {{ Intervenant.number }} de {{ Intervenant.paginator.num_pages }}.
-                             </span>
-
-                                {% if Intervenant.has_next %}
-                              <a href="?page={{ Intervenant.next_page_number }}">Suivant</a>
-                                {% endif %}
-                         </span>
-                    </div>
-                </ul>
             </div>
-        </div>
+
+        {% endif %}
+
+        {% render_table table %}
     </div>
-    <!-- Fin pagination -->
+
+    <!-- Fin intervenant-->
 
     {% include "personnels/modalAjout.html" %}
+
 {% endblock %}
 
 
