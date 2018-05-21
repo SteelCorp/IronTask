@@ -6,9 +6,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 
-
-
-
 class SponsorTables(tables.Table):
     editer = tables.LinkColumn('getSponsor', args=[A('pk')], text='voir')
 
@@ -18,6 +15,7 @@ class SponsorTables(tables.Table):
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout',
 
+
 class IntervenantTables(tables.Table):
     editer = tables.LinkColumn('getIntervenant', args=[A('pk')], text='voir')
 
@@ -26,6 +24,7 @@ class IntervenantTables(tables.Table):
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout',
+
 
 class BenevoleTables(tables.Table):
     editer = tables.LinkColumn('getBenevole', args=[A('pk')], text='voir')
@@ -37,7 +36,6 @@ class BenevoleTables(tables.Table):
         exclude = 'dateAjout', 'id', 'sexe', 'status'
 
 
-
 class PriorityColumn(tables.Column):
     """
     Class qui sert à colorer les cellules en fonction de leurs
@@ -45,7 +43,7 @@ class PriorityColumn(tables.Column):
     """
 
     def render(self, value):
-        if value == dict(Tache.NIV_PRIORITE).get('3') :
+        if value == dict(Tache.NIV_PRIORITE).get('3'):
             self.attrs = {"td": {"bgcolor": "FF3333"}}
 
         elif value == dict(Tache.NIV_PRIORITE).get('2'):
@@ -57,8 +55,8 @@ class PriorityColumn(tables.Column):
         elif value == dict(Tache.NIV_PRIORITE).get('0'):
             self.attrs = {"td": {"bgcolor": "FFE2CE"}}
 
-
         return value
+
 
 class TachesTables(tables.Table):
     niveauPriorite = PriorityColumn()
@@ -68,4 +66,4 @@ class TachesTables(tables.Table):
         model = Tache
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude ='id', 'fk_triathlon', 'fk_benevole'
+        exclude = 'id', 'fk_triathlon', 'fk_benevole'

@@ -8,6 +8,7 @@ from irontask_app.forms.DonationForm import DonationForm
 from django.contrib import messages
 from irontask_app.decorators import triathlon_required
 
+
 @login_required(login_url='login/')
 @triathlon_required
 def listDonationSponsorsTriathlon(request, idSponsors):
@@ -38,12 +39,12 @@ def ajouterDonation(request):
     if request.method == 'POST':
         donationForm = DonationForm(request.POST)
         if donationForm.is_valid():
-
             donation = donationForm.save(commit=False)
             donation.fk_triathlon = tria
             donation.save()
             return HttpResponseRedirect('/personnel/sponsor/')
         return HttpResponseRedirect('/personnel/sponsor/')
+
 
 @login_required(login_url='login/')
 @triathlon_required
@@ -56,6 +57,7 @@ def listDonationSponsor(request, idSponsor):
     listDonationSponsor = Sponsoriser.objets.filter(fk_sponsoriser=idSponsor)
 
     return render(request, "viewSpo.html", {'donationSponsor': listDonationSponsor})
+
 
 @login_required(login_url='login/')
 @triathlon_required

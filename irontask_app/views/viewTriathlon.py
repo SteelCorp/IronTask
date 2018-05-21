@@ -62,7 +62,6 @@ def editerTriathlon(request, pk):
     return render(request, 'triathlon/editerTriathlon.html', {"form": triathlonForm})
 
 
-
 def ajouterTriathlon(request):
     if request.method == 'POST':
         tria = TriathlonForm(request.POST)

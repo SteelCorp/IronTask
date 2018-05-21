@@ -9,10 +9,12 @@
         <div class="container ">
             <ul class="nav nav-tabs align-content-center" role="tablist">
                 <li class="nav-item  px-3">
-                    <a class="nav-link {% if  '/liste' in request.path %}active{% endif %}"  href="{% url 'listTache' %}">Tâches</a>
+                    <a class="nav-link {% if  '/liste' in request.path %}active{% endif %}"
+                       href="{% url 'listTache' %}">Tâches</a>
                 </li>
                 <li class="nav-item px-3">
-                    <a class="nav-link {% if  '/calendrier' in request.path %}active{% endif %} " href="{% url 'listTacheCal' %}">Calendrier</a>
+                    <a class="nav-link {% if  '/calendrier' in request.path %}active{% endif %} "
+                       href="{% url 'listTacheCal' %}">Calendrier</a>
                 </li>
             </ul>
         </div>
@@ -92,17 +94,23 @@
                         <div class="col-6">
                             {% if tache.niveauAvancement == 'P' %}
                                 <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Plannifié </div>
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Plannifié
+                                    </div>
                                 </div>
                             {% endif %}
                             {% if tache.niveauAvancement == 'E' %}
                                 <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> En cours </div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> En cours
+                                    </div>
                                 </div>
                             {% endif %}
                             {% if tache.niveauAvancement == 'V' %}
                                 <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Terminé </div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Terminé
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
@@ -120,7 +128,7 @@
                 </div>
             </div>
         </div>
-    {%  endfor %}
+    {% endfor %}
 
     <!-- Fin Stock-->
 

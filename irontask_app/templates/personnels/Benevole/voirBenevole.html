@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block contenu %}
     {% load static %}
-        <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 py-5 ">
                 <div class="card bg-light mb-3 ">
@@ -33,7 +33,7 @@
                             </tr>
                             <tr>
                                 <td>Adresse :</td>
-                                <td>{{ Benevole.adresse}}</td>
+                                <td>{{ Benevole.adresse }}</td>
                             </tr>
                             <tr>
                                 <td>Code Postal :</td>
@@ -62,8 +62,10 @@
 
                     </div>
                     <div class="card-body text-center">
-                        <a class="button btn btn-link"  href="{% url 'editerBenevole' Benevole.pk %}">Modifier </a>
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprBenevole" >Supprimer</button>
+                        <a class="button btn btn-link" href="{% url 'editerBenevole' Benevole.pk %}">Modifier </a>
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#modalSupprBenevole">Supprimer
+                        </button>
                     </div>
 
                     <div class="card-footer">
@@ -90,15 +92,15 @@
                 </div>
                 <div class="modal-body text-center">
                     Voulez-vous supprimer le bénévole<br>
-                        {{ Benevole.nom}}  {{ Benevole.prenom }}<br>
+                    {{ Benevole.nom }} {{ Benevole.prenom }}<br>
                     pour tous les triathlons ?
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <form action="{% url 'deleteBenevole' Benevole.pk  %}">
-                                 <button class="btn btn-primary" >Supprimer</button>
-                            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="{% url 'deleteBenevole' Benevole.pk %}">
+                            <button class="btn btn-primary">Supprimer</button>
+                        </form>
 
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

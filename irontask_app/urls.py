@@ -14,7 +14,6 @@ urlpatterns = [
     url('logout/', viewLogin.logout_user, name='logout_user'),
     path('', viewIndex.index, name='index'),
 
-
     # Gestion des sponsors
     path('personnel/sponsor/', viewSponsor.listSponsor, name='listSponsor'),
     path('personnel/sponsor/get/<siret>/', viewSponsor.getSponsor, name='getSponsor'),
@@ -51,8 +50,8 @@ urlpatterns = [
     path('stock/alloue/supprimer/<pk>/', viewStock.deleteStock, name='deleteStockAlloue'),
 
     # Gestion des taches
-    path('tache/liste/', viewTache.listTache, name='listTache' ),
-    path('tache/get/<id>/', viewTache.getTache, name='getTache' ),
+    path('tache/liste/', viewTache.listTache, name='listTache'),
+    path('tache/get/<id>/', viewTache.getTache, name='getTache'),
     path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
     path('tache/liste/supprimer/<id>', viewTache.deleteTache, name='deleteTache'),
     path('tache/liste/editer/<id>', viewTache.editerTache, name='editerTache'),
@@ -66,7 +65,5 @@ urlpatterns = [
     path('triathlon/voirTriathlon/<pk>/', viewTriathlon.voirTriathlon, name='voirTriathlon'),
     path('triathlon/supprimer/<pk>/', viewTriathlon.supprimerTriathlon, name='supprimerTriathlon'),
     path('triathlon/editer/<pk>/', viewTriathlon.editerTriathlon, name='editerTriathlon'),
-
-
 
 ]

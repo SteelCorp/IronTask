@@ -16,16 +16,12 @@ from irontask_app.tables import BenevoleTables
 from django_tables2 import RequestConfig
 
 
-
-
 @login_required(login_url='login/')
 @triathlon_required
 def listBenevole(request):
     """Vue qui retourne la liste de tous les intervenant"""
 
-
     benevoleForm = BenevoleForm()
-
 
     table = BenevoleTables(Benevole.objects.all())
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
@@ -38,7 +34,7 @@ def listBenevole(request):
             benevole.save()
         return redirect(listBenevole)
     return render(request, 'personnels/Benevole/listBenevole.html',
-                  {'form': benevoleForm, 'table':table})
+                  {'form': benevoleForm, 'table': table})
 
 
 @login_required(login_url='login/')
@@ -52,11 +48,9 @@ def editerBenevole(request, pk):
         if form.is_valid():
             form.save()
 
-
         return redirect('listBenevole')
 
-
-    return render(request, 'personnels/Benevole/editerBenevole.html', {'form' : benevoleForm})
+    return render(request, 'personnels/Benevole/editerBenevole.html', {'form': benevoleForm})
 
 
 @login_required(login_url='login/')

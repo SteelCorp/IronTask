@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 {% block contenu %}
-{% load static %}
+    {% load static %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 offset-lg-1 py-5 ">
-            <div class="card bg-light mb-3 ">
-                <div class="card-header">
-                    <form method="POST">{% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 py-5 ">
+                <div class="card bg-light mb-3 ">
+                    <div class="card-header">
+                        <form method="POST">{% csrf_token %}
 
 
-                        <div class="container-fluid">
+                            <div class="container-fluid">
 
-                            <div class="row form-group">
-                                <label for="message-text" class="form-control-label">Nom:</label>
-                                {{ form.nom }}
-                            </div>
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">Nom:</label>
+                                    {{ form.nom }}
+                                </div>
 
-                            <div class="row form-group">
-                                <label for="message-text" class="form-control-label">Prenom:</label>
-                                {{ form.prenom }}
-                            </div>
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">Prenom:</label>
+                                    {{ form.prenom }}
+                                </div>
 
-                            <div class="row ">
+                                <div class="row ">
                                     <div class="input-group mb-1">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text">
@@ -33,7 +33,7 @@
                                         </div>
                                         {{ form.dateNaissance }}
                                     </div>
-                            </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="input-group mb-1">
@@ -44,41 +44,41 @@
                                     </div>
                                 </div>
 
-                            <div class="row">
-                                <div class="input-group  mb-1">
-                                    <div class="input-group-prepend  ">
-                                        <label class="input-group-text">
-                                            <img class="iconeadmin" alt="messagerie"
-                                                 src="{% static 'img/home-8x.png' %}">
-                                            Adresse
-                                        </label>
+                                <div class="row">
+                                    <div class="input-group  mb-1">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/home-8x.png' %}">
+                                                Adresse
+                                            </label>
+                                        </div>
+                                        {{ form.adresse }}
                                     </div>
-                                    {{ form.adresse }}
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="input-group">
-                                    <div class="input-group-prepend  ">
-                                        <label class="input-group-text">
-                                            <img class="iconeadmin" alt="messagerie"
-                                                 src="{% static 'img/home-8x.png' %}">
-                                            Cp
-                                        </label>
-                                    </div>
-                                    {{ form.codePostal }}
+                                <div class="form-group row">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend  ">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/home-8x.png' %}">
+                                                Cp
+                                            </label>
+                                        </div>
+                                        {{ form.codePostal }}
 
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text col-form-label">
-                                            <img class="iconeadmin" alt="messagerie"
-                                                 src="{% static 'img/home-8x.png' %}">
-                                            Ville
-                                        </label>
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text col-form-label">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/home-8x.png' %}">
+                                                Ville
+                                            </label>
+                                        </div>
+                                        {{ form.ville }}
                                     </div>
-                                    {{ form.ville }}
                                 </div>
-                            </div>
 
-                            <div class="row">
+                                <div class="row">
                                     <div class="input-group  mb-1">
                                         <div class="input-group-prepend  ">
                                             <label class="input-group-text">
@@ -125,21 +125,21 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div>
+                            </div>
 
 
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
 
-                    </form>
+                        </form>
 
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-       <!-- script pour les selecteurs de date-->
+    <!-- script pour les selecteurs de date-->
     <script type="text/javascript">
         $(function () {
             $('[data-toggle="datepicker"]').datepicker({

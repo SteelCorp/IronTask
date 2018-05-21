@@ -7,14 +7,17 @@
     <div class="container ">
         <ul class="nav nav-tabs align-content-center" role="tablist">
             <li class="nav-item  px-3">
-                <a class="nav-link {% if  '/benevole' in request.path %}active{% endif %}"  href="{% url 'listBenevole' %}">Bénévoles</a>
+                <a class="nav-link {% if  '/benevole' in request.path %}active{% endif %}"
+                   href="{% url 'listBenevole' %}">Bénévoles</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link {% if  '/intervenant' in request.path %}active{% endif %} " href="{% url 'listIntervenant' %}">Intervenants</a>
+                <a class="nav-link {% if  '/intervenant' in request.path %}active{% endif %} "
+                   href="{% url 'listIntervenant' %}">Intervenants</a>
             </li>
 
             <li class="nav-item  px-3">
-                <a class="nav-link {% if  '/sponsor/' in request.path %}active{% endif %}" href="{% url 'listSponsor' %}">Sponsors</a>
+                <a class="nav-link {% if  '/sponsor/' in request.path %}active{% endif %}"
+                   href="{% url 'listSponsor' %}">Sponsors</a>
             </li>
         </ul>
     </div>

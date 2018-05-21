@@ -14,7 +14,6 @@ from irontask_app.tables import TachesTables
 
 
 @login_required(login_url='login/')
-
 def listTache(request):
     """Vue qui retourne la liste de toutes les taches"""
 
@@ -52,22 +51,23 @@ def editerTache(request, id):
 
         return redirect('/')
 
-    return render(request,'tache/editerTache.html', {'form': tacheForm}, {'tache' :tache})
+    return render(request, 'tache/editerTache.html', {'form': tacheForm}, {'tache': tache})
+
 
 @login_required(login_url='login/')
 @triathlon_required
-def getTache(request,id):
+def getTache(request, id):
     tache = Materiel.objects.get(id=id)
     return render(request, 'tache/voirTache.html', {'Tache': tache})
 
 
 @login_required(login_url='login/')
 @triathlon_required
-def deleteTache(request,id):
-
+def deleteTache(request, id):
     Tache.filter(id=id).delete()
 
     return redirect('tache/listTache.html')
+
 
 @login_required(login_url='login/')
 def createTache(request):

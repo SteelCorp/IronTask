@@ -33,7 +33,8 @@ def listIntervenant(request):
             intervenant = intervenantform.save(commit=True)
             intervenant.save()
         return redirect(listIntervenant)
-    return render(request, 'personnels/Intervenant/listIntervenant.html', {'Intervenant': intervenant, 'form': intervenantForm, 'table':table})
+    return render(request, 'personnels/Intervenant/listIntervenant.html',
+                  {'Intervenant': intervenant, 'form': intervenantForm, 'table': table})
 
 
 """""@login_required(login_url='login/')
@@ -54,8 +55,6 @@ def editerSponsor(request, siret):
             sponsor.save()
             return redirect(listSponsor)
     return render(request, 'modalEditerSponsor.html', {'form' : sponsorForm})"""
-
-
 
 
 @login_required(login_url='login/')

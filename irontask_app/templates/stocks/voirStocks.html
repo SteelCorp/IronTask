@@ -21,7 +21,7 @@
                                 <td>{{ Stock.type }}</td>
                             </tr>
                             <tr>
-                                <td>Quantité totale : </td>
+                                <td>Quantité totale :</td>
                                 <td>{{ Stock.qteTotal }}</td>
                             </tr>
                             <tr>
@@ -36,7 +36,9 @@
                     </div>
                     <div class="card-body text-center">
                         <button type="button" class="btn btn-link">Modifier</button>
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprStock">Supprimer</button>
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprStock">
+                            Supprimer
+                        </button>
                     </div>
 
                     <div class="card-footer">
@@ -63,15 +65,15 @@
                 </div>
                 <div class="modal-body text-center">
                     Voulez-vous supprimer le stock<br>
-                        {{ Stock.nom}}<br>
+                    {{ Stock.nom }}<br>
                     pour tous les triathlons ?
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <form action="{% url 'deleteStock' Stock.pk  %}">
-                                 <button class="btn btn-primary" >Supprimer</button>
-                            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="{% url 'deleteStock' Stock.pk %}">
+                            <button class="btn btn-primary">Supprimer</button>
+                        </form>
 
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

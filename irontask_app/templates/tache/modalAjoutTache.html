@@ -21,14 +21,15 @@
 
                         <div class="container-fluid">
                             <div class="row">
-                                <div class ="input-group  mb-1">
+                                <div class="input-group  mb-1">
                                     <div class="input-group-prepend  ">
                                         <label class="input-group-text">
-                                            <img class="iconeadmin" alt="tache" src="{% static 'img/task-8x-black.png' %}">
+                                            <img class="iconeadmin" alt="tache"
+                                                 src="{% static 'img/task-8x-black.png' %}">
                                             Nom
                                         </label>
                                     </div>
-                                  {{ form.nomTache }}
+                                    {{ form.nomTache }}
                                 </div>
                             </div>
 
@@ -36,8 +37,8 @@
                                 <label for="message-text" class="form-control-label">Description :</label>
                                 {{ form.description }}
                             </div>
-                             <div class="row ">
-                                <div class ="input-group mb-1">
+                            <div class="row ">
+                                <div class="input-group mb-1">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text">
                                             <img class="iconeadmin" alt="messagerie" src="{% static 'img/date.png' %}">
@@ -48,8 +49,8 @@
                                 </div>
                             </div>
 
-                             <div class="row ">
-                                <div class ="input-group mb-1">
+                            <div class="row ">
+                                <div class="input-group mb-1">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text">
                                             <img class="iconeadmin" alt="messagerie" src="{% static 'img/date.png' %}">
@@ -60,8 +61,8 @@
                                 </div>
                             </div>
 
-                             <div class="row ">
-                                <div class ="input-group mb-1">
+                            <div class="row ">
+                                <div class="input-group mb-1">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text">
                                             <img class="iconeadmin" alt="messagerie" src="{% static 'img/date.png' %}">
@@ -73,36 +74,36 @@
                             </div>
 
                             <div class="row">
-                                <div class ="input-group mb-1">
-                                   {{ form.niveauAvancement }}
+                                <div class="input-group mb-1">
+                                    {{ form.niveauAvancement }}
                                     <div class="input-group-append">
                                         <label class="input-group-text" for="inputGroupSelect03">Avancement</label>
                                     </div>
                                 </div>
                             </div>
 
-                             <div class="row">
-                                <div class ="input-group mb-1">
-                                   {{ form.niveauPriorite }}
+                            <div class="row">
+                                <div class="input-group mb-1">
+                                    {{ form.niveauPriorite }}
                                     <div class="input-group-append">
                                         <label class="input-group-text" for="inputGroupSelect03">Priorité</label>
                                     </div>
                                 </div>
                             </div>
 
-                             <div class="row">
-                                <div class ="input-group mb-1">
-                                   {{ form.fk_benevole }}
+                            <div class="row">
+                                <div class="input-group mb-1">
+                                    {{ form.fk_benevole }}
                                     <div class="input-group-append">
                                         <label class="input-group-text" for="inputGroupSelect03">Benevole</label>
                                     </div>
                                 </div>
                             </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -110,9 +111,9 @@
     </div>
     <!--fin bouton ajout-->
 
-        <!-- script pour les selecteurs de date-->
+    <!-- script pour les selecteurs de date-->
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $('[data-toggle="datepicker"]').datepicker({
                 format: 'yyyy-mm-dd',
                 autoHide: true,

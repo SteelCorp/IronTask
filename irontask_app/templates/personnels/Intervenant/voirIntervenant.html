@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block contenu %}
     {% load static %}
-     <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 py-5 ">
                 <div class="card bg-light mb-3 ">
@@ -55,7 +55,9 @@
                     </div>
                     <div class="card-body text-center">
                         <button type="button" class="btn btn-link">Modifier</button>
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprIntervenant">Supprimer</button>
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#modalSupprIntervenant">Supprimer
+                        </button>
                     </div>
 
                     <div class="card-footer">
@@ -68,7 +70,7 @@
         </div>
     </div>
 
-<!-- Modal suppimer intervenant -->
+    <!-- Modal suppimer intervenant -->
     <div class="modal fade" id="modalSupprIntervenant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -81,15 +83,15 @@
                 </div>
                 <div class="modal-body text-center">
                     Voulez-vous supprimer l'intervenant<br>
-                        {{ Intervenant.siret}}<br>
+                    {{ Intervenant.siret }}<br>
                     pour tous les triathlons ?
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <form action="{% url 'deleteIntervenant' Intervenant.siret  %}">
-                                 <button class="btn btn-primary" >Supprimer</button>
-                            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="{% url 'deleteIntervenant' Intervenant.siret %}">
+                            <button class="btn btn-primary">Supprimer</button>
+                        </form>
 
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

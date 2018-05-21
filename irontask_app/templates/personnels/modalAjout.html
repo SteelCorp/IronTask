@@ -1,39 +1,38 @@
-
 {% block modal %}
-{% load static %}
-<button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#demo-1">+</button>
+    {% load static %}
+    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#demo-1">+</button>
 
-<!-- [ Modal #1 ] -->
-<div class="modal fade" id="demo-1" tabindex="-1" role="dialog" style="display:none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal"><i class="icon-xs-o-md"></i></button>
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter
-                    {% if  '/sponsor/' in request.path %}un sponsor{% endif %}
-                    {% if  '/intervenant/' in request.path %}un intervenant{% endif %}
-                    {% if  '/benevole/' in request.path %}un benevole{% endif %}
-                </h5>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    {{ donationForm }}
+    <!-- [ Modal #1 ] -->
+    <div class="modal fade" id="demo-1" tabindex="-1" role="dialog" style="display:none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal"><i class="icon-xs-o-md"></i></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter
+                        {% if  '/sponsor/' in request.path %}un sponsor{% endif %}
+                        {% if  '/intervenant/' in request.path %}un intervenant{% endif %}
+                        {% if  '/benevole/' in request.path %}un benevole{% endif %}
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ donationForm }}
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#demo-2"
+                            data-dismiss="modal">Ajouter un Sponsor
+                    </button>
 
                 </div>
             </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#demo-2"
-                        data-dismiss="modal">Ajouter un Sponsor
-                </button>
-
-            </div>
         </div>
     </div>
-</div>
 
-<!-- [ Modal #2 ] -->
-<div class="modal fade" id="demo-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- [ Modal #2 ] -->
+    <div class="modal fade" id="demo-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="false" style="overflow: auto !important;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

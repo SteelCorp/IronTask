@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block contenu %}
     {% load static %}
-        <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 py-5 ">
                 <div class="card bg-light mb-3 ">
@@ -43,17 +43,14 @@
                             </tr>
 
 
-
-
-
-
-
                         </table>
 
                     </div>
                     <div class="card-body text-center">
-                        <a class="button btn btn-link"  href="{% url 'editerTriathlon' triathlon.pk %}">Modifier </a>
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprTriathlon" >Supprimer</button>
+                        <a class="button btn btn-link" href="{% url 'editerTriathlon' triathlon.pk %}">Modifier </a>
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#modalSupprTriathlon">Supprimer
+                        </button>
                     </div>
 
                     <div class="card-footer">
@@ -65,7 +62,7 @@
             </div>
         </div>
     </div>
- <!-- Modal suppimer Triathlon -->
+    <!-- Modal suppimer Triathlon -->
     <div class="modal fade" id="modalSupprTriathlon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -77,15 +74,16 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    Voulez-vous supprimer le Triathlon selectionné, ainsi que toutes les tâches affecter à selui ci ?<br>
+                    Voulez-vous supprimer le Triathlon selectionné, ainsi que toutes les tâches affecter à selui ci
+                    ?<br>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <form action="{% url 'supprimerTriathlon' triathlon.pk  %}">
-                                 <button class="btn btn-primary" >Supprimer</button>
-                            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="{% url 'supprimerTriathlon' triathlon.pk %}">
+                            <button class="btn btn-primary">Supprimer</button>
+                        </form>
 
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

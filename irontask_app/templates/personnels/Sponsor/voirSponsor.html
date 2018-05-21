@@ -22,14 +22,14 @@
                                 <td>{{ sponsor.raisonSocial }}</td>
                             </tr>
                             <tr>
-                                <td>Adresse : </td>
+                                <td>Adresse :</td>
                                 <td>{{ sponsor.adresse }}</td>
                             </tr>
 
                             <tr>
                             <tr>
                                 <td>Code postal :</td>
-                                <td>{{sponsor.codePostal }}</td>
+                                <td>{{ sponsor.codePostal }}</td>
                             </tr>
                             <tr>
                                 <td>Ville</td>
@@ -48,9 +48,11 @@
 
                     </div>
                     <div class="card-body text-center">
-                        <a class="button btn btn-link"  href="{% url 'editerSponsor' sponsor.pk %}">Modifier </a>
+                        <a class="button btn btn-link" href="{% url 'editerSponsor' sponsor.pk %}">Modifier </a>
 
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprSponsor">Supprimer</button>
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSupprSponsor">
+                            Supprimer
+                        </button>
                     </div>
                     <div class="card-header">
                         Donation
@@ -81,7 +83,8 @@
                                             <button type="button" class="btn btn-link">Modifier</button>
                                             <button type="button" class="btn btn-link"
                                                     data-toggle="modal" data-target="#modalSupprDonation"
-                                                    data-whatever="{{donation.id }}" data-model-name="">Supprimer {{donation.id }}</button>
+                                                    data-whatever="{{ donation.id }}" data-model-name="">
+                                                Supprimer {{ donation.id }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +116,7 @@
                 <div class="modal-body">
                     <form method="POST">{% csrf_token %}
                         {{ request.session.idTriathlon | getTriathlonEnCours }}
-                        {{ sponsor.siret}}
+                        {{ sponsor.siret }}
                         {{ donationForm.donation }}
 
                         <div class="modal-footer">
@@ -141,13 +144,13 @@
                 </div>
                 <div class="modal-body text-center">
                     Voulez-vous supprimer le sponsor<br>
-                        {{ sponsor.raisonSocial}}<br>
+                    {{ sponsor.raisonSocial }}<br>
                     pour tous les triathlons ?
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <form action="{% url 'deleteSponsor' sponsor.siret  %}">
-                                 <button class="btn btn-primary" >Supprimer</button>
-                            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="{% url 'deleteSponsor' sponsor.siret %}">
+                            <button class="btn btn-primary">Supprimer</button>
+                        </form>
 
                     </div>
                 </div>
