@@ -3,23 +3,20 @@
     {% load static %}
     {% load filters %}
 
-<div class="entête">
-    {% include 'dashboard.html' %}
+    <div class="entête">
+        {% include 'dashboard.html' %}
 
-    <div class="container ">
-        <ul class="nav nav-tabs align-content-center" role="tablist">
-            <li class="nav-item  px-3">
-                <a class="nav-link {% if  '/liste' in request.path %}active{% endif %}"  href="{% url 'listTache' %}">Tâches</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link {% if  '/calendrier' in request.path %}active{% endif %} " href="{% url 'listTacheCal' %}">Calendrier</a>
-            </li>
-
-
-        </ul>
+        <div class="container ">
+            <ul class="nav nav-tabs align-content-center" role="tablist">
+                <li class="nav-item  px-3">
+                    <a class="nav-link {% if  '/liste' in request.path %}active{% endif %}"  href="{% url 'listTache' %}">Tâches</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link {% if  '/calendrier' in request.path %}active{% endif %} " href="{% url 'listTacheCal' %}">Calendrier</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-
     <br>
     <br>
     <!-- Taches -->
@@ -49,51 +46,77 @@
                         <div class="=col-sm-2">
                             {% retard tache.dateFin as bool %}
                             {% if bool %}
-                            <div class="alert-danger">
-                                Cette tâche est en retard !
-                            </div>
+                                <div class="alert-danger">
+                                    Cette tâche est en retard !
+                                </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
+                    <!-- description et dates -->
                     <div class="row">
-                        <div class="col-sm-9">
-                            <p class="card-text">{{ tache.description }}</p>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-9 float-left">
-                                    <a href="#" class="btn btn-primary">Modifier</a>
-                                </div>
-                                <div class="col-sm-3 float-right">
-                                    <a href="#" class="btn btn-outline-danger">Supprimer</a>
-                                </div>
-                            </div>
+                        <div class="col-8">
+                            <p class="card-text">Description : {{ tache.description }}</p>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    Début
-                                    <br>
-                                    Fin
-                                    <br>
-                                    Rappel
+                        <div class="col-1">
+                            Début
+                            <br>
+                            Fin
+                            <br>
+                            Rappel
+                        </div>
+                        <div class="col-1">
+                            <img class="iconeadmin" alt="debut" src="{% static 'img/date.png' %}">
+                            <br>
+                            <img class="iconeadmin" alt="fin" src="{% static 'img/dateend.png' %}">
+                            <br>
+                            <img class="iconeadmin" alt="rappel" src="{% static 'img/alerte.png' %}">
+                        </div>
+                        <div class="col-2">
+                            {{ tache.dateDebut }}
+                            <br>
+                            {{ tache.dateFin }}
+                            <br>
+                            {{ tache.dateRappel }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <a>
+                                <img class="iconeadmin" alt="responsable" src="{% static 'img/person.svg' %}">
+                                responsable : {{ tache.fk_benevole.prenom }} {{ tache.fk_benevole.nom }}
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            {% if tache.niveauAvancement == 'P' %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Plannifié </div>
                                 </div>
-                                <div class="col-sm-2">
-                                    <img class="iconeadmin" alt="debut" src="{% static 'img/date.png' %}">
-                                    <br>
-                                    <img class="iconeadmin" alt="fin" src="{% static 'img/dateend.png' %}">
-                                    <br>
-                                    <img class="iconeadmin" alt="rappel" src="{% static 'img/alerte.png' %}">
+                            {% endif %}
+                            {% if tache.niveauAvancement == 'E' %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> En cours </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    {{ tache.dateDebut }}
-                                    <br>
-                                    {{ tache.dateFin }}
-                                    <br>
-                                    {{ tache.dateRappel }}
+                            {% endif %}
+                            {% if tache.niveauAvancement == 'V' %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> Terminé </div>
                                 </div>
-                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-8">
+
+                        </div>
+                        <div class="col-2">
+                            <a href="#" class="btn btn-primary">Modifier</a>
+                        </div>
+                        <div class="col-2">
+                            <a href="#" class="btn btn-outline-danger">Supprimer</a>
                         </div>
                     </div>
                 </div>
@@ -107,7 +130,7 @@
 
     <span class="plus"></span>
 
-     <!-- Pagination -->
+    <!-- Pagination -->
 
     <div class="container">
         <div class="row">
@@ -121,9 +144,9 @@
                             <span class="current">
                                 Page {{ Stock.number }} de {{ Tache.paginator.num_pages }}.
                             </span>
-                                {% if Tache.has_next %}
-                                    <a href="?page={{ Tache.next_page_number }}">Suivant</a>
-                                {% endif %}
+                            {% if Tache.has_next %}
+                                <a href="?page={{ Tache.next_page_number }}">Suivant</a>
+                            {% endif %}
                          </span>
                     </div>
                 </ul>
