@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from irontask_app.forms.TacheFrom import TacheForm
-from irontask_app.models import Materiel
+from irontask_app.models import Materiel, Triathlon
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
@@ -17,17 +17,24 @@ def listTache(request):
     tache = Tache.objects.all()
     tacheForm = TacheForm()
 
-    """ Implémentation de la pagination"""
-    paginator = Paginator(tache,2)
-    page = request.GET.get('page')
-    tache = paginator.get_page(page)
+    print("mmmmmmm")
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""
     if request.method == 'POST':
         tacheForm = TacheForm(request.POST)
+        print("eeekmlk")
+
+        print(request.session['id_Triathlon'])
+        print("eeekmlk2")
 
         if tacheForm.is_valid():
-            tacheForm.save(commit=True)
+            tachem = tacheForm.save(commit=False)
+            tachem.fk_triathlon = request.session['id_Triathlon']
+            print("eeee")
+            print(request.session['id_Triathlon'])
+            print("eeee2")
+
+            tachem.save()
         else:
             """ Passe le message d'error du formulaire à la template
             afin de l'afficher en cas d'erreur dans le formulaire"""

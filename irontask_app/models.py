@@ -199,7 +199,7 @@ class Tache(models.Model):
         ('3', 'Important')
     )
     nomTache = models.CharField(max_length=150)
-    description = models.CharField(max_length=500)
+    description = models.TextField()
     dateDebut = models.DateField(null=False, blank=False)
     dateFin = models.DateField(null=False, blank=False)
     dateRappel = models.DateField(null=True, blank=False)
