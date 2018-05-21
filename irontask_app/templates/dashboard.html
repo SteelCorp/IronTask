@@ -21,8 +21,8 @@
 
                     <div class="col-6 col-md-4">
                          <p>    <img class="messagerie2" alt="messagerie" src="{% static 'img/task-8x-black.png' %}">
-                            Vous avez <a href="{% url 'listTache' %}"> 10 </a> tâche(s) dont
-                             <a href=""> {% nbrDonationPourTriatlon %} </a> en retard </p>
+                            Vous avez <a href="{% url 'listTache' %}"> {{ request.session.idTriathlon |  nbrTachesPourTriathlon }} </a> tâche(s) dont
+                             <a href=""> 5 </a> en retard </p>
 
                             <p>    <img class="messagerie2" alt="messagerie" src="{% static 'img/person-8x-black.png' %}">
                             Vous avez <a href="{% url 'listBenevole' %}"> 10 </a> bénévole(s) affecté(s) </p>
@@ -32,7 +32,7 @@
                     <div class="col-6 col-md-4">
 
                           <p><img class="messagerie2" alt="messagerie" src="{% static 'img/euro-8x-black.png' %}">
-                            Vous avez <a href="{% url 'listSponsor' %}"> 100 </a> euros pour <a href=""> {% nbrDonationPourTriatlon %} </a> donation(s) </p>
+                            Vous avez <a href="{% url 'listSponsor' %}"> {{ request.session.idTriathlon |  nbrTotalEurosPourTriatlon}} </a> euros pour <a href=""> {{ request.session.idTriathlon |  nbrDonationPourTriatlon }} </a> donation(s) </p>
 
 
                             <img class="messagerie2" alt="messagerie" src="{% static 'img/wrench-8x.png' %}">

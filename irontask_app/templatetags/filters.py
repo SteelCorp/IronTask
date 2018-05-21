@@ -1,4 +1,6 @@
 from django import template
+from django.db.models import Sum
+
 from irontask_app.models import *
 from irontask_app.forms.TriathlonForm import *
 from django.utils.translation import ugettext as _
@@ -7,13 +9,18 @@ import datetime
 
 register = template.Library()
 
-@register.simple_tag
-def nbrDonationPourTriatlon():
-    return Sponsoriser.objects.filter().count()
+@register.filter
+def nbrDonationPourTriatlon(session):
+    return Sponsoriser.objects.filter(fk_triathlon=session).count()
 
-@register.simple_tag
-def nbrTachesPourTriathlon():
-    return Tache.objects.filter().count()
+@register.filter
+def nbrTotalEurosPourTriatlon(session):
+    somme = Sponsoriser.objects.filter(fk_triathlon=session).aggregate(Sum('donation'))['donation__sum']
+    return somme
+
+@register.filter
+def nbrTachesPourTriathlon(session):
+    return Tache.objects.filter(fk_triathlon=session).count()
 
 @register.simple_tag
 def getTriathlonNonFini():
