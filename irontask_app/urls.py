@@ -39,13 +39,18 @@ urlpatterns = [
     path('personnel/benevole/supprimer/<pk>/', viewBenevole.deleteBenevole, name='deleteBenevole'),
 
     # Gestion des stocks
-    path('stocks/', viewStock.listStock, name='listStock'),
-    path('stocks/get/<pk>/', viewStock.getStock, name='getStock'),
-    path('stocks/editer/<pk>/', viewStock.editerStock, name='editerStock'),
-    path('stocks/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
+    path('stock/total/', viewStock.listStock, name='listStock'),
+    path('stock/total/get/<pk>/', viewStock.getStock, name='getStock'),
+    path('stock/total/editer/<pk>/', viewStock.editerStock, name='editerStock'),
+    path('stock/total/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
+
+    path('stock/alloue/', viewStock.listStock, name='listStockAlloue'),
+    path('stock/alloue/get/<pk>/', viewStock.getStock, name='getStockAlloue'),
+    path('stock/alloue/editer/<pk>/', viewStock.editerStock, name='editerStockAlloue'),
+    path('stock/alloue/supprimer/<pk>/', viewStock.deleteStock, name='deleteStockAlloue'),
 
     # Gestion des taches
-    path('tache/', viewTache.listTache, name='listTache' ),
+    path('tache/liste/', viewTache.listTache, name='listTache' ),
     path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
 
     # url(r'api/', include(router.urls))
