@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
-    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache
+    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation
 from django.conf.urls import url, include
 
 from irontask_app import api
@@ -23,6 +23,7 @@ urlpatterns = [
 
     # Gestion des donations
     path('personnel/donation/', viewSponsor.listSponsor, name='listDonation'),
+    path('personnel/donation/ajouter/', viewSponsorDonation.ajouterDonation, name='ajouterDonation'),
     path('personnel/donation/get/<id>/', viewSponsor.getSponsor, name='getDonation'),
     path('personnel/donation/editer/<id>/', viewSponsor.editerSponsor, name='editerDonation'),
     path('personnel/donation/supprimer/<id>/', viewSponsor.deleteDonation, name='deleteDonation'),
@@ -42,7 +43,7 @@ urlpatterns = [
     path('stock/total/', viewStock.listStock, name='listStock'),
     path('stock/total/get/<pk>/', viewStock.getStock, name='getStock'),
     path('stock/total/editer/<pk>/', viewStock.editerStock, name='editerStock'),
-    path('stock/total/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
+    path('stock/total/editer/supprimer/<pk>/', viewStock.deleteStock, name='deleteStock'),
 
     path('stock/alloue/', viewStock.listStock, name='listStockAlloue'),
     path('stock/alloue/get/<pk>/', viewStock.getStock, name='getStockAlloue'),
@@ -53,7 +54,8 @@ urlpatterns = [
     path('tache/liste/', viewTache.listTache, name='listTache' ),
     path('tache/get/<id>/', viewTache.getTache, name='getTache' ),
     path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
-    path('tache/liste/supprimer/<pk>', viewTache.deleteTache, name='deleteTache'),
+    path('tache/liste/supprimer/<id>', viewTache.deleteTache, name='deleteTache'),
+    path('tache/liste/editer/<id>', viewTache.editerTache, name='editerTache'),
 
     # url(r'api/', include(router.urls))
 

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block contenu %}
+
+
+
+
+    <div class="col-2">
+        <a href="{% url 'deleteTache' tache.id%}" class="btn btn-outline-danger">Supprimer</a>
+    </div>
+
+{% endblock %}
