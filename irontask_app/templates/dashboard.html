@@ -12,7 +12,7 @@
                         {% if request.session.idTriathlon %}
                             <a class="nav-link"
                                href="{% url 'voirTriathlon' request.session.idTriathlon %}">
-                                {{ request.session.idTriathlon | getTriathlonEnCours }}</a>
+                                {{ request.session.idTriathlon | getTriathlonEnCours }}  <img class="messagerie3" alt="messagerie" src="{% static 'img/pencil-8x.png' %}"></a>
                         {% else %}
                             <a class="nav-link" href="{% url 'choisirTriathlon' %}">Aucun triathlon selectionné</a>
 
@@ -20,20 +20,21 @@
 
 
                     <div class="col-6 col-md-4">
-                        <a class="nav-link" href="#">
-                            <img class="messagerie2" alt="messagerie" src="{% static 'img/task-8x-black.png' %}">
-                            Vous avez 10 tâche(s) dont 0 en retard </a>
-                        <a class="nav-link" href="#">
-                            <img class="messagerie2" alt="messagerie" src="{% static 'img/people-8x-black.png' %}">
-                            Vous avez 10 bénévole(s) affecté(s) </a>
+                         <p>    <img class="messagerie2" alt="messagerie" src="{% static 'img/task-8x-black.png' %}">
+                            Vous avez <a href="{% url 'listTache' %}"> 10 </a> tâche(s) dont
+                             <a href=""> {% nbrDonationPourTriatlon %} </a> en retard </p>
+
+                            <p>    <img class="messagerie2" alt="messagerie" src="{% static 'img/person-8x-black.png' %}">
+                            Vous avez <a href="{% url 'listBenevole' %}"> 10 </a> bénévole(s) affecté(s) </p>
 
                     </div>
 
                     <div class="col-6 col-md-4">
-                        <a class="nav-link" href="#">
-                            <img class="messagerie2" alt="messagerie" src="{% static 'img/euro-8x-black.png' %}">
-                            Vous avez 100 euros pour {% nbrDonationPourTriatlon %}  donation(s) </a>
-                        <a class="nav-link" href="#">
+
+                          <p><img class="messagerie2" alt="messagerie" src="{% static 'img/euro-8x-black.png' %}">
+                            Vous avez <a href="{% url 'listSponsor' %}"> 100 </a> euros pour <a href=""> {% nbrDonationPourTriatlon %} </a> donation(s) </p>
+
+
                             <img class="messagerie2" alt="messagerie" src="{% static 'img/wrench-8x.png' %}">
                             Vous n'avez pas de matériels manquant </a>
 
