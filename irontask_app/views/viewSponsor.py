@@ -46,6 +46,7 @@ def listSponsor(request):
              afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, sponsorform.errors)
 
+        # Si le premier formulaire et valide, recharge la page avec la variable sccessful_submit à True, afin de réouvrir la modal d'ajout de donations
         return render(request, 'personnels/Sponsor/listSponsor.html', {'Sponsor': sponsor,
                                                                        'form': sponsorForm, 'table': table,
                                                                        'donationForm': donationForm,
