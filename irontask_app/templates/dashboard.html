@@ -22,7 +22,7 @@
                     <div class="col-6 col-md-4">
                          <p>    <img class="messagerie2" alt="messagerie" src="{% static 'img/task-8x-black.png' %}">
                             Vous avez <a href="{% url 'listTache' %}"> {{ request.session.idTriathlon |  nbrTachesPourTriathlon }} </a> tâche(s) dont
-                             <a href=""> 5 </a> en retard </p>
+                             <a href=""> {{ request.session.idTriathlon | nbrTacheEnRetardPourTriathlon }} </a> en retard </p>
 
                             <p>    <img class="messagerie2" alt="messagerie" src="{% static 'img/person-8x-black.png' %}">
                             Vous avez <a href="{% url 'listBenevole' %}"> 10 </a> bénévole(s) affecté(s) </p>

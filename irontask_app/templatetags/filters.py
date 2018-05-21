@@ -10,6 +10,10 @@ import datetime
 register = template.Library()
 
 @register.filter
+def nbrTacheEnRetardPourTriathlon(session):
+    return Tache.objects.filter(fk_triathlon=session, dateFin__lt =datetime.date.today()).count()
+
+@register.filter
 def nbrDonationPourTriatlon(session):
     return Sponsoriser.objects.filter(fk_triathlon=session).count()
 
