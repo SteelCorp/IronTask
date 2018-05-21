@@ -2,6 +2,7 @@ from django.db import models
 from irontask_app.validators import *
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
     """
     Class pour la gestion des utilateurs du logiciel (connexion etc...)
@@ -40,14 +41,16 @@ class Sponsor(models.Model):
     Class Reprénsentant un sponsor
     """
 
-    siret = models.CharField(max_length=14, primary_key=True)
-    raisonSocial = models.CharField(max_length=50, blank=False, null=True)
-    adresse = models.CharField(max_length=200, blank=False, null=True)
-    codePostal = models.CharField(max_length=5, blank=False, null=True)
-    ville = models.CharField(max_length=50, blank=False, null=True)
-    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
-    telephonePortable = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
-    email = models.EmailField(blank=False, null=True)
+    siret = models.CharField(max_length=14, primary_key=True, verbose_name='Siret')
+    raisonSocial = models.CharField(max_length=50, blank=False, null=True, verbose_name='Raison Social')
+    adresse = models.CharField(max_length=200, blank=False, null=True, verbose_name='Adresse')
+    codePostal = models.CharField(max_length=5, blank=False, null=True, verbose_name='Code Postal')
+    ville = models.CharField(max_length=50, blank=False, null=True, verbose_name='Ville')
+    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator],
+                                     verbose_name='Téléphone Fixe')
+    telephonePortable = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator],
+                                         verbose_name='Téléphone Portable')
+    email = models.EmailField(blank=False, null=True, verbose_name='Email')
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -80,6 +83,7 @@ class Categorie(models.Model):
         :return: String représentant l'objet Catégorie par son libellé
         """
         return self.libelle
+
     class Meta:
         verbose_name_plural = "Catégories"
 
@@ -108,8 +112,8 @@ class Materiel(models.Model):
 class Benevole(models.Model):
     """Class Representant un bénévole"""
     SEX_CHOICES = (
-        ('F','Feminin' ),
-        ('M','Masculin'),
+        ('F', 'Feminin'),
+        ('M', 'Masculin'),
 
     )
     STATUS_CHOICES = (
@@ -151,6 +155,7 @@ class TypeTriathlon(models.Model):
     def __str__(self):
         """Retourne un string des parametre du type de triathlon"""
         return self.libelle
+
     class Meta:
         verbose_name_plural = "Type Triathlon"
 
@@ -235,7 +240,7 @@ class Sponsoriser(models.Model):
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.donation) +"€ de " + self.fk_sponsor.__str__() +" pour le " + self.fk_triathlon.__str__()
+        return str(self.donation) + "€ de " + self.fk_sponsor.__str__() + " pour le " + self.fk_triathlon.__str__()
 
     class Meta:
         verbose_name_plural = "Donations"

@@ -24,7 +24,7 @@ def listSponsor(request):
     sponsor = Sponsor.objects.filter()
 
     table = SponsorTables(Sponsor.objects.filter())
-    RequestConfig(request, paginate={'per_page': 10}).configure(table)
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
     # Instancie le formulaire sponsorForm
     sponsorForm = SponsorForm()
