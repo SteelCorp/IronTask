@@ -17,8 +17,6 @@ from django_tables2 import RequestConfig
 @triathlon_required
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
-
-
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
 
     """Donne les sponsors affecter au triathlon courant"""
