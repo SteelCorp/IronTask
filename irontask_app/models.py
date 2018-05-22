@@ -206,7 +206,6 @@ class Tache(models.Model):
     niveauAvancement = models.CharField(max_length=1, choices=NIV_AVANCEMENT)
     niveauPriorite = models.CharField(max_length=1, choices=NIV_PRIORITE)
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT, null=False)
-    fk_benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
