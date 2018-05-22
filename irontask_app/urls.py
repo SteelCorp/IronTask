@@ -1,11 +1,9 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
     viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation
-from django.conf.urls import url, include
+from django.conf.urls import url
 
-from irontask_app import api
-from irontask_app import views
 
 admin.site.site_header = 'IronTask Administration'
 urlpatterns = [
