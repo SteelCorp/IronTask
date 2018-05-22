@@ -116,11 +116,7 @@ class Benevole(models.Model):
         ('M', 'Masculin'),
 
     )
-    STATUS_CHOICES = (
-        ('A', 'Administrateur'),
-        ('O', 'Organisateur'),
-        ('B', 'Benevole'),
-    )
+
 
     nom = models.CharField(max_length=50, blank=False, null=False)
     prenom = models.CharField(max_length=50, blank=False, null=False)
@@ -132,7 +128,6 @@ class Benevole(models.Model):
     telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
     telephonePortable = models.CharField(max_length=10, blank=False, null=False, validators=[phoneValidator])
     email = models.EmailField(blank=False, null=False)
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
