@@ -39,6 +39,11 @@ def listDonationSponsorsTriathlon(request, idSponsors):
 @login_required(login_url='login/')
 @triathlon_required
 def ajouterDonation(request):
+    """
+
+    :param request:
+    :return: Vue qui permet à la modal de faire une request de Type POST afin d'ajouter une donation
+    """
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         donationForm = DonationForm(request.POST)

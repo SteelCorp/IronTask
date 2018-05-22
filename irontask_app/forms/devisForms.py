@@ -4,10 +4,8 @@ from irontask_app.models import Intervenir, Intervenant
 
 
 class DevisForm(ModelForm):
-    donation = forms.IntegerField(label="Donation : ", widget=forms.TextInput({"type": "text", "class": "form-control",
-                                                                               "id": "formGroupExampleInput",
-                                                                               "placeholder": ""}))
-    fk_sponsor = forms.ModelChoiceField(label='Type de Triathlon', queryset=Intervenant.objects.all(),
+
+    fk_intervenant = forms.ModelChoiceField(label='Type de Triathlon', queryset=Intervenant.objects.all(),
                                         widget=forms.Select(
                                             {"class": "custom-select", "id": "inputGroupSelect03"}))
     class Meta:

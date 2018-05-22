@@ -34,9 +34,12 @@ def listIntervenant(request):
         if intervenantform.is_valid():
             intervenant = intervenantform.save(commit=True)
             intervenant.save()
-        return redirect(listIntervenant)
+        return render(request, 'personnels/Intervenant/listIntervenant.html',
+                      {'Intervenant': intervenant, 'form': intervenantForm, 'table': table, 'devisForm': devisForm,
+                       'successful_submit': True})
+
     return render(request, 'personnels/Intervenant/listIntervenant.html',
-                  {'Intervenant': intervenant, 'form': intervenantForm, 'table': table, 'devisForm':devisForm})
+                  {'Intervenant': intervenant, 'form': intervenantForm, 'table': table, 'devisForm':devisForm, 'successful_submit': False})
 
 
 @login_required(login_url='login/')
@@ -45,12 +48,13 @@ def ajouterDevis(request):
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         devisForm = DevisForm(request.POST)
+        print(devisForm.errors)
         if devisForm.is_valid():
             donation = devisForm.save(commit=False)
             donation.fk_triathlon = tria
             donation.save()
             return HttpResponseRedirect('/personnel/intervenant/')
-        return HttpResponseRedirect('/personnel/internvenant/')
+        return HttpResponseRedirect('/personnel/intervenant/')
 
 @login_required(login_url='login/')
 @triathlon_required
