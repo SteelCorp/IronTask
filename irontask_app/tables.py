@@ -13,7 +13,7 @@ class SponsorTables(tables.Table):
         model = Sponsor
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude = 'dateAjout',
+        exclude = 'dateAjout', 'siret'
 
 
 class IntervenantTables(tables.Table):
@@ -23,7 +23,7 @@ class IntervenantTables(tables.Table):
         model = Intervenant
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude = 'dateAjout',
+        exclude = 'dateAjout', 'siret'
 
 
 class BenevoleTables(tables.Table):
@@ -33,7 +33,7 @@ class BenevoleTables(tables.Table):
         model = Benevole
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude = 'dateAjout', 'id', 'sexe', 'status'
+        exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret'
 
 
 class PriorityColumn(tables.Column):

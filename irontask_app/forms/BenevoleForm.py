@@ -44,8 +44,6 @@ class BenevoleForm(ModelForm):
                "id": "formGroupExampleInput",
                "placeholder": ""}))
 
-    status = forms.ChoiceField(choices=Benevole.STATUS_CHOICES, widget=forms.Select(
-        {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
     class Meta:
         model = Benevole
