@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 from irontask_app.models import Materiel
 from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Materiel
+from irontask_app.decorators import triathlon_required
+
 
 @login_required(login_url='login/')
+@triathlon_required
 def listStock(request):
     """Vue qui retourne la liste de tous les sponsors"""
 
@@ -14,7 +19,7 @@ def listStock(request):
     stockForm = StockForm()
 
     """ Implémentation de la pagination"""
-    paginator = Paginator(stock,2)
+    paginator = Paginator(stock, 2)
     page = request.GET.get('page')
     stock = paginator.get_page(page)
 
@@ -33,19 +38,26 @@ def listStock(request):
 
 
 @login_required(login_url='login/')
+@triathlon_required
 def editerStock(request):
-
     return render(request)
 
+
 @login_required(login_url='login/')
-def getStock(request,pk):
+@triathlon_required
+def getStock(request, pk):
     stock = Materiel.objects.get(pk=pk)
     return render(request, 'stocks/voirStocks.html', {'Stock': stock})
 
-@login_required(login_url='login/')
-def deleteStock(request):
-    return render(request)
 
 @login_required(login_url='login/')
+@triathlon_required
+def deleteStock(request, pk):
+    Materiel.objects.filter(pk=pk).delete()
+    return redirect(listStock)
+
+
+@login_required(login_url='login/')
+@triathlon_required
 def createStock(request):
     return render(request)

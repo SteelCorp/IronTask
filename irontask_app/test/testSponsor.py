@@ -14,7 +14,8 @@ class test_SponsorCase(TestCase):
                                codePostal='31000',
                                ville='Toulouse',
                                telephone='0305060788',
-                               email='leclerc@gmail.com'
+                               email='leclerc@gmail.com',
+                               date_ajout="2018-04-16"
                                )
         self.user = User.objects.create_user(username='john', email='john@beatles.fr', password='johnpassword')
         self.c = Client()
@@ -40,7 +41,8 @@ class test_SponsorCase(TestCase):
                                                  'codePostal': '31000',
                                                  'ville': 'Toulouse',
                                                  'telephone': '0305060788',
-                                                 'email': 'leclerc@gmail.com'})
+                                                 'email': 'leclerc@gmail.com',
+                                                 'date_ajout': '2018-04-16'})
         self.assertEqual(reponse.status_code, 302)
         self.assertTrue(Sponsor.objects.get(siret='12345678912342'))
 

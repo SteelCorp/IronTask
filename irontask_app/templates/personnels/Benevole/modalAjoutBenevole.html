@@ -1,0 +1,121 @@
+{% block modal %}
+    {% load static %}
+
+
+    <!--bouton ajout-->
+    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#exampleModal">+</button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un nouveau bénévole</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="ui form" method="POST">{% csrf_token %}
+
+                        <div class="container-fluid">
+                            <div class="input-group  mb-1">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text">
+                                        Nom
+                                    </label>
+                                </div>
+                                {{ form.nom }}
+                            </div>
+                            <div class="input-group  mb-1">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text">
+                                        Prénom
+                                    </label>
+                                </div>
+                                {{ form.prenom }}
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text">Sexe</label>
+                                    {{ form.sexe }}
+                                </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/date.png' %}">
+                                    Date de naissance
+                                </label>
+                                {{ form.dateNaissance }}
+                            </div>
+                            <br>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    Adresse
+                                </label>
+                                {{ form.adresse }}
+                            </div>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/home-8x.png' %}">
+                                    Ville
+                                </label>
+                                {{ form.ville }}
+                                <label class="input-group-text">
+                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/home-8x.png' %}">
+                                    Code Postal
+                                </label>
+                                {{ form.codePostal }}
+                            </div>
+                            <br>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/tel_fix.png' %}">
+                                    Téléphone Fixe
+                                </label>
+                                {{ form.telephoneFixe }}
+                            </div>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/tel_fix.png' %}">
+                                    Téléphone portable
+                                </label>
+                                {{ form.telephonePortable }}
+                            </div>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/mail-512.png' %}">
+                                    Mail
+                                </label>
+                                {{ form.email }}
+                            </div>
+                            <br>
+                            <div class="input-group mb-1">
+                                <label class="input-group-text">
+                                    Status
+                                </label>
+                                {{ form.status }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin bouton ajout-->
+
+    <!-- script pour les selecteurs de date-->
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="datepicker"]').datepicker({
+                format: 'yyyy-mm-dd',
+                autoHide: true,
+                zIndex: 2048,
+            });
+        });
+    </script>
+{% endblock %}

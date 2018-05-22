@@ -1,11 +1,39 @@
 {% block modal %}
     {% load static %}
+    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#demo-1">+</button>
 
-    <!--bouton ajout-->
-    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#exampleModal">+</button>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <!-- [ Modal #1 ] -->
+    <div class="modal fade" id="demo-1" tabindex="-1" role="dialog" style="display:none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal"><i class="icon-xs-o-md"></i></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter
+                        {% if  '/sponsor/' in request.path %}un sponsor{% endif %}
+                        {% if  '/intervenant/' in request.path %}un intervenant{% endif %}
+                        {% if  '/benevole/' in request.path %}un benevole{% endif %}
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ donationForm }}
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#demo-2"
+                            data-dismiss="modal">Ajouter un Sponsor
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [ Modal #2 ] -->
+    <div class="modal fade" id="demo-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="false" style="overflow: auto !important;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,12 +48,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="ui form" method="POST">{% csrf_token %}
-                        {{ form.as_table }}
+                    <form class="ui form" method="POST">
+                        {% csrf_token %}
+                        {{ form }}
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
                         </div>
                     </form>
                 </div>
@@ -34,7 +63,6 @@
     </div>
     <!--fin bouton ajout-->
 
-    </div>
 
 
 

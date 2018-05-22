@@ -20,7 +20,8 @@
 
                             {% getTriathlonNonFini as triathlons %}
                             {% for triathlon in triathlons %}
-                                <a class="dropdown-item" href="{% url 'selectTriathlon' triathlon.id %}">{{ triathlon }}</a>
+                                <a class="dropdown-item"
+                                   href="{% url 'selectTriathlon' triathlon.id %}">{{ triathlon }}</a>
                             {% endfor %}
 
                             <div class="dropdown-divider"></div>
@@ -31,35 +32,27 @@
                         </div>
                     </li>
 
-                    <li class="nav-item  px-3 "><a class="nav-link{% if  '/tache/' in request.path %} active {% endif %}" href="{% url 'listTache' %}">Tâches
+                    <li class="nav-item  px-3 "><a
+                            class="nav-link{% if  '/tache/' in request.path %} active {% endif %}"
+                            href="{% url 'listTache' %}">Tâches
                         <span class="sr-only">(current)</span>
                     </a></li>
                     <li class="ligne_verticale"></li>
                     <li class="nav-item {% if  '/personnel/' in request.path %}active{% endif %} px-3"><a
                             class="nav-link"
-                            href="{% url 'listSponsor' %}">Personnels</a>
+                            href="{% url 'listBenevole' %}">Personnels</a>
                     </li>
                     <li class="ligne_verticale"></li>
-                    <li class="nav-item {% if  '/stocks/' in request.path %}active{% endif %}  px-3"><a class="nav-link" href="{% url 'listStock' %}">Stocks</a></li>
+                    <li class="nav-item {% if  '/stock/' in request.path %}active{% endif %}  px-3"><a class="nav-link"
+                                                                                                       href="{% url 'listStock' %}">Stocks</a>
+                    </li>
+
+
                 </ul>
                 <ul class="navbar-nav ml-auto w-100 justify-content-end">
-
-                        {% if request.session.idTriathlon %}
-                        {{ request.session.idTriathlon | getTriathlonEnCours }}
-                        {% else %}
-                            Aucun Triathlon Selectionner
-                        {% endif %}
-
-
                     <li class="nav-item px-3 ">
                         <a class="nav-link" href="#">
-                            <span id="noti_Counter">{% nbrDonationPourTriatlon %}  </span>
-
-                            <img class="messagerie" alt="messagerie" src="{% static 'img/euro-8x.png' %}"></a></li>
-
-                    <li class="nav-item px-3 ">
-                        <a class="nav-link" href="#">
-                            <span id="noti_Counter">{% nbrTachesPourTriathlon %}</span>
+                            <span id="noti_Counter"></span>
 
                             <img class="messagerie" alt="messagerie" src="{% static 'img/task-8x.png' %}"></a></li>
 
@@ -67,20 +60,20 @@
                         <a class="nav-link" href="#">
                             <span id="noti_Counter">70</span>
 
-                            <img class="messagerie" alt="messagerie" src="{% static 'img/mail.png' %}"></a></li>
+                            <img class="messagerie" alt="messagerie" src="{% static 'img/chat-8x.png' %}"></a></li>
 
 
                     <li class="nav-item dropdown px-3"><a
                             class="nav-link dropdown-toggle" href="#"
                             id="navbarDropdownMenuLink1" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"><img class="compte" alt="messagerie"
-                                                                            src="{% static 'img/admin.png' %}">
+                                                                            src="{% static 'img/person-8x.png' %}">
                         {{ request.user.email }}</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink1">
                             <a class="dropdown-item" href="#"><img class="iconeadmin" alt="messagerie"
                                                                    src="{% static 'img/moncompte.png' %}">Mon
                                 compte</a>
-                            <a class="dropdown-item" href="#"><img class="iconeadmin" alt="messagerie"
+                            <a class="dropdown-item" href="/admin"><img class="iconeadmin" alt="messagerie"
                                                                    src="{% static 'img/parametres.png' %}">Paramètres</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'logout_user' %}" data-toggle="modal"

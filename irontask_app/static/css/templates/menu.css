@@ -1,79 +1,99 @@
 @charset "ISO-8859-1";
-.datepicker{
-	position:relative;
-	z-index:10;
+.datepicker {
+    position: relative;
+    z-index: 10;
 }
 
-.entête{
-	background: #F7F7F7;
-	padding-top: 54px;
+.entête {
+    background: #F7F7F7;
+    padding-top: 12px;
+    /*background-image: url("https://d112e54l47d6r7.cloudfront.net/runtime/p3media/pic-header-roadfitness-2015-triathlon-2000x400px-jpg-add217f270-1953.jpg");
+    */
 }
 
-.ligne_verticale
-{
-	width:1px;
-	border-left:1px solid white;
-}
-.ajouter{
-	position: fixed;
-	bottom: 32px;
-	right: 32px;
-	border-radius:50%;
-	width:45px;
-	height:45px;
-	line-height:1em; /* centrage vertical */
-	text-align:center; /* centrage horizontal */
-	box-shadow: 2px 2px 3px #aaa;
-	padding: 0;
-	margin: 0;
-	vertical-align:middle;
+.ligne_verticale {
+    width: 1px;
+    border-left: 1px solid white;
 }
 
-.card{
-	margin-bottom: 10px;
+.ajouter {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    line-height: 1em; /* centrage vertical */
+    text-align: center; /* centrage horizontal */
+    box-shadow: 2px 2px 3px #aaa;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
 }
-.panneauHaut{
-	height: 32px;
+
+.card {
+    margin-bottom: 10px;
 }
-.espaceModale{
-	margin-bottom: 16px;
+
+.panneauHaut {
+    height: 32px;
+}
+
+.espaceModale {
+    margin-bottom: 16px;
 }
 
 .logoit {
-	width: 3em;
-	height: 3em;
+    width: 3em;
+    height: 3em;
 }
+
 .messagerie {
-	width: 2em;
-	height: 2em;
+    width: 2em;
+    height: 2em;
 }
+
+.messagerie2 {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.messagerie3 {
+    margin-left: 3px;
+    width: 1em;
+    height: 1em;
+}
+
 .compte {
-	width: 2em;
-	height: 2em;
+    width: 2em;
+    height: 2em;
 }
-.iconeadmin{
-	vertical-align:middle;
-	width: 1em;
-	height: 1em;
-	margin-right: 12px;
+
+.iconeadmin {
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+    margin-right: 12px;
 
 }
+
 #noti_Counter {
-	position: relative;
-	background: #E1141E;
-	color: #FFF;
-	font-size: 10px;
-	font-weight: 400;
-	padding: 2px;
-	margin: 0em -4em 0em 2em;
-	border:none;
-	border-radius:8px;
-	z-index: 1;
-	top: 1em;
+    position: relative;
+    background: #E1141E;
+    color: #FFF;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 2px;
+    margin: 0em -4em 0em 2em;
+    border: none;
+    border-radius: 8px;
+    z-index: 1;
+    top: 1em;
 }
-.cardpadding{
-	display: -webkit-box;
- display: -webkit-flex;
- display: -ms-flexbox;
- display: flex;
+
+.cardpadding {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }

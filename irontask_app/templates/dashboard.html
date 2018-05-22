@@ -1,0 +1,59 @@
+{% block dashboard %}
+    {% load static %}
+    {% load filters %}
+
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        Bonjour {{ request.user }}, vous êtes actuellement sur le triathlon :
+                        {% if request.session.idTriathlon %}
+                            <a class="nav-link"
+                               href="{% url 'voirTriathlon' request.session.idTriathlon %}">
+                                {{ request.session.idTriathlon | getTriathlonEnCours }} <img class="messagerie3"
+                                                                                             alt="messagerie"
+                                                                                             src="{% static 'img/pencil-8x.png' %}"></a>
+                        {% else %}
+                            <a class="nav-link" href="{% url 'choisirTriathlon' %}">Aucun triathlon selectionné</a>
+
+                        {% endif %} </div>
+
+
+                    <div class="col-6 col-md-4">
+                        <p><img class="messagerie2" alt="messagerie" src="{% static 'img/task-8x-black.png' %}">
+                            Vous avez <a
+                                    href="{% url 'listTache' %}"> {{ request.session.idTriathlon |  nbrTachesPourTriathlon }} </a>
+                            tâche(s) dont
+                            <a href=""> {{ request.session.idTriathlon | nbrTacheEnRetardPourTriathlon }} </a> en retard
+                        </p>
+
+                        <p><img class="messagerie2" alt="messagerie" src="{% static 'img/person-8x-black.png' %}">
+                            Vous avez <a
+                                    href="{% url 'listBenevole' %}"> {{ request.session.idTriathlon | nbrBenevolesAffecte }} </a>
+                            bénévole(s) affecté(s) </p>
+
+                    </div>
+
+                    <div class="col-6 col-md-4">
+
+                        <p><img class="messagerie2" alt="messagerie" src="{% static 'img/euro-8x-black.png' %}">
+                            Vous avez <a
+                                    href="{% url 'listSponsor' %}"> {{ request.session.idTriathlon |  nbrTotalEurosPourTriatlon }} </a>
+                            euros pour <a href="{% url 'listDonationTriathlon' %}"> {{ request.session.idTriathlon |  nbrDonationPourTriatlon }} </a>
+                            donation(s) </p>
+
+
+                        <img class="messagerie2" alt="messagerie" src="{% static 'img/wrench-8x.png' %}">
+                        Vous n'avez pas de matériels manquant </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
