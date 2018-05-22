@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django_tables2 import RequestConfig
 
-from irontask_app.models import Intervenant
+from irontask_app.forms.devisForms import DevisForm
+from irontask_app.models import Intervenant, Triathlon
 from django.urls import reverse
 from irontask_app.forms.IntervenantForm import IntervenantForm
 from django.contrib.auth.decorators import login_required
@@ -21,6 +22,7 @@ def listIntervenant(request):
 
     intervenant = Intervenant.objects.all()
     intervenantForm = IntervenantForm()
+    devisForm = DevisForm()
 
     table = IntervenantTables(Intervenant.objects.all())
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
@@ -34,10 +36,21 @@ def listIntervenant(request):
             intervenant.save()
         return redirect(listIntervenant)
     return render(request, 'personnels/Intervenant/listIntervenant.html',
-                  {'Intervenant': intervenant, 'form': intervenantForm, 'table': table})
+                  {'Intervenant': intervenant, 'form': intervenantForm, 'table': table, 'devisForm':devisForm})
 
 
-
+@login_required(login_url='login/')
+@triathlon_required
+def ajouterDevis(request):
+    tria = Triathlon.objects.get(id=request.session['idTriathlon'])
+    if request.method == 'POST':
+        devisForm = DevisForm(request.POST)
+        if devisForm.is_valid():
+            donation = devisForm.save(commit=False)
+            donation.fk_triathlon = tria
+            donation.save()
+            return HttpResponseRedirect('/personnel/intervenant/')
+        return HttpResponseRedirect('/personnel/internvenant/')
 
 @login_required(login_url='login/')
 @triathlon_required
