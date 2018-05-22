@@ -40,8 +40,10 @@
 
                         <p><img class="messagerie2" alt="messagerie" src="{% static 'img/euro-8x-black.png' %}">
                             Vous avez <a
-                                    href="{% url 'listSponsor' %}"> {{ request.session.idTriathlon |  nbrTotalEurosPourTriatlon }} </a>
-                            euros pour <a href="{% url 'listDonationTriathlon' %}"> {{ request.session.idTriathlon | nbrDonationPourTriatlon }} </a>
+
+                                    href="{% url 'listSponsor' %}">{{ request.session.idTriathlon |  nbrTotalEurosPourTriatlon }} </a>
+                            euros pour <a
+                                    href="{% url 'listDonationTriathlon' %}"> {{ request.session.idTriathlon | nbrDonationPourTriatlon }} </a>
                             donation(s) </p>
 
 

@@ -29,7 +29,10 @@ def nbrDonationPourTriatlon(session):
 @register.filter
 def nbrTotalEurosPourTriatlon(session):
     somme = Sponsoriser.objects.filter(fk_triathlon=session).aggregate(Sum('donation'))['donation__sum']
-    return somme
+    if somme == None:
+        return 0
+    else:
+        return somme
 
 
 @register.filter
