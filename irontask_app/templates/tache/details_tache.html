@@ -22,7 +22,7 @@
     <br>
     <br>
     <!-- Taches -->
-    {% for tache in Tache %}
+
         <div class="container">
             <div class="card">
                 <div class="card-header">
@@ -128,41 +128,16 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
-
-    <!-- Fin Stock-->
-
-    <!-- Bouton Plus pour ajouter un Benevole -->
-
-    <span class="plus"></span>
-
-    <!-- Pagination -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 py-5 d-flex">
-                <ul class="pagination mx-auto">
-                    <div class="pagination">
-                        <span class="step-links">
-                            {% if Tache.has_previous %}
-                                <a href="?page={{ Tache.previous_page_number }}">Precèdent</a>
-                            {% endif %}
-                            <span class="current">
-                                Page {{ Stock.number }} de {{ Tache.paginator.num_pages }}.
-                            </span>
-                            {% if Tache.has_next %}
-                                <a href="?page={{ Tache.next_page_number }}">Suivant</a>
-                            {% endif %}
-                         </span>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fin pagination -->
 
 
-    {% include "tache/modalAjoutTache.html" %}
+
+
+    <!-- Bouton Plus pour ajouter un Benevole Affecter à la tache-->
+
+   <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#demo-1">+</button>
+
+
+
+    {% include "tache/modalAjoutBenevoleAffecter.html" %}
 
 {% endblock %}

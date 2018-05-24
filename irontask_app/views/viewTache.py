@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django_tables2 import RequestConfig
 
+from irontask_app.forms.AffecterForm import AffecterForm
 from irontask_app.forms.TacheFrom import TacheForm
 from irontask_app.models import Materiel, Triathlon
 from django.core.paginator import Paginator
@@ -58,8 +59,16 @@ def editerTache(request, id):
 @login_required(login_url='login/')
 @triathlon_required
 def getTache(request, id):
-    tache = Materiel.objects.get(id=id)
-    return render(request, 'tache/voirTache.html', {'Tache': tache})
+    affecterForm = AffecterForm()
+    tache = Tache.objects.get(id=id)
+    if request.method == 'POST':
+        affecterForm = AffecterForm(request.POST)
+        print(affecterForm.errors)
+        if affecterForm.is_valid():
+            affecter = affecterForm.save(commit=False)
+            affecter.fk_tache = tache
+            affecter.save()
+    return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm})
 
 
 @login_required(login_url='login/')
