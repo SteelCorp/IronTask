@@ -1,8 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django_tables2 import RequestConfig
 
 from irontask_app.forms.AffecterForm import AffecterForm
+from irontask_app.forms.BenevoleForm import BenevoleForm
 from irontask_app.forms.TacheFrom import TacheForm
 from irontask_app.models import Materiel, Triathlon, Benevole
 from django.core.paginator import Paginator
@@ -21,22 +24,25 @@ def listTache(request):
 
     table = TachesTables(Tache.objects.filter(fk_triathlon=request.session['idTriathlon']))
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
+
     tacheForm = TacheForm()
+    benevoleForm = BenevoleForm()
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""
     if request.method == 'POST':
-        tacheForm = TacheForm(request.POST)
+        benevoleForm = BenevoleForm(request.POST)
 
-        if tacheForm.is_valid():
-            tachem = tacheForm.save(commit=False)
-            tachem.fk_triathlon = Triathlon.objects.get(id=request.session['idTriathlon'])
-            tachem.save()
+        if benevoleForm.is_valid():
+            benevoleF = benevoleForm.save(commit=False)
+            benevoleF .save()
+            return render(request, 'tache/listTaches.html',
+                          {'table': table, 'form': tacheForm, 'benevoleForm': benevoleForm, 'successful_submit': True})
         else:
             """ Passe le message d'error du formulaire à la template
             afin de l'afficher en cas d'erreur dans le formulaire"""
             messages.add_message(request, messages.INFO, tacheForm.errors)
         return redirect(listTache)
-    return render(request, 'tache/listTaches.html', {'table': table, 'form': tacheForm})
+    return render(request, 'tache/listTaches.html', {'table': table, 'form': tacheForm, 'benevoleForm': benevoleForm, 'successful_submit': False})
 
 
 @login_required(login_url='login/')
@@ -67,6 +73,7 @@ def getTache(request, id):
     affecterForm = AffecterForm()
 
 
+
     tache = Tache.objects.get(id=id)
     if request.method == 'POST':
         affecterForm = AffecterForm(request.POST)
@@ -75,6 +82,7 @@ def getTache(request, id):
             affecter = affecterForm.save(commit=False)
             affecter.fk_tache = tache
             affecter.save()
+            return redirect(reverse('getTache', kwargs={"id": id}))
     return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm, 'table' : table})
 
 
@@ -87,5 +95,20 @@ def deleteTache(request, id):
 
 
 @login_required(login_url='login/')
-def createTache(request):
-    return render(request)
+@triathlon_required
+def ajouterTache(request):
+    """
+
+    :param request:
+    :return: Vue qui permet à la modal de faire une request de Type POST afin d'ajouter une donation
+    """
+    tria = Triathlon.objects.get(id=request.session['idTriathlon'])
+    if request.method == 'POST':
+        tacheForm = TacheForm(request.POST)
+        print("salope")
+        if tacheForm.is_valid():
+            tache = tacheForm.save(commit=False)
+            tache.fk_triathlon = tria
+            tache.save()
+            return HttpResponseRedirect('/tache')
+        return HttpResponseRedirect('/tache')

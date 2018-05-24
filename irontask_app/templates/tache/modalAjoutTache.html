@@ -1,12 +1,9 @@
 {% block modal %}
     {% load static %}
+    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#demo-1">+</button>
 
-
-    <!--bouton ajout-->
-    <button type="button" class="btn btn-primary ajouter" data-toggle="modal" data-target="#exampleModal">+</button>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <!-- [ Modal #1 ] -->
+    <div class="modal fade" id="demo-1" tabindex="-1" role="dialog" style="display:none;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -17,7 +14,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="ui form" method="POST">{% csrf_token %}
+                    <form action="{% url 'ajouterTache' %}" class="ui form" method="POST">{% csrf_token %}
 
                         <div class="container-fluid">
                             <div class="row">
@@ -95,8 +92,11 @@
                                 <div class="input-group mb-1">
                                     {{ form.fk_benevole }}
                                     <div class="input-group-append">
-                                        <label class="input-group-text" for="inputGroupSelect03">Benevole</label>
+                                        <label class="input-group-text" for="inputGroupSelect03">Responsable</label>
                                     </div>
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#demo-2"
+                            data-dismiss="modal">Ajouter un Benevole
+                    </button>
                                 </div>
                             </div>
 
@@ -106,19 +106,50 @@
                             </div>
                     </form>
                 </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--fin bouton ajout-->
+
+    <!-- [ Modal #2 ] -->
+    <div class="modal fade" id="demo-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="false" style="overflow: auto !important;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un benevole
+
+                    </h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="ui form" method="POST">
+                        {% csrf_token %}
+                        {{ benevoleForm }}
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </div>
+                        {% if successful_submit == True %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#demo-1").modal('show');
+        });
+    </script>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
     <!--fin bouton ajout-->
 
-    <!-- script pour les selecteurs de date-->
-    <script type="text/javascript">
-        $(function () {
-            $('[data-toggle="datepicker"]').datepicker({
-                format: 'yyyy-mm-dd',
-                autoHide: true,
-                zIndex: 2048,
-            });
-        });
-    </script>
+{% endif %}
+
 {% endblock %}

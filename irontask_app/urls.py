@@ -59,6 +59,7 @@ urlpatterns = [
     path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
     path('tache/liste/supprimer/<id>', viewTache.deleteTache, name='deleteTache'),
     path('tache/liste/editer/<id>', viewTache.editerTache, name='editerTache'),
+    path('tache/ajouter/', viewTache.ajouterTache, name='ajouterTache'),
 
     # url(r'api/', include(router.urls))
 

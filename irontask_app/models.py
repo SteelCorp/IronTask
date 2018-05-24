@@ -277,4 +277,5 @@ class Affecter(models.Model):
         return self.fk_benevole.__str__() + " affecter à la tâche id :" + str(self.fk_tache.id)
 
     class Meta:
+        unique_together = (('fk_benevole', 'fk_tache'),)
         verbose_name_plural = "Affectation des bénévoles"
