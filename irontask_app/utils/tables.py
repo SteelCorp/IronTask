@@ -1,4 +1,4 @@
-from irontask_app.models import Sponsor, Intervenant, Benevole, Tache, Sponsoriser
+from irontask_app.models import Sponsor, Intervenant, Benevole, Tache, Sponsoriser, Affecter
 import django_tables2 as tables
 from django.urls import reverse
 from django_tables2.utils import A
@@ -72,5 +72,11 @@ class TachesTables(tables.Table):
 class DonationTriathlonTables(tables.Table):
     class Meta:
         model = Sponsoriser
+        template_name = 'django_tables2/bootstrap4.html'
+        exclude = 'id', 'fk_triathlon'
+
+class AffectationListeTables(tables.Table):
+    class Meta:
+        model = Affecter
         template_name = 'django_tables2/bootstrap4.html'
         exclude = 'id', 'fk_triathlon'

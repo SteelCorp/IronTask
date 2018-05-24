@@ -4,14 +4,14 @@ from django_tables2 import RequestConfig
 
 from irontask_app.forms.AffecterForm import AffecterForm
 from irontask_app.forms.TacheFrom import TacheForm
-from irontask_app.models import Materiel, Triathlon
+from irontask_app.models import Materiel, Triathlon, Benevole
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
 from irontask_app.utils.decorators import triathlon_required
 from datetime import date
 
-from irontask_app.utils.tables import TachesTables
+from irontask_app.utils.tables import TachesTables, AffectationListeTables, BenevoleTables
 
 
 @login_required(login_url='login/')
@@ -59,7 +59,14 @@ def editerTache(request, id):
 @login_required(login_url='login/')
 @triathlon_required
 def getTache(request, id):
+
+    table = BenevoleTables(Benevole.objects.filter(affecter__fk_tache=id))
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
+
+
     affecterForm = AffecterForm()
+
+
     tache = Tache.objects.get(id=id)
     if request.method == 'POST':
         affecterForm = AffecterForm(request.POST)
@@ -68,7 +75,7 @@ def getTache(request, id):
             affecter = affecterForm.save(commit=False)
             affecter.fk_tache = tache
             affecter.save()
-    return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm})
+    return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm, 'table' : table})
 
 
 @login_required(login_url='login/')
