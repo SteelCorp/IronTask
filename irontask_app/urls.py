@@ -73,5 +73,6 @@ urlpatterns = [
 
     #dashboard
     path('personnel/donation/triathlon_courant', viewSponsorDonation.listDonationTriathlon, name='listDonationTriathlon'),
+    path('personnel/benevole/affecter/', viewBenevole.listBenevoleAffecter, name='listBenevoleAffecter'),
 
 ]

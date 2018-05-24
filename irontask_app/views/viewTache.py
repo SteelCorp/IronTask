@@ -105,10 +105,10 @@ def ajouterTache(request):
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         tacheForm = TacheForm(request.POST)
-        print("salope")
+
         if tacheForm.is_valid():
             tache = tacheForm.save(commit=False)
             tache.fk_triathlon = tria
             tache.save()
-            return HttpResponseRedirect('/tache')
-        return HttpResponseRedirect('/tache')
+            return HttpResponseRedirect('/tache/liste/')
+        return HttpResponseRedirect('/tache/liste/')

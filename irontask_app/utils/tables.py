@@ -80,3 +80,10 @@ class AffectationListeTables(tables.Table):
         model = Affecter
         template_name = 'django_tables2/bootstrap4.html'
         exclude = 'id', 'fk_triathlon'
+
+class BenevoleAffecterTables(tables.Table):
+
+
+    class Meta:
+        model = Benevole
+        template_name = 'django_tables2/bootstrap4.html'
