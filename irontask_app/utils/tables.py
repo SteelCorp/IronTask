@@ -33,7 +33,25 @@ class BenevoleTables(tables.Table):
         model = Benevole
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret'
+        exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret', 'dateNaissance'
+
+
+
+class BenevoleTacheTables(tables.Table):
+
+
+
+    supprimer = tables.LinkColumn('supprimerAffectation', args=[A('pk')], text='Supprimer')
+
+
+
+    class Meta:
+        model = Affecter
+        template_name = 'django_tables2/bootstrap4.html'
+        attrs = {"class": "table table-condensed table-striped table-hover"}
+        exclude = 'dateAjout', 'id', 'dateAjout', 'fk_tache'
+
+
 
 
 class PriorityColumn(tables.Column):
@@ -91,9 +109,11 @@ class AffectationListeTables(tables.Table):
         template_name = 'django_tables2/bootstrap4.html'
         exclude = 'id', 'fk_triathlon'
 
+
+
 class BenevoleAffecterTables(tables.Table):
     editer = tables.LinkColumn('getBenevole', args=[A('pk')], text='voir')
     class Meta:
         model = Benevole
         template_name = 'django_tables2/bootstrap4.html'
-        exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret'
+        exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret', 'dateNaissance'

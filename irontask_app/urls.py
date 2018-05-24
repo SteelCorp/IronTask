@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
-    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation
+    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation, viewAffecter
 from django.conf.urls import url
 
 
@@ -60,6 +60,9 @@ urlpatterns = [
     path('tache/liste/supprimer/<id>', viewTache.deleteTache, name='deleteTache'),
     path('tache/liste/editer/<id>', viewTache.editerTache, name='editerTache'),
     path('tache/ajouter/', viewTache.ajouterTache, name='ajouterTache'),
+
+    #Gestion des affectations
+    path('affecter/supprimer/<pk>/', viewAffecter.supprimer, name='supprimerAffectation'),
 
     # url(r'api/', include(router.urls))
 
