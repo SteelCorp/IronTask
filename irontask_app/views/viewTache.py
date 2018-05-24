@@ -7,14 +7,14 @@ from django_tables2 import RequestConfig
 from irontask_app.forms.AffecterForm import AffecterForm
 from irontask_app.forms.BenevoleForm import BenevoleForm
 from irontask_app.forms.TacheFrom import TacheForm
-from irontask_app.models import Materiel, Triathlon, Benevole
+from irontask_app.models import Materiel, Triathlon, Benevole, Affecter
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
 from irontask_app.utils.decorators import triathlon_required
 import datetime
 
-from irontask_app.utils.tables import TachesTables, AffectationListeTables, BenevoleTables
+from irontask_app.utils.tables import TachesTables, AffectationListeTables, BenevoleTables, BenevoleTacheTables
 
 
 @login_required(login_url='login/')
@@ -66,8 +66,10 @@ def editerTache(request, id):
 @triathlon_required
 def getTache(request, id):
 
-    table = BenevoleTables(Benevole.objects.filter(affecter__fk_tache=id))
+
+    table = BenevoleTacheTables(Affecter.objects.filter(fk_tache=id))
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
+
 
 
     affecterForm = AffecterForm()
@@ -77,11 +79,11 @@ def getTache(request, id):
     tache = Tache.objects.get(id=id)
     if request.method == 'POST':
         affecterForm = AffecterForm(request.POST)
-        print(affecterForm.errors)
         if affecterForm.is_valid():
             affecter = affecterForm.save(commit=False)
             affecter.fk_tache = tache
             affecter.save()
+
             return redirect(reverse('getTache', kwargs={"id": id}))
     return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm, 'table' : table})
 

@@ -130,6 +130,8 @@ class Benevole(models.Model):
     email = models.EmailField(blank=False, null=False, verbose_name='Email')
     dateAjout = models.DateField(auto_now_add=True)
 
+
+
     def __str__(self):
         """Retourne un string representant le benevole"""
         return self.nom + " " + self.prenom
@@ -269,13 +271,18 @@ class Allouer(models.Model):
 class Affecter(models.Model):
     """Class Represantant le lien caractérisant entre benevole et tache"""
 
-    fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False)
+    fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False, verbose_name='Benevole')
     fk_tache = models.ForeignKey(Tache, on_delete=models.CASCADE, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.fk_benevole.__str__() + " affecter à la tâche id :" + str(self.fk_tache.id)
 
+    @property
+    def time_data(self):
+        origins = Affecter.origin.all()
+
+        return ' '.join([str(x.time.value) for x in origins])
     class Meta:
         unique_together = (('fk_benevole', 'fk_tache'),)
         verbose_name_plural = "Affectation des bénévoles"
