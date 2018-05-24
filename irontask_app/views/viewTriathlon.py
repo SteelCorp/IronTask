@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from irontask_app.models import Triathlon, Sponsoriser, Sponsor
+from irontask_app.models import Triathlon, Sponsoriser, Sponsor, Tache
 from irontask_app.forms.TriathlonForm import *
 from irontask_app.urls import *
 import datetime
@@ -44,8 +44,9 @@ def voirTriathlon(request, pk):
     """
     triathlon = Triathlon.objects.get(pk=pk)
     nbrSponsor = Sponsor.objects.filter(sponsoriser__fk_triathlon=triathlon).count()
+    nbrTache = Tache.objects.filter(fk_triathlon=triathlon).count()
 
-    return render(request, "triathlon/voirTriathlon.html", {'triathlon': triathlon, 'nbrSponsor': nbrSponsor})
+    return render(request, "triathlon/voirTriathlon.html", {'triathlon': triathlon, 'nbrSponsor': nbrSponsor,  'nbrTache': nbrTache})
 
 
 @login_required(login_url='login/')
