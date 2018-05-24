@@ -1,5 +1,5 @@
 from django.db import models
-from irontask_app.validators import *
+from irontask_app.utils.validators import *
 from django.contrib.auth.models import User
 
 
