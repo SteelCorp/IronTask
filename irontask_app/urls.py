@@ -4,11 +4,8 @@ from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
     viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation
 from django.conf.urls import url
 
-<<<<<<< Updated upstream
-=======
 
 from irontask_app import views
->>>>>>> Stashed changes
 
 admin.site.site_header = 'IronTask Administration'
 urlpatterns = [

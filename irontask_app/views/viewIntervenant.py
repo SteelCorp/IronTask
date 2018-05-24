@@ -11,8 +11,8 @@ from irontask_app.forms.IntervenantForm import IntervenantForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import IntervenantTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import IntervenantTables
 
 
 @login_required(login_url='login/')

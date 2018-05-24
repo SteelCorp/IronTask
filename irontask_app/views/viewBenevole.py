@@ -10,8 +10,8 @@ from irontask_app.forms.BenevoleForm import BenevoleForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import BenevoleTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import BenevoleTables
 
 from django_tables2 import RequestConfig
 

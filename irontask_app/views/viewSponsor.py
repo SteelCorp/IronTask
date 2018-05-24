@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.core.paginator import Paginator
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import SponsorTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import SponsorTables
 from django_tables2 import RequestConfig
 
 

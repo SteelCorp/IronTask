@@ -7,7 +7,7 @@ from irontask_app.forms.StockForm import StockForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Materiel
-from irontask_app.decorators import triathlon_required
+from irontask_app.utils.decorators import triathlon_required
 
 
 @login_required(login_url='login/')

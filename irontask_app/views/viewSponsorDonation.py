@@ -7,8 +7,8 @@ from irontask_app.models import Sponsoriser, Triathlon
 from django.contrib.auth.decorators import login_required
 from irontask_app.forms.DonationForm import DonationForm
 from django.contrib import messages
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import DonationTriathlonTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import DonationTriathlonTables
 
 
 @login_required(login_url='login/')

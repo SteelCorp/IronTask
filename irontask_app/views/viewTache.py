@@ -7,10 +7,10 @@ from irontask_app.models import Materiel, Triathlon
 from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
-from irontask_app.decorators import triathlon_required
+from irontask_app.utils.decorators import triathlon_required
 from datetime import date
 
-from irontask_app.tables import TachesTables
+from irontask_app.utils.tables import TachesTables
 
 
 @login_required(login_url='login/')
