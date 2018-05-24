@@ -26,7 +26,7 @@
                             Vous avez <a
                                     href="{% url 'listTache' %}"> {{ request.session.idTriathlon |  nbrTachesPourTriathlon }} </a>
                             tâche(s) dont
-                            <a href=""> {{ request.session.idTriathlon | nbrTacheEnRetardPourTriathlon }} </a> en retard
+                            <a href="{% url 'listTacheRetard' %}"> {{ request.session.idTriathlon | nbrTacheEnRetardPourTriathlon }} </a> en retard
                         </p>
 
                         <p><img class="messagerie2" alt="messagerie" src="{% static 'img/person-8x-black.png' %}">

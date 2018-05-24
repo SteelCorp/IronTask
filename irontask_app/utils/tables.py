@@ -66,8 +66,18 @@ class TachesTables(tables.Table):
         model = Tache
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude = 'id', 'fk_triathlon', 'fk_benevole'
+        exclude = 'id', 'fk_triathlon', 'fk_benevole', 'description', 'dateRappel'
 
+
+class TachesEnRetardTables(tables.Table):
+    niveauPriorite = PriorityColumn()
+    editer = tables.LinkColumn('getTache', args=[A('id')], text='voir')
+
+    class Meta:
+        model = Tache
+        template_name = 'django_tables2/bootstrap4.html'
+        attrs = {"class": "table table-condensed table-striped table-hover"}
+        exclude = 'id', 'fk_triathlon', 'fk_benevole'
 
 class DonationTriathlonTables(tables.Table):
     class Meta:
@@ -82,8 +92,8 @@ class AffectationListeTables(tables.Table):
         exclude = 'id', 'fk_triathlon'
 
 class BenevoleAffecterTables(tables.Table):
-
-
+    editer = tables.LinkColumn('getBenevole', args=[A('pk')], text='voir')
     class Meta:
         model = Benevole
         template_name = 'django_tables2/bootstrap4.html'
+        exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret'

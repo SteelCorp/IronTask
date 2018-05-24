@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from irontask_app.models import Tache
 from irontask_app.utils.decorators import triathlon_required
-from datetime import date
+import datetime
 
 from irontask_app.utils.tables import TachesTables, AffectationListeTables, BenevoleTables
 
@@ -112,3 +112,30 @@ def ajouterTache(request):
             tache.save()
             return HttpResponseRedirect('/tache/liste/')
         return HttpResponseRedirect('/tache/liste/')
+
+
+def listTacheRetard(request):
+    """Vue qui retourne la liste de toutes les taches en retard"""
+
+    table = TachesTables(Tache.objects.filter(fk_triathlon=request.session['idTriathlon'], dateFin__lt=datetime.date.today()))
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
+
+    tacheForm = TacheForm()
+    benevoleForm = BenevoleForm()
+
+    """ si méthode POST alors sauvegarder resultat du formulaire"""
+    if request.method == 'POST':
+        benevoleForm = BenevoleForm(request.POST)
+
+        if benevoleForm.is_valid():
+            benevoleF = benevoleForm.save(commit=False)
+            benevoleF.save()
+            return render(request, 'tache/listTaches.html',
+                          {'table': table, 'form': tacheForm, 'benevoleForm': benevoleForm, 'successful_submit': True})
+        else:
+            """ Passe le message d'error du formulaire à la template
+            afin de l'afficher en cas d'erreur dans le formulaire"""
+            messages.add_message(request, messages.INFO, tacheForm.errors)
+        return redirect(listTache)
+    return render(request, 'tache/listTaches.html',
+                  {'table': table, 'form': tacheForm, 'benevoleForm': benevoleForm, 'successful_submit': False})
