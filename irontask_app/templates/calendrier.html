@@ -66,7 +66,12 @@
                         end: '{{ tache.dateFin.isoformat }}',
                         url: '{% url 'getTache' tache.id %}',
                     {% if tache.niveauPriorite == '3' %}
-                        color  : 'red'
+                        color  : '#FF3333',
+                        {% elif tache.niveauPriorite == '2'  %}
+                        color  : '#FF8585',
+                        {% elif tache.niveauPriorite == '1'  %}
+                        color  : '#FFC299'
+
                     {% endif %}
                     },
 

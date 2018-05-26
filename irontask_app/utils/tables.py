@@ -95,6 +95,7 @@ class TachesTables(tables.Table):
         '<a href="{% url "getTache" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
         verbose_name=u'Voir', )
 
+
     class Meta:
         model = Tache
         template_name = 'django_tables2/bootstrap4.html'
