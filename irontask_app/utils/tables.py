@@ -19,7 +19,7 @@ class SponsorTables(tables.Table):
 
     class Meta:
         model = Sponsor
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout', 'siret'
 
@@ -33,7 +33,7 @@ class IntervenantTables(tables.Table):
 
     class Meta:
         model = Intervenant
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout', 'siret'
 
@@ -45,7 +45,7 @@ class BenevoleTables(tables.Table):
 
     class Meta:
         model = Benevole
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret', 'dateNaissance'
 
@@ -60,7 +60,7 @@ class BenevoleTacheTables(tables.Table):
 
     class Meta:
         model = Affecter
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'dateAjout', 'id', 'dateAjout', 'fk_tache'
 
@@ -98,7 +98,7 @@ class TachesTables(tables.Table):
 
     class Meta:
         model = Tache
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'id', 'fk_triathlon', 'fk_benevole', 'description', 'dateRappel', 'dateAjout'
 
@@ -111,20 +111,21 @@ class TachesEnRetardTables(tables.Table):
 
     class Meta:
         model = Tache
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
         exclude = 'id', 'fk_triathlon', 'fk_benevole', 'dateAjout'
 
 class DonationTriathlonTables(tables.Table):
     class Meta:
         model = Sponsoriser
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         exclude = 'id', 'fk_triathlon'
+
 
 class AffectationListeTables(tables.Table):
     class Meta:
         model = Affecter
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         exclude = 'id', 'fk_triathlon'
 
 
@@ -133,7 +134,8 @@ class BenevoleAffecterTables(tables.Table):
     editer = tables.TemplateColumn(
         '<a href="{% url "getBenevole" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
         verbose_name=u'Voir', )
+
     class Meta:
         model = Benevole
-        template_name = 'django_tables2/bootstrap4.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
         exclude = 'dateAjout', 'id', 'sexe', 'status', 'siret', 'dateNaissance'
