@@ -64,8 +64,12 @@
                         title: '{{ tache.nomTache }}',
                         start: '{{ tache.dateDebut.isoformat }}',
                         end: '{{ tache.dateFin.isoformat }}',
-                        url: '{% url 'getTache' tache.id %}'
+                        url: '{% url 'getTache' tache.id %}',
+                    {% if tache.niveauPriorite == '3' %}
+                        color  : 'red'
+                    {% endif %}
                     },
+
 
                 {% endfor %}
             ]
