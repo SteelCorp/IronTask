@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -70,19 +71,20 @@ def getTache(request, id):
     table = BenevoleTacheTables(Affecter.objects.filter(fk_tache=id))
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
-
-
     affecterForm = AffecterForm()
-
 
 
     tache = Tache.objects.get(id=id)
     if request.method == 'POST':
         affecterForm = AffecterForm(request.POST)
         if affecterForm.is_valid():
-            affecter = affecterForm.save(commit=False)
-            affecter.fk_tache = tache
-            affecter.save()
+            try:
+                affecter = affecterForm.save(commit=False)
+                affecter.fk_tache = tache
+                affecter.save()
+            except IntegrityError:
+                messages.add_message(request, messages.INFO, "Le Bénévole est déjà affecté à cette tâche")
+
 
             return redirect(reverse('getTache', kwargs={"id": id}))
     return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm, 'table' : table})
