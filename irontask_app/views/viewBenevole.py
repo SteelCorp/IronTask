@@ -71,7 +71,7 @@ def getBenevole(request, pk):
 @triathlon_required
 def deleteBenevole(request, pk):
     """Vue qui permet de supprimer un intervenant
-    :param id est la primary key d'un intervenant
+    :param pk est la primary key d'un intervenant
     """
     Benevole.objects.filter(pk=pk).delete()
     return redirect(reverse(viewname=listBenevole))

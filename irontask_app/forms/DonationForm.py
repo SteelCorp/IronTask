@@ -14,3 +14,14 @@ class DonationForm(ModelForm):
     class Meta:
         model = Sponsoriser
         exclude = {'fk_triathlon'}
+
+
+class DonationFormSansSponsor(ModelForm):
+    donation = forms.IntegerField(label="Donation : ", widget=forms.TextInput({"type": "text", "class": "form-control",
+                                                                               "id": "formGroupExampleInput",
+                                                                               "placeholder": ""}))
+
+
+    class Meta:
+        model = Sponsoriser
+        exclude = {'fk_triathlon', 'fk_sponsor'}

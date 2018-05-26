@@ -230,10 +230,10 @@ class Intervenir(models.Model):
 class Sponsoriser(models.Model):
     """Class Representant le lien entre triathlon et Sponsor"""
 
-    donation = models.PositiveIntegerField(null=False, blank=False)
-    fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
-    fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
-    dateAjout = models.DateField(auto_now_add=True)
+    donation = models.PositiveIntegerField(null=False, blank=False, verbose_name="Donation")
+    fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False, verbose_name='Triathlon')
+    fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False, verbose_name='Sponsor')
+    dateAjout = models.DateField(auto_now_add=True, verbose_name="Date d'ajout")
 
     def __str__(self):
         return str(self.donation) + "€ de " + self.fk_sponsor.__str__() + " pour le " + self.fk_triathlon.__str__()

@@ -47,6 +47,7 @@ def ajouterDonation(request):
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         donationForm = DonationForm(request.POST)
+
         if donationForm.is_valid():
             donation = donationForm.save(commit=False)
             donation.fk_triathlon = tria

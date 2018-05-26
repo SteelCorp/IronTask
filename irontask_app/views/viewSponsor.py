@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor, Sponsoriser, Triathlon
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
-from irontask_app.forms.DonationForm import DonationForm
+from irontask_app.forms.DonationForm import DonationForm, DonationFormSansSponsor
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -81,11 +81,14 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
     listDonationSponsor = Sponsoriser.objects.filter(fk_sponsor=siret)
-    donationForm = DonationForm
+    donationForm = DonationFormSansSponsor()
+
+
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""
     if request.method == 'POST':
-        donationForm = DonationForm(request.POST)
+        donationForm = DonationFormSansSponsor(request.POST)
+        donationForm.fk_sponsor = sponsor
 
         if donationForm.is_valid():
             """
