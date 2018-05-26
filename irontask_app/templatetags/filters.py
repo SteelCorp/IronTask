@@ -13,7 +13,7 @@ register = template.Library()
 @register.filter
 def nbrBenevolesAffecte(session):
     # à Refaire marche pas pour le moment
-    return Benevole.objects.filter(affecter__fk_tache__fk_triathlon=session).count()
+    return Benevole.objects.filter(affecter__fk_tache__fk_triathlon=session).distinct().count()
 
 
 @register.filter

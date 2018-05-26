@@ -94,7 +94,7 @@ def listBenevoleAffecter(request):
 
 
     triathlon = Triathlon.objects.get(id=request.session['idTriathlon'])
-    table = BenevoleAffecterTables(Benevole.objects.filter(affecter__fk_tache__fk_triathlon=triathlon))
+    table = BenevoleAffecterTables(Benevole.objects.filter(affecter__fk_tache__fk_triathlon=triathlon).distinct())
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
 
 
