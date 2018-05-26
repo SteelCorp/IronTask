@@ -1,3 +1,5 @@
+from html import escape
+
 from irontask_app.models import Sponsor, Intervenant, Benevole, Tache, Sponsoriser, Affecter
 import django_tables2 as tables
 from django.urls import reverse
@@ -6,8 +8,14 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 
+
 class SponsorTables(tables.Table):
-    editer = tables.LinkColumn('getSponsor', args=[A('pk')], text='voir')
+    editer = tables.TemplateColumn(
+        '<a href="{% url "getSponsor" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Voir', )
+
+
+
 
     class Meta:
         model = Sponsor
@@ -17,7 +25,11 @@ class SponsorTables(tables.Table):
 
 
 class IntervenantTables(tables.Table):
-    editer = tables.LinkColumn('getIntervenant', args=[A('pk')], text='voir')
+    editer = tables.TemplateColumn(
+        '<a href="{% url "getIntervenant" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Voir', )
+
+
 
     class Meta:
         model = Intervenant
@@ -27,7 +39,9 @@ class IntervenantTables(tables.Table):
 
 
 class BenevoleTables(tables.Table):
-    editer = tables.LinkColumn('getBenevole', args=[A('pk')], text='voir')
+    editer = tables.TemplateColumn(
+        '<a href="{% url "getBenevole" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Voir', )
 
     class Meta:
         model = Benevole
@@ -38,10 +52,9 @@ class BenevoleTables(tables.Table):
 
 
 class BenevoleTacheTables(tables.Table):
-
-
-
-    supprimer = tables.LinkColumn('supprimerAffectation', args=[A('pk')], text='Supprimer')
+    Supprimer = tables.TemplateColumn(
+        '<a href="{% url "supprimerAffectation" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/x-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Supprimer', )
 
 
 
@@ -78,7 +91,9 @@ class PriorityColumn(tables.Column):
 
 class TachesTables(tables.Table):
     niveauPriorite = PriorityColumn()
-    editer = tables.LinkColumn('getTache', args=[A('id')], text='voir')
+    editer = tables.TemplateColumn(
+        '<a href="{% url "getTache" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Voir', )
 
     class Meta:
         model = Tache
@@ -89,7 +104,9 @@ class TachesTables(tables.Table):
 
 class TachesEnRetardTables(tables.Table):
     niveauPriorite = PriorityColumn()
-    editer = tables.LinkColumn('getTache', args=[A('id')], text='voir')
+    editer = tables.TemplateColumn(
+        '<a href="{% url "getTache" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Voir', )
 
     class Meta:
         model = Tache
@@ -112,7 +129,9 @@ class AffectationListeTables(tables.Table):
 
 
 class BenevoleAffecterTables(tables.Table):
-    editer = tables.LinkColumn('getBenevole', args=[A('pk')], text='voir')
+    editer = tables.TemplateColumn(
+        '<a href="{% url "getBenevole" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
+        verbose_name=u'Voir', )
     class Meta:
         model = Benevole
         template_name = 'django_tables2/bootstrap4.html'
