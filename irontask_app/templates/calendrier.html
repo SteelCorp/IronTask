@@ -49,7 +49,8 @@
                     {
                         title: '{{ tache.nomTache }}',
                         start: '{{ tache.dateDebut.isoformat }}',
-                        end: '{{ tache.dateFin.isoformat }}'
+                        end: '{{ tache.dateFin.isoformat }}',
+                        url: '{% url 'getTache' tache.id %}'
                     },
 
                 {% endfor %}
