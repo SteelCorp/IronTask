@@ -84,7 +84,7 @@ class TachesTables(tables.Table):
         model = Tache
         template_name = 'django_tables2/bootstrap4.html'
         attrs = {"class": "table table-condensed table-striped table-hover"}
-        exclude = 'id', 'fk_triathlon', 'fk_benevole', 'description', 'dateRappel'
+        exclude = 'id', 'fk_triathlon', 'fk_benevole', 'description', 'dateRappel', 'dateAjout'
 
 
 class TachesEnRetardTables(tables.Table):
