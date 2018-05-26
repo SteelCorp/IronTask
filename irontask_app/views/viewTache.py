@@ -143,3 +143,9 @@ def listTacheRetard(request):
         return redirect(listTache)
     return render(request, 'tache/listTaches.html',
                   {'table': table, 'form': tacheForm, 'benevoleForm': benevoleForm, 'successful_submit': False})
+
+
+def calendrierTache(request):
+    taches = Tache.objects.all()
+
+    return render(request, 'calendrier.html', {'taches':taches})
