@@ -44,13 +44,21 @@
 
         $('#calendar1').fullCalendar({
             locale: 'fr',
+            default: 'bootstrap4',
+
             events: [
                 {% for tache in taches %}
                     {
                         title: '{{ tache.nomTache }}',
                         start: '{{ tache.dateDebut.isoformat }}',
                         end: '{{ tache.dateFin.isoformat }}',
-                        url: '{% url 'getTache' tache.id %}'
+                        url: '{% url 'getTache' tache.id %}',
+                    {% if tache.NIV_PRIORITE == 'IMPORTANT' %}
+                        eventColor: '#378006',
+
+                    {% else %}
+                        eventColor: '#158006'
+                        {% endif %}
                     },
 
                 {% endfor %}

@@ -146,6 +146,6 @@ def listTacheRetard(request):
 
 
 def calendrierTache(request):
-    taches = Tache.objects.all()
+    taches = Tache.objects.filter(fk_triathlon=request.session['idTriathlon'])
 
     return render(request, 'calendrier.html', {'taches':taches})
