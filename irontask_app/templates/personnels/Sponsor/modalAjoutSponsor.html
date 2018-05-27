@@ -19,19 +19,22 @@
                                     <div class="input-group mb-1">
                                         {{ donationForm.donation }}
                                         <div class="input-group-append">
-                                            <label class="input-group-text" for="inputGroupSelect03">Format</label>
+                                            <label class="input-group-text" for="inputGroupSelect03">€</label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="input-group mb-1">
+                                    <div class="col-6 pading0">
+                                        <div class="input-group mb-1">
 
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="inputGroupSelect03">Sponsor</label>
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect03">Sponsor</label>
+                                            </div>
+                                            {{ donationForm.fk_sponsor }}
                                         </div>
-                                        {{ donationForm.fk_sponsor }}
-
+                                    </div>
+                                    <div class="col-6 pading0">
                                         <a class="btn" data-toggle="modal" data-target="#demo-2"
                                            data-dismiss="modal">
                                             <img class="messagerie2" alt="messagerie"
@@ -83,21 +86,21 @@
 
 
                         {% if successful_submit == True %}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#demo-1").modal('show');
-        });
-    </script>
+                            <script type="text/javascript">
+                                $(document).ready(function(){
+                                    $("#demo-1").modal('show');
+                                });
+                            </script>
 
 
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--fin bouton ajout-->
+                            </form>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <!--fin bouton ajout-->
 
-{% endif %}
+                        {% endif %}
 
 
 {% endblock %}
