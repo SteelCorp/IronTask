@@ -53,6 +53,11 @@ def ajouterDonation(request):
             donation.fk_triathlon = tria
             donation.save()
             return HttpResponseRedirect('/personnel/sponsor/')
+        else:
+            
+            """ Passe le message d'error du formulaire à la template
+             afin de l'afficher en cas d'erreur dans le formulaire"""
+            messages.add_message(request, messages.INFO, donationForm.errors)
         return HttpResponseRedirect('/personnel/sponsor/')
 
 

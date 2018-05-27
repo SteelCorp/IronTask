@@ -1,6 +1,7 @@
 from django.db import models
 from irontask_app.utils.validators import *
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 
 
 class UserProfile(models.Model):
@@ -73,8 +74,8 @@ class Categorie(models.Model):
         ('M', 'Masculin',),
     )
     libelle = models.CharField(max_length=50, blank=False, null=False)
-    ageMin = models.PositiveSmallIntegerField(blank=False, null=False)
-    ageMax = models.PositiveSmallIntegerField(blank=False, null=False)
+    ageMin = models.PositiveSmallIntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
+    ageMax = models.PositiveSmallIntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
     sexe = models.CharField(max_length=1, choices=SEX_CHOICES)
     dateAjout = models.DateField(auto_now_add=True)
 
@@ -95,7 +96,7 @@ class Materiel(models.Model):
 
     nom = models.CharField(max_length=50, blank=False, null=False)
     type = models.CharField(max_length=50, blank=False, null=False)
-    qteTotal = models.PositiveIntegerField(blank=False, null=False)
+    qteTotal = models.PositiveIntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
     lieuStockage = models.CharField(max_length=50, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
@@ -217,8 +218,8 @@ class Tache(models.Model):
 class Intervenir(models.Model):
     """Class Representant le lien entre triathlon et Intervenant"""
 
-    devis = models.CharField(max_length=150, verbose_name='Devis')
-    prixDevis = models.PositiveIntegerField(null=False, blank=False, verbose_name='Prix')
+    devis = models.CharField(max_length=150, verbose_name='Devis', )
+    prixDevis = models.PositiveIntegerField(null=False, blank=False, verbose_name='Prix', validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_intervenant = models.ForeignKey(Intervenant, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
@@ -230,7 +231,7 @@ class Intervenir(models.Model):
 class Sponsoriser(models.Model):
     """Class Representant le lien entre triathlon et Sponsor"""
 
-    donation = models.PositiveIntegerField(null=False, blank=False, verbose_name="Donation")
+    donation = models.PositiveIntegerField(null=False, blank=False, verbose_name="Donation", validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False, verbose_name='Triathlon')
     fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False, verbose_name='Sponsor')
     dateAjout = models.DateField(auto_now_add=True, verbose_name="Date d'ajout")
@@ -245,7 +246,7 @@ class Sponsoriser(models.Model):
 class Caracteriser(models.Model):
     """Class Representant le lien entre triathlon et catégorie (exemple 20 filles seniors pour triat Lyon"""
 
-    nbrParticipant = models.PositiveIntegerField(null=False, blank=False)
+    nbrParticipant = models.PositiveIntegerField(null=False, blank=False, validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
@@ -257,7 +258,7 @@ class Caracteriser(models.Model):
 class Allouer(models.Model):
     """Class Representant le lien caracterisant l'allocation d'un materiel pour un triathlon donné"""
 
-    qteUtilise = models.PositiveIntegerField(null=False, blank=False)
+    qteUtilise = models.PositiveIntegerField(null=False, blank=False, validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_materiel = models.ForeignKey(Materiel, on_delete=models.CASCADE, null=False)
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False)
@@ -278,11 +279,7 @@ class Affecter(models.Model):
     def __str__(self):
         return self.fk_benevole.__str__() + " affecter à la tâche id :" + str(self.fk_tache.id)
 
-    @property
-    def time_data(self):
-        origins = Affecter.origin.all()
 
-        return ' '.join([str(x.time.value) for x in origins])
     class Meta:
         unique_together = (('fk_benevole', 'fk_tache'),)
         verbose_name_plural = "Affectation des bénévoles"
