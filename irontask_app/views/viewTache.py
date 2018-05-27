@@ -21,7 +21,11 @@ from irontask_app.utils.tables import TachesTables, AffectationListeTables, Bene
 @login_required(login_url='login/')
 @triathlon_required
 def listTache(request):
-    """Vue qui retourne la liste de toutes les taches"""
+    """
+
+    :param request:
+    :return:
+    """
 
     table = TachesTables(Tache.objects.filter(fk_triathlon=request.session['idTriathlon']))
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
@@ -49,6 +53,12 @@ def listTache(request):
 @login_required(login_url='login/')
 @triathlon_required
 def editerTache(request, id):
+    """
+
+    :param request:
+    :param id:
+    :return:
+    """
     tache = Tache.objects.get(id=id)
     tacheForm = TacheForm()
 
@@ -66,6 +76,12 @@ def editerTache(request, id):
 @login_required(login_url='login/')
 @triathlon_required
 def getTache(request, id):
+    """
+
+    :param request:
+    :param id:
+    :return:
+    """
 
 
     table = BenevoleTacheTables(Affecter.objects.filter(fk_tache=id))
@@ -93,6 +109,12 @@ def getTache(request, id):
 @login_required(login_url='login/')
 @triathlon_required
 def deleteTache(request, id):
+    """
+
+    :param request:
+    :param id:
+    :return:
+    """
     Tache.filter(id=id).delete()
 
     return redirect('tache/listTache.html')
@@ -119,7 +141,11 @@ def ajouterTache(request):
 
 
 def listTacheRetard(request):
-    """Vue qui retourne la liste de toutes les taches en retard"""
+    """
+
+    :param request:
+    :return:
+    """
 
     table = TachesTables(Tache.objects.filter(fk_triathlon=request.session['idTriathlon'], dateFin__lt=datetime.date.today()))
     RequestConfig(request, paginate={'per_page': 8}).configure(table)
@@ -146,6 +172,11 @@ def listTacheRetard(request):
 
 
 def calendrierTache(request):
-    taches = Tache.objects.all()
+    """
+
+    :param request:
+    :return:
+    """
+    taches = Tache.objects.filter(fk_triathlon=request.session['idTriathlon'])
 
     return render(request, 'calendrier.html', {'taches':taches})

@@ -123,6 +123,7 @@ class DonationTriathlonTables(tables.Table):
 
 
 class AffectationListeTables(tables.Table):
+    email = tables.Column(accessor='affecter.fk_benevole', )
     class Meta:
         model = Affecter
         template_name = 'django_tables2/bootstrap-responsive.html'
