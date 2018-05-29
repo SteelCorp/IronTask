@@ -16,95 +16,132 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form class="ui form" method="POST">{% csrf_token %}
+                <form class="ui form" method="POST">{% csrf_token %}
+                    <div class="modal-body">
+
 
                         <div class="container-fluid">
-                            <div class="input-group  mb-1">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text">
-                                        Nom
-                                    </label>
+                            <div class="row">
+                                <div class="input-group  mb-1">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">
+                                            Nom
+                                        </label>
+                                    </div>
+                                    {{ form.nom }}
                                 </div>
-                                {{ form.nom }}
                             </div>
-                            <div class="input-group  mb-1">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text">
-                                        Prénom
-                                    </label>
+                            <div class="row">
+                                <div class="input-group  mb-1">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">
+                                            Prénom
+                                        </label>
+                                    </div>
+                                    {{ form.prenom }}
                                 </div>
-                                {{ form.prenom }}
                             </div>
-                            <div class="input-group mb-1">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text">Sexe</label>
+                            <div class="form-group row">
+                                <div class="input-group">
+                                    <div class="input-group-prepend  ">
+                                        <label class="input-group-text">
+                                            Sexe
+                                        </label>
+                                    </div>
                                     {{ form.sexe }}
+
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text col-form-label">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/date.png' %}">
+                                            Date naiss.
+                                        </label>
+                                    </div>
+                                    {{ form.dateNaissance }}
                                 </div>
                             </div>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/date.png' %}">
-                                    Date de naissance
-                                </label>
-                                {{ form.dateNaissance }}
+
+                            <div class="row">
+                                <div class="input-group  mb-1">
+                                    <div class="input-group-prepend  ">
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/home-8x.png' %}">
+                                            Adresse
+                                        </label>
+                                    </div>
+                                    {{ form.adresse }}
+                                </div>
                             </div>
-                            <br>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    Adresse
-                                </label>
-                                {{ form.adresse }}
+                            <div class="form-group row">
+                                <div class="input-group">
+                                    <div class="input-group-prepend  ">
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/home-8x.png' %}">
+                                            Cp
+                                        </label>
+                                    </div>
+                                    {{ form.codePostal }}
+
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text col-form-label">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/home-8x.png' %}">
+                                            Ville
+                                        </label>
+                                    </div>
+                                    {{ form.ville }}
+                                </div>
                             </div>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/home-8x.png' %}">
-                                    Ville
-                                </label>
-                                {{ form.ville }}
-                                <label class="input-group-text">
-                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/home-8x.png' %}">
-                                    Code Postal
-                                </label>
-                                {{ form.codePostal }}
+
+                            <div class="row">
+                                <div class="input-group  mb-1">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/tel_fix.png' %}">
+                                            Téléphone fixe
+                                        </label>
+                                    </div>
+                                    {{ form.telephoneFixe }}
+                                </div>
                             </div>
-                            <br>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/tel_fix.png' %}">
-                                    Téléphone Fixe
-                                </label>
-                                {{ form.telephoneFixe }}
+                            <div class="row">
+                                <div class="input-group  mb-1">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/tel_fix.png' %}">
+                                            Téléphone portable
+                                        </label>
+                                    </div>
+                                    {{ form.telephonePortable }}
+                                </div>
                             </div>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/tel_fix.png' %}">
-                                    Téléphone portable
-                                </label>
-                                {{ form.telephonePortable }}
+
+                            <div class="row">
+                                <div class="input-group  mb-1">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">
+                                            <img class="iconeadmin" alt="messagerie"
+                                                 src="{% static 'img/mail-512.png' %}">
+                                            Mail
+                                        </label>
+                                    </div>
+                                    {{ form.email }}
+                                </div>
                             </div>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    <img class="iconeadmin" alt="messagerie" src="{% static 'img/mail-512.png' %}">
-                                    Mail
-                                </label>
-                                {{ form.email }}
-                            </div>
-                            <br>
-                            <div class="input-group mb-1">
-                                <label class="input-group-text">
-                                    Status
-                                </label>
-                                {{ form.status }}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                            </div>
-                    </form>
-                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
     <!--fin bouton ajout-->
 
