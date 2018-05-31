@@ -139,7 +139,7 @@
 
                 </div>
                 <div class="card-footer text-center">
-                    <button type="button" class="btn btn-link">Modifier</button>
+                     <a class="button btn btn-link" href="{% url 'editerTache' tache.pk %}">Modifier </a>
                     <button type="button" class="btn btn-link"
                             data-toggle="modal" data-target="#modalSupprDonation"
                             data-whatever="{{ donation.id }}" data-model-name="">

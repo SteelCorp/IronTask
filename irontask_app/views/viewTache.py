@@ -60,17 +60,18 @@ def editerTache(request, id):
     :return:
     """
     tache = Tache.objects.get(id=id)
-    tacheForm = TacheForm()
+    tacheForm = TacheForm(instance=tache)
 
     if request.method == "POST":
-        tacheForm = TacheForm(request.POST)
+        form = TacheForm(request.POST, instance=tache)
+        print(form.errors)
 
-        if tacheForm.is_valid():
-            tacheForm.save()
+        if form.is_valid():
+            form.save()
 
-        return redirect('/')
+        return redirect('listTache')
 
-    return render(request, 'tache/editerTache.html', {'form': tacheForm}, {'tache': tache})
+    return render(request, 'tache/editerTache.html', {'form': tacheForm})
 
 
 @login_required(login_url='login/')
