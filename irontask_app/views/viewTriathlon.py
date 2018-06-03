@@ -87,6 +87,7 @@ def ajouterTriathlon(request):
     """
     if request.method == 'POST':
         tria = TriathlonForm(request.POST)
+        print(tria.errors)
         if tria.is_valid():
             tria.save()
 
