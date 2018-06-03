@@ -107,7 +107,7 @@ def getTache(request, id):
     return render(request, 'tache/details_tache.html', {'tache': tache, 'affecterForm': AffecterForm, 'table' : table})
 
 
-@login_required(login_url='login/')
+"""""@login_required(login_url='login/')
 @triathlon_required
 def deleteTache(request, id):
     """
@@ -118,7 +118,7 @@ def deleteTache(request, id):
     """
     Tache.filter(id=id).delete()
 
-    return redirect('tache/listTache.html')
+    return redirect('tache/listTache.html')"""
 
 
 @login_required(login_url='login/')
