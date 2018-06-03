@@ -84,3 +84,26 @@ def createIntervenant(request):
     """ Vue qui permet de creer un intervenant
     """
     return render(request, 'personnel/add_Intervenant.html', {'IntervenantForm': IntervenantForm})
+
+@login_required(login_url='login/')
+@triathlon_required
+def editerIntervenant(request, pk):
+    """
+
+    :param request:
+    :param pk:
+    :return:
+    """
+    inter = Intervenant.objects.get(pk=pk)
+    intervenantForm = IntervenantForm(instance=inter)
+
+    if request.method == "POST":
+        form = IntervenantForm(request.POST, instance=inter)
+        print(form.errors)
+
+        if form.is_valid():
+            form.save()
+
+        return redirect('listIntervenant')
+
+    return render(request, 'personnels/Intervenant/editerIntervenant.html', {'form': intervenantForm})

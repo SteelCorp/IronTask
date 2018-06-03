@@ -25,7 +25,7 @@ class Intervenant(models.Model):
     codePostal = models.CharField(max_length=5, blank=False, null=True, verbose_name='Code Postal')
     ville = models.CharField(max_length=50, blank=False, null=True, verbose_name='Ville')
     telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator], verbose_name='Téléphone Fixe')
-    telephonePort = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator], verbose_name='Téléphone Portable')
+    telephonePortable = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator], verbose_name='Téléphone Portable')
     email = models.EmailField(blank=False, null=False, verbose_name='Email')
     dateAjout = models.DateField(auto_now_add=True)
 
