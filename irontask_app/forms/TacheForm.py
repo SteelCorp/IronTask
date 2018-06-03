@@ -23,7 +23,7 @@ class TacheForm(ModelForm):
     niveauPriorite = forms.ChoiceField(choices=Tache.NIV_PRIORITE, widget=forms.Select(
         {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
-    fk_benevole = forms.ModelChoiceField(label='Benevole', queryset=Benevole.objects.all(), widget=forms.Select(
+    responsable = forms.ModelChoiceField(label='Benevole', queryset=Benevole.objects.all(), widget=forms.Select(
         {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
     class Meta:

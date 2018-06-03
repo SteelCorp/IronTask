@@ -135,6 +135,7 @@ class Benevole(models.Model):
 
 
 
+
     def __str__(self):
         """Retourne un string representant le benevole"""
         return self.nom + " " + self.prenom
@@ -207,6 +208,7 @@ class Tache(models.Model):
     niveauPriorite = models.CharField(max_length=1, choices=NIV_PRIORITE, verbose_name='Priorité')
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+    responsable = models.ForeignKey(Benevole, verbose_name='Responsable', on_delete=models.PROTECT)
 
     def __str__(self):
         """Retrourne une representation string de l'objet Tache"""
