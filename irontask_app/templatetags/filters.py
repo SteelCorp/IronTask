@@ -66,3 +66,7 @@ def retard(ladate):
         return False
 
 
+@register.simple_tag
+def getTriathlonAVenir():
+    triathlons = Triathlon.objects.filter(date__gt=datetime.date.today()).count()
+    return triathlons

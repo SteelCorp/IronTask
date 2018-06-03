@@ -91,6 +91,10 @@ class PriorityColumn(tables.Column):
 
 class TachesTables(tables.Table):
     niveauPriorite = PriorityColumn()
+    responsable = tables.TemplateColumn(
+        '{{ record.responsable }}')
+
+
     editer = tables.TemplateColumn(
         '<a href="{% url "getTache" record.pk %}"><img src=\'{% load  staticfiles %} {% static "img/eye-3x.png" %}\' / width="25"></a>',
         verbose_name=u'Voir', )
