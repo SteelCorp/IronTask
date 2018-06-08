@@ -4,14 +4,14 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django_tables2 import RequestConfig
 
-from irontask_app.models import Intervenant, Benevole
+from irontask_app.models import Intervenant, Benevole, Triathlon
 from django.urls import reverse
 from irontask_app.forms.BenevoleForm import BenevoleForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import BenevoleTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import BenevoleTables, BenevoleAffecterTables
 
 from django_tables2 import RequestConfig
 
@@ -71,7 +71,7 @@ def getBenevole(request, pk):
 @triathlon_required
 def deleteBenevole(request, pk):
     """Vue qui permet de supprimer un intervenant
-    :param id est la primary key d'un intervenant
+    :param pk est la primary key d'un intervenant
     """
     Benevole.objects.filter(pk=pk).delete()
     return redirect(reverse(viewname=listBenevole))
@@ -83,3 +83,20 @@ def createBenevole(request):
     """ Vue qui permet de creer un intervenant
     """
     pass
+
+
+
+
+@login_required(login_url='login/')
+@triathlon_required
+def listBenevoleAffecter(request):
+    """Vue qui retourne la liste de tous les intervenant"""
+
+
+    triathlon = Triathlon.objects.get(id=request.session['idTriathlon'])
+    table = BenevoleAffecterTables(Benevole.objects.filter(affecter__fk_tache__fk_triathlon=triathlon).distinct())
+    RequestConfig(request, paginate={'per_page': 8}).configure(table)
+
+
+    return render(request, 'dashboard/listBenevolesAffectes.html',
+                  {'table': table})

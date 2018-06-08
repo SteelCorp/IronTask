@@ -1,11 +1,116 @@
 {% extends 'base.html' %}
 {% block contenu %}
+    {% load static %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 py-5 ">
+                <div class="card bg-light mb-3 ">
+                    <div class="card-header">
+                        <form method="POST">{% csrf_token %}
 
 
+                            <div class="container-fluid">
+
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">Nom :</label>
+                                    {{ form.nomTache }}
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">Description :</label>
+                                    {{ form.description}}
+                                </div>
 
 
-    <div class="col-2">
-        <a href="{% url 'deleteTache' tache.id %}" class="btn btn-outline-danger">Supprimer</a>
+                                <div class="row ">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/date.png' %}">
+                                                Date debut
+                                            </label>
+                                        </div>
+                                        {{ form.dateDebut }}
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/date.png' %}">
+                                                Date fin
+                                            </label>
+                                        </div>
+                                        {{ form.dateFin }}
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text">
+                                                <img class="iconeadmin" alt="messagerie"
+                                                     src="{% static 'img/date.png' %}">
+                                                Date rappel
+                                            </label>
+                                        </div>
+                                        {{ form.dateRappel }}
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">niveau d'avancement :</label>
+                                    {{ form.niveauAvancement}}
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">niveau de priorité :</label>
+                                    {{ form.niveauPriorite}}
+                                </div>
+
+                                <div class="row form-group">
+                                    <label for="message-text" class="form-control-label">Responsable :</label>
+                                    {{ form.responsable}}
+                                </div>
+
+
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- script pour les selecteurs de date-->
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="datepicker"]').datepicker({
+                format: 'dd-mm-yyyy',
+                autoHide: true,
+                zIndex: 2048,
+            });
+        });
+    </script>
+    <script>
+        $('.clockpicker').clockpicker({
+            placement: 'top',
+            align: 'left',
+            donetext: 'Valider'
+        });
+    </script>
+
+
+
 {% endblock %}
+

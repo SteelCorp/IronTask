@@ -11,11 +11,11 @@ class TacheForm(ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(attrs={"class": "form-control", "id": "message-text2", "rows": "3"}))
 
-    dateDebut = forms.CharField(
+    dateDebut = forms.DateField(
         widget=forms.DateInput(attrs={"type": "text", "class": "form-control", "data-toggle": "datepicker"}))
-    dateFin = forms.CharField(
+    dateFin = forms.DateField(
         widget=forms.DateInput(attrs={"type": "text", "class": "form-control", "data-toggle": "datepicker"}))
-    dateRappel = forms.CharField(
+    dateRappel = forms.DateField(
         widget=forms.DateInput(attrs={"type": "text", "class": "form-control", "data-toggle": "datepicker"}))
 
     niveauAvancement = forms.ChoiceField(choices=Tache.NIV_AVANCEMENT, widget=forms.Select(
@@ -23,7 +23,7 @@ class TacheForm(ModelForm):
     niveauPriorite = forms.ChoiceField(choices=Tache.NIV_PRIORITE, widget=forms.Select(
         {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
-    fk_benevole = forms.ModelChoiceField(label='Benevole', queryset=Benevole.objects.all(), widget=forms.Select(
+    responsable = forms.ModelChoiceField(label='Benevole', queryset=Benevole.objects.all(), widget=forms.Select(
         {"class": "custom-select", "id": "inputGroupSelect05 "}))
 
     class Meta:

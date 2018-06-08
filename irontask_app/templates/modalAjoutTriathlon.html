@@ -65,6 +65,7 @@
                                         </label>
                                     </div>
                                     {{ form.date }}
+
                                 </div>
                             </div>
                             <div class="row ">
@@ -90,12 +91,12 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <!-- <button type="button" class="btn btn-primary">Ajouter</button> -->
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <!-- <button type="button" class="btn btn-primary">Ajouter</button> -->
 
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
 
-                </div>
+                        </div>
                     </form>
                 </div>
 
@@ -107,9 +108,15 @@
     <script type="text/javascript">
         $(function () {
             $('[data-toggle="datepicker"]').datepicker({
-                format: 'yyyy-mm-dd',
-                autoHide: true,
-                zIndex: 2048,
+                format: 'dd/mm/yyyy',
+                days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                daysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                daysMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                weekStart: 1,
+                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jui', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+
+                zIndex: 2048
             });
         });
     </script>

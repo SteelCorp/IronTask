@@ -1,6 +1,9 @@
+import datetime
+
 from django.db import models
-from irontask_app.validators import *
+from irontask_app.utils.validators import *
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 
 
 class UserProfile(models.Model):
@@ -15,15 +18,15 @@ class Intervenant(models.Model):
     """
     Class Reprénsentant un intervenant
     """
-    siret = models.CharField(max_length=14, primary_key=True)
-    raisonSocial = models.CharField(max_length=50, blank=False, null=True)
-    type = models.CharField(max_length=50, blank=False, null=True)
-    adresse = models.CharField(max_length=200, blank=False, null=True)
-    codePostal = models.CharField(max_length=5, blank=False, null=True)
-    ville = models.CharField(max_length=50, blank=False, null=True)
-    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
-    telephonePort = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
-    email = models.EmailField(blank=False, null=False)
+    siret = models.CharField(max_length=14, primary_key=True, verbose_name='Siret')
+    raisonSocial = models.CharField(max_length=50, blank=False, null=True, verbose_name='Raison Social')
+    type = models.CharField(max_length=50, blank=False, null=True, verbose_name='Type')
+    adresse = models.CharField(max_length=200, blank=False, null=True, verbose_name='Adresse')
+    codePostal = models.CharField(max_length=5, blank=False, null=True, verbose_name='Code Postal')
+    ville = models.CharField(max_length=50, blank=False, null=True, verbose_name='Ville')
+    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator], verbose_name='Téléphone Fixe')
+    telephonePortable = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator], verbose_name='Téléphone Portable')
+    email = models.EmailField(blank=False, null=False, verbose_name='Email')
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -73,8 +76,8 @@ class Categorie(models.Model):
         ('M', 'Masculin',),
     )
     libelle = models.CharField(max_length=50, blank=False, null=False)
-    ageMin = models.PositiveSmallIntegerField(blank=False, null=False)
-    ageMax = models.PositiveSmallIntegerField(blank=False, null=False)
+    ageMin = models.PositiveSmallIntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
+    ageMax = models.PositiveSmallIntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
     sexe = models.CharField(max_length=1, choices=SEX_CHOICES)
     dateAjout = models.DateField(auto_now_add=True)
 
@@ -97,7 +100,7 @@ class Materiel(models.Model):
 
     nom = models.CharField(max_length=50, blank=False, null=False)
     type = models.CharField(max_length=50, blank=False, null=False)
-    qteTotal = models.PositiveIntegerField(blank=False, null=False)
+    qteTotal = models.PositiveIntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
     lieuStockage = models.CharField(max_length=50, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
 
@@ -108,7 +111,7 @@ class Materiel(models.Model):
         return self.nom + ' stocké a : ' + self.lieuStockage
 
     class Meta:
-        verbose_name_plural = "Matèriel"
+        verbose_name_plural = "Matériel"
 
 
 class Benevole(models.Model):
@@ -118,24 +121,22 @@ class Benevole(models.Model):
         ('M', 'Masculin'),
 
     )
-    STATUS_CHOICES = (
-        ('A', 'Administrateur'),
-        ('O', 'Organisateur'),
-        ('B', 'Benevole'),
-    )
 
-    nom = models.CharField(max_length=50, blank=False, null=False)
-    prenom = models.CharField(max_length=50, blank=False, null=False)
-    dateNaissance = models.DateField(blank=False, null=True)
-    sexe = models.CharField(choices=SEX_CHOICES, max_length=1, null=False)
-    adresse = models.CharField(max_length=50, blank=False, null=True)
-    codePostal = models.CharField(max_length=5, blank=False, null=True)
-    ville = models.CharField(max_length=50, blank=False, null=True)
-    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator])
-    telephonePortable = models.CharField(max_length=10, blank=False, null=False, validators=[phoneValidator])
-    email = models.EmailField(blank=False, null=False)
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=False)
+
+    nom = models.CharField(max_length=50, blank=False, null=False, verbose_name='Nom')
+    prenom = models.CharField(max_length=50, blank=False, null=False, verbose_name='Prénom')
+    dateNaissance = models.DateField(blank=False, null=True, verbose_name='Date de naissance')
+    sexe = models.CharField(choices=SEX_CHOICES, max_length=1, null=False, verbose_name='Adresse')
+    adresse = models.CharField(max_length=50, blank=False, null=True, verbose_name='Adresse')
+    codePostal = models.CharField(max_length=5, blank=False, null=True, verbose_name='Code postal')
+    ville = models.CharField(max_length=50, blank=False, null=True, verbose_name='Ville')
+    telephoneFixe = models.CharField(max_length=10, blank=False, null=True, validators=[phoneValidator], verbose_name='Téléphone Fixe')
+    telephonePortable = models.CharField(max_length=10, blank=False, null=False, validators=[phoneValidator], verbose_name='Téléphone portable')
+    email = models.EmailField(blank=False, null=False, verbose_name='Email')
     dateAjout = models.DateField(auto_now_add=True)
+
+
+
 
     def __str__(self):
         """Retourne un string representant le benevole"""
@@ -165,13 +166,13 @@ class TypeTriathlon(models.Model):
 class Triathlon(models.Model):
     """Class Répresentant un Triathlon"""
 
-    date = models.DateField(null=False, blank=False)
-    description = models.TextField()
-    heureDepart = models.TimeField(null=False, blank=False)
-    codePostal = models.CharField(max_length=5, null=False, blank=False)
-    adresse = models.CharField(max_length=50, null=False, blank=False)
-    ville = models.CharField(max_length=50, null=False, blank=False)
-    fk_TypeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT, null=False)
+    date = models.DateField(null=False, blank=False, verbose_name='Date')
+    description = models.TextField(verbose_name='Description')
+    heureDepart = models.TimeField(null=False, blank=False, verbose_name='Heure de départ')
+    codePostal = models.CharField(max_length=5, null=False, blank=False, verbose_name='Code postal')
+    adresse = models.CharField(max_length=50, null=False, blank=False, verbose_name='Adresse')
+    ville = models.CharField(max_length=50, null=False, blank=False, verbose_name='Ville')
+    fk_TypeTriathlon = models.ForeignKey(TypeTriathlon, on_delete=models.PROTECT, null=False, verbose_name='Type de Triathlon')
     dateAjout = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -200,16 +201,16 @@ class Tache(models.Model):
         ('2', 'Moyen'),
         ('3', 'Important')
     )
-    nomTache = models.CharField(max_length=150)
-    description = models.TextField()
-    dateDebut = models.DateField(null=False, blank=False)
-    dateFin = models.DateField(null=False, blank=False)
-    dateRappel = models.DateField(null=True, blank=False)
-    niveauAvancement = models.CharField(max_length=1, choices=NIV_AVANCEMENT)
-    niveauPriorite = models.CharField(max_length=1, choices=NIV_PRIORITE)
+    nomTache = models.CharField(max_length=150, verbose_name='Titre')
+    description = models.TextField(verbose_name='Description')
+    dateDebut = models.DateField(null=False, blank=False, verbose_name='Date de début')
+    dateFin = models.DateField(null=False, blank=False, verbose_name='Date de fin')
+    dateRappel = models.DateField(null=True, blank=False, verbose_name='Date de rappel')
+    niveauAvancement = models.CharField(max_length=1, choices=NIV_AVANCEMENT, verbose_name="Niveau d'avancement")
+    niveauPriorite = models.CharField(max_length=1, choices=NIV_PRIORITE, verbose_name='Priorité')
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT, null=False)
-    fk_benevole = models.ForeignKey(Benevole, on_delete=models.PROTECT, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+    responsable = models.ForeignKey(Benevole, verbose_name='Responsable', on_delete=models.PROTECT)
 
     def __str__(self):
         """Retrourne une representation string de l'objet Tache"""
@@ -223,8 +224,8 @@ class Tache(models.Model):
 class Intervenir(models.Model):
     """Class Representant le lien entre triathlon et Intervenant"""
 
-    devis = models.CharField(max_length=150)
-    prixDevis = models.PositiveIntegerField(null=False, blank=False)
+    devis = models.CharField(max_length=150, verbose_name='Devis', )
+    prixDevis = models.PositiveIntegerField(null=False, blank=False, verbose_name='Prix', validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_intervenant = models.ForeignKey(Intervenant, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
@@ -236,16 +237,16 @@ class Intervenir(models.Model):
 class Sponsoriser(models.Model):
     """Class Representant le lien entre triathlon et Sponsor"""
 
-    donation = models.PositiveIntegerField(null=False, blank=False)
-    fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
-    fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False)
-    dateAjout = models.DateField(auto_now_add=True)
+    donation = models.PositiveIntegerField(null=False, blank=False, verbose_name="Donation", validators=[MinValueValidator(0)])
+    fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False, verbose_name='Triathlon')
+    fk_sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, null=False, verbose_name='Sponsor')
+    dateAjout = models.DateField(auto_now_add=True, verbose_name="Date d'ajout")
 
 
 class Caracteriser(models.Model):
     """Class Representant le lien entre triathlon et catégorie (exemple 20 filles seniors pour triat Lyon"""
 
-    nbrParticipant = models.PositiveIntegerField(null=False, blank=False)
+    nbrParticipant = models.PositiveIntegerField(null=False, blank=False, validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
@@ -257,7 +258,7 @@ class Caracteriser(models.Model):
 class Allouer(models.Model):
     """Class Representant le lien caracterisant l'allocation d'un materiel pour un triathlon donné"""
 
-    qteUtilise = models.PositiveIntegerField(null=False, blank=False)
+    qteUtilise = models.PositiveIntegerField(null=False, blank=False, validators=[MinValueValidator(0)])
     fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     fk_materiel = models.ForeignKey(Materiel, on_delete=models.CASCADE, null=False)
     fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False)
@@ -271,6 +272,14 @@ class Allouer(models.Model):
 class Affecter(models.Model):
     """Class Represantant le lien caractérisant entre benevole et tache"""
 
-    fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False)
+    fk_benevole = models.ForeignKey(Benevole, on_delete=models.CASCADE, null=False, blank=False, verbose_name='Benevole')
     fk_tache = models.ForeignKey(Tache, on_delete=models.CASCADE, blank=False, null=False)
     dateAjout = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.fk_benevole.__str__() + " affecter à la tâche id :" + str(self.fk_tache.id)
+
+
+    class Meta:
+        unique_together = (('fk_benevole', 'fk_tache'),)
+        verbose_name_plural = "Affectation des bénévoles"

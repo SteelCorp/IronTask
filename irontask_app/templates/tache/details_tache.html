@@ -2,6 +2,7 @@
 {% block  contenu %}
     {% load static %}
     {% load filters %}
+    {% load render_table from django_tables2 %}
 
     <div class="entête">
         {% include 'dashboard.html' %}
@@ -22,9 +23,25 @@
     <br>
     <br>
     <!-- Taches -->
-    {% for tache in Tache %}
+
+
+    <div class="container">
         <div class="container">
+            {% if messages %}
+
+                <div class="alert alert-danger" role="alert">
+
+                {% for message in messages %}
+
+                    {{ message }}
+
+                {% endfor %}
+            {% endif %}
+            </div>
+
             <div class="card">
+
+
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3">
@@ -58,10 +75,10 @@
                 <div class="card-body">
                     <!-- description et dates -->
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-6">
                             <p class="card-text">Description : {{ tache.description }}</p>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             Début
                             <br>
                             Fin
@@ -75,7 +92,7 @@
                             <br>
                             <img class="iconeadmin" alt="rappel" src="{% static 'img/alerte.png' %}">
                         </div>
-                        <div class="col-2">
+                        <div class="col-3">
                             {{ tache.dateDebut }}
                             <br>
                             {{ tache.dateFin }}
@@ -85,10 +102,10 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <a>
                                 <img class="iconeadmin" alt="responsable" src="{% static 'img/person.svg' %}">
-                                responsable : {{ tache.fk_benevole.prenom }} {{ tache.fk_benevole.nom }}
+                                responsable : {{ tache.fk_reponsable }}
                             </a>
                         </div>
                         <div class="col-6">
@@ -116,53 +133,33 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row">
-                        <div class="col-8">
 
-                        </div>
-                        <div class="col-2">
-                            <a href="{% url 'editerTache' tache.id %}" class="btn btn-primary">Modifier</a>
-                        </div>
 
-                    </div>
+
+
                 </div>
+                <div class="card-footer text-center">
+                     <a class="button btn btn-link" href="{% url 'editerTache' tache.pk %}">Modifier </a>
+                    <button type="button" class="btn btn-link"
+                            data-toggle="modal" data-target="#modalSupprDonation"
+                            data-whatever="{{ donation.id }}" data-model-name="">
+                        Supprimer {{ donation.id }}</button>
+                </div>
+
             </div>
+
+
+            Liste des bénévoles affecté :
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demo-1">+</button>
+            <p></p>
+            {% render_table table %}
+
         </div>
-    {% endfor %}
-
-    <!-- Fin Stock-->
-
-    <!-- Bouton Plus pour ajouter un Benevole -->
-
-    <span class="plus"></span>
-
-    <!-- Pagination -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 py-5 d-flex">
-                <ul class="pagination mx-auto">
-                    <div class="pagination">
-                        <span class="step-links">
-                            {% if Tache.has_previous %}
-                                <a href="?page={{ Tache.previous_page_number }}">Precèdent</a>
-                            {% endif %}
-                            <span class="current">
-                                Page {{ Stock.number }} de {{ Tache.paginator.num_pages }}.
-                            </span>
-                            {% if Tache.has_next %}
-                                <a href="?page={{ Tache.next_page_number }}">Suivant</a>
-                            {% endif %}
-                         </span>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fin pagination -->
 
 
-    {% include "tache/modalAjoutTache.html" %}
+        <!-- Bouton Plus pour ajouter un Benevole Affecter à la tache-->
+
+
+        {% include "tache/modalAjoutBenevoleAffecter.html" %}
 
 {% endblock %}

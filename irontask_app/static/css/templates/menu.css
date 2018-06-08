@@ -57,6 +57,11 @@
     width: 1.5em;
     height: 1.5em;
 }
+.pading0{
+     padding-right: 0;
+     padding-left: 0;
+
+ }
 
 .messagerie3 {
     margin-left: 3px;

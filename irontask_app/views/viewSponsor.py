@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from irontask_app.models import Sponsor, Sponsoriser, Triathlon
 from django.urls import reverse
 from irontask_app.forms.SponsorForm import SponsorForm
-from irontask_app.forms.DonationForm import DonationForm
+from irontask_app.forms.DonationForm import DonationForm, DonationFormSansSponsor
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.core.paginator import Paginator
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import SponsorTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import SponsorTables
 from django_tables2 import RequestConfig
 
 
@@ -17,8 +17,6 @@ from django_tables2 import RequestConfig
 @triathlon_required
 def listSponsor(request):
     """Vue qui retourne la liste de tous les sponsors"""
-
-
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
 
     """Donne les sponsors affecter au triathlon courant"""
@@ -83,11 +81,14 @@ def getSponsor(request, siret):
     """
     sponsor = Sponsor.objects.get(siret=siret)
     listDonationSponsor = Sponsoriser.objects.filter(fk_sponsor=siret)
-    donationForm = DonationForm
+    donationForm = DonationFormSansSponsor()
+
+
 
     """ si méthode POST alors sauvegarder resultat du formulaire"""
     if request.method == 'POST':
-        donationForm = DonationForm(request.POST)
+        donationForm = DonationFormSansSponsor(request.POST)
+        donationForm.fk_sponsor = sponsor
 
         if donationForm.is_valid():
             """

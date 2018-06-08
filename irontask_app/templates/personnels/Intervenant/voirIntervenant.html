@@ -40,8 +40,8 @@
                                 <td>{{ Intervenant.telephoneFixe }}</td>
                             </tr>
                             <tr>
-                                <td>Téléphone Mobile :</td>
-                                <td>{{ Intervenant.telephonePort }}</td>
+                                <td>Téléphone Portable :</td>
+                                <td>{{ Intervenant.telephonePortable }}</td>
                             </tr>
                             <tr>
                                 <td>Mail :</td>
@@ -54,7 +54,7 @@
 
                     </div>
                     <div class="card-body text-center">
-                        <button type="button" class="btn btn-link">Modifier</button>
+                      <a class="button btn btn-link" href="{% url 'editerIntervenant' Intervenant.siret %}">Modifier </a>
                         <button type="button" class="btn btn-link" data-toggle="modal"
                                 data-target="#modalSupprIntervenant">Supprimer
                         </button>

@@ -6,7 +6,7 @@ from irontask_app.models import Triathlon, TypeTriathlon
 class TriathlonForm(ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(attrs={"class": "form-control", "id": "message-text2", "rows": "3"}))
-    date = forms.CharField(
+    date = forms.DateField(
         widget=forms.DateInput(attrs={"type": "text", "class": "form-control", "data-toggle": "datepicker"}))
     heureDepart = forms.CharField(widget=forms.TextInput({"class": "form-control", "type": "text", "value": "18:00"}))
     codePostal = forms.CharField(max_length=5, widget=forms.TextInput(

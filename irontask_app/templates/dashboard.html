@@ -26,12 +26,12 @@
                             Vous avez <a
                                     href="{% url 'listTache' %}"> {{ request.session.idTriathlon |  nbrTachesPourTriathlon }} </a>
                             tâche(s) dont
-                            <a href=""> {{ request.session.idTriathlon | nbrTacheEnRetardPourTriathlon }} </a> en retard
+                            <a href="{% url 'listTacheRetard' %}"> {{ request.session.idTriathlon | nbrTacheEnRetardPourTriathlon }} </a> en retard
                         </p>
 
                         <p><img class="messagerie2" alt="messagerie" src="{% static 'img/person-8x-black.png' %}">
                             Vous avez <a
-                                    href="{% url 'listBenevole' %}"> {{ request.session.idTriathlon | nbrBenevolesAffecte }} </a>
+                                    href="{% url 'listBenevoleAffecter' %}"> {{ request.session.idTriathlon | nbrBenevolesAffecte }} </a>
                             bénévole(s) affecté(s) </p>
 
                     </div>
@@ -40,8 +40,10 @@
 
                         <p><img class="messagerie2" alt="messagerie" src="{% static 'img/euro-8x-black.png' %}">
                             Vous avez <a
-                                    href="{% url 'listSponsor' %}"> {{ request.session.idTriathlon |  nbrTotalEurosPourTriatlon }} </a>
-                            euros pour <a href="{% url 'listDonationTriathlon' %}"> {{ request.session.idTriathlon |  nbrDonationPourTriatlon }} </a>
+
+                                    href="{% url 'listSponsor' %}">{{ request.session.idTriathlon |  nbrTotalEurosPourTriatlon }} </a>
+                            euros pour <a
+                                    href="{% url 'listDonationTriathlon' %}"> {{ request.session.idTriathlon | nbrDonationPourTriatlon }} </a>
                             donation(s) </p>
 
 

@@ -13,7 +13,7 @@ register = template.Library()
 @register.filter
 def nbrBenevolesAffecte(session):
     # à Refaire marche pas pour le moment
-    return Tache.objects.filter(fk_triathlon=session).count()
+    return Benevole.objects.filter(affecter__fk_tache__fk_triathlon=session).distinct().count()
 
 
 @register.filter
@@ -29,7 +29,10 @@ def nbrDonationPourTriatlon(session):
 @register.filter
 def nbrTotalEurosPourTriatlon(session):
     somme = Sponsoriser.objects.filter(fk_triathlon=session).aggregate(Sum('donation'))['donation__sum']
-    return somme
+    if somme == None:
+        return 0
+    else:
+        return somme
 
 
 @register.filter
@@ -61,3 +64,9 @@ def retard(ladate):
         return True
     else:
         return False
+
+
+@register.simple_tag
+def getTriathlonAVenir():
+    triathlons = Triathlon.objects.filter(date__gt=datetime.date.today()).count()
+    return triathlons

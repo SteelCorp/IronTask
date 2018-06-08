@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from irontask_app.views import viewSponsor, viewIndex, viewLogin, \
-    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation
-from django.conf.urls import url, include
+    viewIntervenant, viewBenevole, viewStock, viewTriathlon, viewTache, viewSponsorDonation, viewAffecter
+from django.conf.urls import url
 
-from irontask_app import api
+
 from irontask_app import views
 
 admin.site.site_header = 'IronTask Administration'
@@ -32,6 +32,10 @@ urlpatterns = [
     path('personnel/intervenant/', viewIntervenant.listIntervenant, name='listIntervenant'),
     path('personnel/intervenant/get/<siret>/', viewIntervenant.getIntervenant, name='getIntervenant'),
     path('personnel/intervenant/supprimer/<siret>/', viewIntervenant.deleteIntervenant, name='deleteIntervenant'),
+    path('personnel/intervenant/ajouterDevis/', viewIntervenant.ajouterDevis, name='ajouterDevis'),
+    path('personnel/intervenant/editer/<pk>/', viewIntervenant.editerIntervenant, name='editerIntervenant'),
+
+
 
     # Gestion des benevoles
     path('personnel/benevole/', viewBenevole.listBenevole, name='listBenevole'),
@@ -53,9 +57,15 @@ urlpatterns = [
     # Gestion des taches
     path('tache/liste/', viewTache.listTache, name='listTache'),
     path('tache/get/<id>/', viewTache.getTache, name='getTache'),
-    path('tache/calendrier/', viewTache.listTache, name='listTacheCal'),
+    path('tache/calendrier/', viewTache.calendrierTache, name='listTacheCal'),
     path('tache/liste/supprimer/<id>', viewTache.deleteTache, name='deleteTache'),
     path('tache/liste/editer/<id>', viewTache.editerTache, name='editerTache'),
+    path('tache/ajouter/', viewTache.ajouterTache, name='ajouterTache'),
+
+
+
+    #Gestion des affectations
+    path('affecter/supprimer/<pk>/', viewAffecter.supprimer, name='supprimerAffectation'),
 
     # url(r'api/', include(router.urls))
 
@@ -69,5 +79,7 @@ urlpatterns = [
 
     #dashboard
     path('personnel/donation/triathlon_courant', viewSponsorDonation.listDonationTriathlon, name='listDonationTriathlon'),
+    path('personnel/benevole/affecter/', viewBenevole.listBenevoleAffecter, name='listBenevoleAffecter'),
+    path('tache/list/retard', viewTache.listTacheRetard, name='listTacheRetard'),
 
 ]

@@ -114,10 +114,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">{% csrf_token %}
+                    <form  method="POST">{% csrf_token %}
                         {{ request.session.idTriathlon | getTriathlonEnCours }}
                         {{ sponsor.siret }}
                         {{ donationForm.donation }}
+                        {{ donationForm.fk_sponsor }}
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

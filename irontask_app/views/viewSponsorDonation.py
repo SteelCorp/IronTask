@@ -7,8 +7,8 @@ from irontask_app.models import Sponsoriser, Triathlon
 from django.contrib.auth.decorators import login_required
 from irontask_app.forms.DonationForm import DonationForm
 from django.contrib import messages
-from irontask_app.decorators import triathlon_required
-from irontask_app.tables import DonationTriathlonTables
+from irontask_app.utils.decorators import triathlon_required
+from irontask_app.utils.tables import DonationTriathlonTables
 
 
 @login_required(login_url='login/')
@@ -39,14 +39,25 @@ def listDonationSponsorsTriathlon(request, idSponsors):
 @login_required(login_url='login/')
 @triathlon_required
 def ajouterDonation(request):
+    """
+
+    :param request:
+    :return: Vue qui permet à la modal de faire une request de Type POST afin d'ajouter une donation
+    """
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         donationForm = DonationForm(request.POST)
+
         if donationForm.is_valid():
             donation = donationForm.save(commit=False)
             donation.fk_triathlon = tria
             donation.save()
             return HttpResponseRedirect('/personnel/sponsor/')
+        else:
+            
+            """ Passe le message d'error du formulaire à la template
+             afin de l'afficher en cas d'erreur dans le formulaire"""
+            messages.add_message(request, messages.INFO, donationForm.errors)
         return HttpResponseRedirect('/personnel/sponsor/')
 
 
