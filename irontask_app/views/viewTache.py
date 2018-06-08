@@ -127,6 +127,7 @@ def ajouterTache(request):
     tria = Triathlon.objects.get(id=request.session['idTriathlon'])
     if request.method == 'POST':
         tacheForm = TacheForm(request.POST)
+        print(tacheForm.errors)
 
         if tacheForm.is_valid():
             tache = tacheForm.save(commit=False)
