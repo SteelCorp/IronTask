@@ -208,9 +208,9 @@ class Tache(models.Model):
     dateRappel = models.DateField(null=True, blank=False, verbose_name='Date de rappel')
     niveauAvancement = models.CharField(max_length=1, choices=NIV_AVANCEMENT, verbose_name="Niveau d'avancement")
     niveauPriorite = models.CharField(max_length=1, choices=NIV_PRIORITE, verbose_name='Priorité')
-    fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.PROTECT, null=False)
+    fk_triathlon = models.ForeignKey(Triathlon, on_delete=models.CASCADE, null=False)
     dateAjout = models.DateField(auto_now_add=True)
-    responsable = models.ForeignKey(Benevole, verbose_name='Responsable', on_delete=models.PROTECT)
+    responsable = models.ForeignKey(Benevole, verbose_name='Responsable', on_delete=models.CASCADE)
 
     def __str__(self):
         """Retrourne une representation string de l'objet Tache"""
