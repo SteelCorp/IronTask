@@ -4,6 +4,7 @@ from django.db import models
 from irontask_app.utils.validators import *
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
+from datetime import datetime
 
 
 class UserProfile(models.Model):
@@ -179,7 +180,7 @@ class Triathlon(models.Model):
         """Retourne une représentation string de l'objet Triathlon
         (utile pour la partie admin) """
 
-        return 'Triathlon du ' + str(self.date) + ' à ' + self.ville
+        return 'Triathlon du ' + str(self.date.strftime('%d-%m-%Y')) + ' à ' + self.ville
 
     class Meta:
         verbose_name_plural = "Triathlon"
