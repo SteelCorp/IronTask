@@ -109,11 +109,11 @@ def getTache(request, id):
 
 @login_required(login_url='login/')
 @triathlon_required
-def deleteTache(request, id):
+def deleteTache(request, pk):
     
-    Tache.filter(id=id).delete()
+    Tache.objects.filter(pk=pk).delete()
 
-    return redirect('tache/listTache.html')
+    return redirect('listTache')
 
 
 @login_required(login_url='login/')
