@@ -1,7 +1,6 @@
 language: python
 
 python:
-  - "3.5"
   - "3.6"
   - "3.7-dev"  # 3.7 development branch
   - "nightly"
@@ -20,5 +19,4 @@ script:
   - python manage.py test
 
 env:
-  - DJANGO_VERSION=1.11
-  - DJANGO_VERSION=2.0.2
+  - DJANGO_VERSION=2.2
